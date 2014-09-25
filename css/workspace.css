@@ -1,0 +1,33 @@
+.input-group-addon{
+    background-color: #222222;
+    border-color: #222222;
+    color: #FFF;
+    font-size: 15px;
+}
+
+#workspace-container{
+
+    max-height:1000px;
+    overflow-y:scroll;
+}
+
+#workspace-main{
+    background-color: #eee;
+}
+.command-object{
+    z-index:10;
+}
+
+.command-placeholder{
+
+}
+
+.workspace-row div{
+    height:43px;
+    background-color:#eee;
+
+}
+
+.line-number{
+    border-right: solid 1px #e0e0e0;
+}
