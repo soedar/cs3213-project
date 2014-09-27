@@ -36,7 +36,7 @@ var listenDrag = function(){
             //console.log(lineData);
             workspace[workspace.length]={
                 line: rowData.line,
-                nestLevel: rowData.nestLevel,
+                nestLevel: rowData.nestlevel,
                 type: data.type,
                 direction: data.direction,
                 steps: data.steps
