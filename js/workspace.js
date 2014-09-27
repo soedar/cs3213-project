@@ -9,6 +9,10 @@ $(document).ready(function(){
         helper: "clone"
     });
 
+    $('#save-workspace').on('click', function(){
+        console.log("Saving: " + JSON.stringify(workspace));
+    });
+
     //Start listening to drops
     listenDrag();
 
