@@ -41,7 +41,7 @@
         {
             "type": "move",
             "id": "1234",
-            "update": {"health": 99},
+            "update": {"1234": {"health": 99}},
             "xy": {
                 "x": 0,
                 "y": 3
@@ -50,7 +50,7 @@
         {
             "type": "move",
             "id": "2222",
-            "update": {"health": 98},
+            "update": {"2222": {"health": 98}},
             "xy": {
                 "x": 6,
                 "y": 3
@@ -59,7 +59,7 @@
         {
             "type": "move",
             "id": "2222",
-            "update": {"health": 98},
+            "update": {"2222": {"health": 97}},
             "xy": {
                 "x": 6,
                 "y": 2

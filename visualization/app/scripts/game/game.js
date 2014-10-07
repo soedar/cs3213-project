@@ -27,24 +27,6 @@ function Game(game, canvasSize) {
     Grid.prototype.size = this.gridSize;
 }
 
-Game.prototype.createObjects = function(objs) {
-    var objects = {};
-
-    objs.forEach(function(obj) {
-        var object;
-        if (obj.type === 'player') {
-            object = new Player(obj.model);
-        }
-
-        if (object) {
-            object.setGrid(obj.xy.x, obj.xy.y);
-            objects[obj.id] = objects;
-        }
-    });
-
-    return objects;
-};
-
 Game.prototype.getLayers = function() {
     var layers = [];
     layers.push(this.getBackgroundLayer());
@@ -95,11 +77,15 @@ Game.prototype.executeNextEvent = function(callback) {
     var nextEvent = this.game.events[this.eventCounter++];
 
     var updateModelAndCallback = function() {
-        object.updateModel(nextEvent.update);
+        for (var objId in nextEvent.update) {
+            console.log(this.objects);
+            console.log(objId);
+            this.objects[objId].updateModel(nextEvent.update[objId]);
+        }
         if (callback) {
             callback(false);
         }
-    };
+    }.bind(this);
 
     if (nextEvent.type === 'move') {
         var object = this.objects[nextEvent.id];
