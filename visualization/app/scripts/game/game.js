@@ -78,8 +78,6 @@ Game.prototype.executeNextEvent = function(callback) {
 
     var updateModelAndCallback = function() {
         for (var objId in nextEvent.update) {
-            console.log(this.objects);
-            console.log(objId);
             this.objects[objId].updateModel(nextEvent.update[objId]);
         }
         if (callback) {
@@ -90,11 +88,21 @@ Game.prototype.executeNextEvent = function(callback) {
     if (nextEvent.type === 'move') {
         var object = this.objects[nextEvent.id];
         if (!object) {
-            DEBUG('Invalid id for objects in event');
+            DEBUG('Invalid id for object in event');
             return;
         }
 
         object.animateTo(nextEvent.xy.x, nextEvent.xy.y, updateModelAndCallback);
+    } else if (nextEvent.type === 'attack') {
+        var object = this.objects[nextEvent.id];
+        var target = this.objects[nextEvent.target];
+
+        if (!object || !target) {
+            DEBUG('Invalid id for object or target in event');
+            return;
+        }
+
+        object.animateAttack(target, updateModelAndCallback);
     }
 };
 
