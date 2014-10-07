@@ -19,6 +19,7 @@ var game;
 Assets.load(function() {
     $.get('input.json', function(gameData) {
         game = new Game(gameData, 500);
+        console.log(gameData);
 
         game.getLayers().forEach(function(layer) {
             stage.add(layer);

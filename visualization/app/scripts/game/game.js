@@ -70,6 +70,8 @@ Game.prototype.getObjectLayer = function() {
         var object;
         if (obj.type === 'player') {
             object = new Player(obj.model);
+        } else if (obj.type === 'coin') {
+            object = new Coin();
         }
 
         if (object) {

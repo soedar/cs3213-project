@@ -1,5 +1,5 @@
 {
-    "mapSize": 9,
+    "mapSize": 7,
     "objects": [
         {
             "type": "player",
@@ -10,7 +10,7 @@
             },
             "model": {
                 "name": "SomeName",
-                "color": "blue",
+                "color": "green",
                 "health": 100
             }
         },
@@ -26,8 +26,16 @@
                 "color": "yellow",
                 "health": 100
             }
-
+        },
+        {
+            "type": "coin",
+            "id": "1",
+            "xy": {
+                "x": 0,
+                "y": 5
+            }
         }
+
     ],
     "events": [
         {
