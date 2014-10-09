@@ -103,8 +103,26 @@ Game.prototype.executeNextEvent = function(callback) {
         }
 
         object.animateAttack(target, updateModelAndCallback);
-    }
+    } else if (nextEvent.type === 'pickCoin') {
+		var characterObject = this.objects[nextEvent.id];
+		var targetedCoin = this.object[nextEvent.target];
+		
+		if (!characterObject || !targetedCoin) {
+			DEBUG('Invalid id for object or target in event');
+			return;
+		}
+		
+		characterObject.animateTo(nextEvent.xy.x, nextEvent.xy.y, updateModelAndCallback);
+		this.removeObject(targetedCoin);
+	}
+	
 };
+
+Game.prototype.removeObj = function (object) {
+	this.objects.splice(object.id, 1);
+	var index = this._objectLayer.indexOf(object.repr);
+    this._objectLayer.splice(index, 1);
+}
 
 Game.prototype.executeEvents = function() {
     this.executeNextEvent(function(done) {
