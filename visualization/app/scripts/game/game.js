@@ -103,7 +103,18 @@ Game.prototype.executeNextEvent = function(callback) {
         }
 
         object.animateAttack(target, updateModelAndCallback);
-    }
+    } else if (nextEvent.type === 'pickCoin') {
+		var charaterId = this.objects[nextEvent.id];
+		var coin = this.objects[nextEvent.target];
+		
+		if (!charaterId || !coin) {
+			DEBUG('Invalid id for object or target in event');
+			return;
+		}
+		
+		charaterId.animatePickCoin(nextEvent.target, updateModelAndCallback);
+	}
+	
 };
 
 Game.prototype.executeEvents = function() {

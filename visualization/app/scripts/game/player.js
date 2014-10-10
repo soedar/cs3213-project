@@ -62,3 +62,26 @@ Player.prototype.animateAttack = function(target, callback) {
 
     (new Kinetic.Tween(tweenIn)).play();
 };
+
+Player.prototype.animatePickCoin = function(coinId, callback) {
+	this.repr.moveToTop();
+	
+	var coin = game.objects[coinId];
+	var gridX = coin.gridX;
+	var gridY = coin.gridY;
+	this.setGrid(gridX, gridY, true);
+
+    new Kinetic.Tween({
+        node: this.repr, 
+        duration: 1,
+        x: this.gridToReprCoord(gridX),
+        y: this.gridToReprCoord(gridY),
+        onFinish: function() {
+			coin.repr.remove();
+			delete game.objects[coinId];
+            if (callback) {
+                callback();
+            }
+        }.bind(this)
+    }).play();
+};
