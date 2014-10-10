@@ -122,8 +122,6 @@ Game.prototype.removeObj = function (object) {
 	this.objects.splice(object.id, 1);
 	var index = this._objectLayer.indexOf(object.repr);
     this._objectLayer.splice(index, 1);
-	index = stage.indexOf(object.repr);
-	stage.splice(index, 1);
 }
 
 Game.prototype.executeEvents = function() {
