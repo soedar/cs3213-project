@@ -1,0 +1,33 @@
+{
+    "mapSize": 4,
+    "objects": [
+        {
+            "type": "player",
+            "id": "1234",
+            "xy": {
+                "x": 1,
+                "y": 1
+            },
+            "model": {
+                "name": "SomeName",
+                "color": "green",
+                "health": 100
+            }
+        },
+        {
+            "type": "coin",
+            "id": "1",
+            "xy": {
+                "x": 1,
+                "y": 2
+            }
+        }
+    ],
+    "events": [
+        {
+            "type": "pickCoin",
+            "id": "1234",
+            "target": "1"
+        }
+    ]
+}
