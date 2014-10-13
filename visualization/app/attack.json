@@ -10,7 +10,7 @@
             },
             "model": {
                 "name": "SomeName",
-                "color": "green",
+                "color": "blue",
                 "health": 100
             }
         },
@@ -33,13 +33,13 @@
             "type": "attack",
             "id": "1234",
             "target": "2222",
-            "update": {"2222": {"health": 99}, "1234": {"health": 99}}
+            "update": {"2222": {"health": 2}, "1234": {"health": 3}}
         },
         {
             "type": "attack",
             "id": "2222",
             "target": "1234",
-            "update": {"2222": {"health": 98}, "1234": {"health": 98}}
+            "update": {"2222": {"health": 2}, "1234": {"health": 2}}
         }
     ]
 }

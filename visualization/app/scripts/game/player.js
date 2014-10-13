@@ -30,6 +30,9 @@ function Player(model) {
         fillPatternRepeat: 'no-repeat',
         fillPatternScale: {x: scale, y: scale}
     }));
+	
+	this.model.health = 3;
+	this.model.coin = 0;
 }
 Player.prototype = Object.create(Grid.prototype);
 
@@ -57,10 +60,22 @@ Player.prototype.animateAttack = function(target, callback) {
             if (callback) {
                 callback();
             }
+			if (target.model.color === "blue")
+				target.updateHealth();
         }.bind(this)
     };
 
     (new Kinetic.Tween(tweenIn)).play();
+};
+
+Player.prototype.updateHealth = function() {
+	var healthText = document.getElementById("localPlayerHealth");
+	healthText.innerHTML = 'Health: ' + this.model.health;
+};
+
+Player.prototype.updateCoin = function() {
+	var coinText = document.getElementById("localPlayerCoin");
+	coinText.innerHTML = 'Coin: ' + this.model.coin;
 };
 
 Player.prototype.animatePickCoin = function(coinId, callback) {
@@ -82,6 +97,8 @@ Player.prototype.animatePickCoin = function(coinId, callback) {
             if (callback) {
                 callback();
             }
+			if (this.model.color === "blue")
+				this.updateCoin();
         }.bind(this)
     }).play();
 };
