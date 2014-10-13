@@ -10,7 +10,7 @@
             },
             "model": {
                 "name": "SomeName",
-                "color": "green",
+                "color": "blue",
                 "health": 100
             }
         },
@@ -27,7 +27,8 @@
         {
             "type": "pickCoin",
             "id": "1234",
-            "target": "1"
+            "target": "1",
+			"update": {"1234": {"coin": 10}}
         }
     ]
 }
