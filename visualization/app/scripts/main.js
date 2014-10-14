@@ -17,12 +17,17 @@ var nextEvent = null;
 var game;
 
 Assets.load(function() {
-    $.get('attack.json', function(gameData) {
-        DEBUG(gameData);
+    $.get('player.json', function(playerMoves) {
+        var map = new Map(4);
+        map.addPlayer("testPlayer", "blue", 100, {x: 0, y: 2});
+        var engine = new Engine(map, playerMoves);
+
+        var gameData = engine.run();
+
         game = new Game(gameData, 500);
-        DEBUG(game);
         game.getLayers().forEach(function(layer) {
             stage.add(layer);
         });
-   });
+    });
+    
 });
