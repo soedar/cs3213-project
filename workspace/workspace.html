@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="visualide">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,8 +16,9 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
-    <div class="container">
+<body ng-controller="DragCommandController">
+
+    <div class="container" >
         <h1>Workspace <small>prototype v0.1</small></h1>
         <div id="command-bar">
             <div class="navbar navbar-inverse">
@@ -47,7 +48,7 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#">Run</a></li>
-                        <li><a href="#" id="save-workspace">Save</a></li>
+                        <li><a href="#" id="save-workspace" ng-click="sendData()">Save</a></li>
                         <li><a href="#">Clear all</a></li>
                     </ul>
                 </div>
@@ -55,7 +56,18 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container" >
+        <!-- This part of the code works 
+         <div class="row">
+             <div class="btn btn-primary" data-drag="true" data-jqyoui-options="{revert: 'invalid'}"  jqyoui-draggable="{animate:true}" >Hello World</div>
+        </div>
+        <div class="row">
+            <div class="thumbnail" data-drop="true" data-jqyoui-options ng-model="list2" jqyoui-droppable style='height:50px;'>
+                <div class="btn btn-success" data-drag="false" data-jqyoui-options ng-model="list2" jqyoui-draggable ng-hide="!list2.title">{{list2.title}}</div> 
+            </div>
+        </div> -->
+       
+
         <div class="row">
             <div class="col-xs-4" id="command-palette">
                 <div class="panel panel-primary">
@@ -64,44 +76,17 @@
                     </div>
                     <div class="panel-body">
                         <div class="command-object-wrapper">
-                            <div class="input-group command-object move-command" data-type="move" data-direction="up" data-steps="0">
-                                <span class="input-group-addon">Move </span>
+                            <div ng-repeat='navCommand in navigation' ng-show="navCommand.command" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="navigation" jqyoui-draggable="{index: {{$index}},animate:true, placeholder: 'keep'}" class="input-group command-object move-command" data-type="move" data-direction="up" data-steps="0" >
+                                <span class="input-group-addon">{{ navCommand.command }} </span>
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-default " data-toggle="dropdown" data-option="move-direction">
-                                    <span class="text-only">Up&nbsp;&nbsp;&nbsp;</span> </button>
+                                    <span class="text-only">{{ navCommand.direction }}&nbsp;&nbsp;&nbsp;</span> </button>
 
                                 </div>
-                                <input type="text" class="form-control" placeholder="# of steps">
-                            </div>
-                            <br />
-                            <div class="input-group command-object move-command" data-type="move" data-direction="down" data-steps="0">
-                                <span class="input-group-addon">Move </span>
-                                <div class="input-group-btn">
-                                    <button type="button" class="btn btn-default " data-toggle="dropdown" data-option="move-direction">
-                                    <span class="text-only">Down&nbsp;</span> </button>
+                                <input type="text" class="form-control" ng-model="navCommand.steps" > 
+                                
+                                <br />
 
-                                </div>
-                                <input type="text" class="form-control" placeholder="# of steps">
-                            </div>
-                            <br />
-                            <div class="input-group command-object move-command" data-type="move" data-direction="left" data-steps="0">
-                                <span class="input-group-addon">Move </span>
-                                <div class="input-group-btn">
-                                    <button type="button" class="btn btn-default " data-toggle="dropdown" data-option="move-direction">
-                                    <span class="text-only">Left&nbsp;</span> </button>
-
-                                </div>
-                                <input type="text" class="form-control" placeholder="# of steps">
-                            </div>
-                            <br />
-                            <div class="input-group command-object move-command" data-type="move" data-direction="right" data-steps="0">
-                                <span class="input-group-addon">Move </span>
-                                <div class="input-group-btn">
-                                    <button type="button" class="btn btn-default " data-toggle="dropdown" data-option="move-direction">
-                                    <span class="text-only">Right</span> </button>
-
-                                </div>
-                                <input type="text" class="form-control" placeholder="# of steps">
                             </div>
 
                         </div>
@@ -132,18 +117,28 @@
             <div class="col-xs-8">
                 <div class="panel panel-primary">
                     <div class="panel-body" id="workspace-main">
-                        <div class="row workspace-row hidden">
-                            <div class="col-xs-1 text-center line-number">
-                                <h4>1</h4>
-                            </div>
-                            <div class="col-xs-11 command-placeholder" data-line="0" data-nestLevel="0"><h4>Drag commands from the left and drop it here</h4></div>
-                        </div>
-                        <div class="row workspace-row">
-                            <div class="col-xs-1 text-center line-number">
-                                <h4>1</h4>
-                            </div>
-                            <div class="col-xs-11 command-placeholder"  data-line="1" data-nestlevel="0"><h4>Drag commands from the left and drop it here</h4></div>
-                        </div>
+                        <ol data-drop="true" ng-model="commandsWorkspace" jqyoui-droppable="{multiple:true}" >
+                            
+                            <li ng-repeat="item in commandsWorkspace track by $index" ng-show="item.command" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="commandsWorkspace" jqyoui-draggable="{index: {{$index}}, animate:true}">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                <span class="input-group-addon">{{ item.command }} </span>
+                                    </div>
+                                    <div class="col-xs-3">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default " data-toggle="dropdown" data-option="move-direction">
+                                    <span class="text-only">{{ item.direction }}&nbsp;&nbsp;&nbsp;</span> </button>
+
+                                </div>
+                                </div>
+                                <div class="col-xs-6">
+                                <input type="text" class="form-control" value="{{ item.steps }}">
+                                </div>
+                                </div>
+
+                            </li>
+                            <li class="placeholder" ng-hide="hideMe()">Add your items here</li>
+                                                    </ol>
 
                     </div>
                 </div>
@@ -151,10 +146,12 @@
 
         </div>
     </div>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-dragdrop/src/angular-dragdrop.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
     <script src="js/bootstrap.min.js"></script>
     <script src="js/workspace.js"></script>
 

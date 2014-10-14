@@ -1,53 +1,27 @@
-var workspace = [];
+(function(){
 
-$(document).ready(function(){
-    //From command palette, we just need to clone
-    $('.command-object').draggable({
-        snap:true,
-        snapMode: "inner",
-        revert: "invalid",
-        helper: "clone"
-    });
+    var app = angular.module('visualide', ['ngDragDrop']);
+    
+    app.controller('DragCommandController', ['$scope',function($scope, $timeout){
+        // $scope.list1 = {title: 'AngularJS - Drag Me'};
+        // $scope.list2 = {};
 
-    $('#save-workspace').on('click', function(){
-        console.log("Saving: " + JSON.stringify(workspace));
-    });
+       
+       // console.log($scope.stepsValue);
+        $scope.stepsValue = 0;
+        $scope.navigation = [{'command':'Move', 'direction':'Up','steps':0},{'command':'Move', 'direction':'Down','steps':0},{'command':'Move', 'direction':'Left','steps':0},{'command':'Move', 'direction':'Right','steps':0}]
+        $scope.commandsWorkspace = [];
+     	$scope.hideMe = function() {
+		    return $scope.commandsWorkspace.length > 0;
+		  }
+		$scope.sendStepsValue = function(){
+			//console.log('in function' + $scope.stepsValue);
+		}
+		$scope.sendData = function(){
+			console.log($scope.commandsWorkspace);
+		}
+    }]);
 
-    //Start listening to drops
-    listenDrag();
+})();
 
-});
 
-var listenDrag = function(){
-
-    $('.command-placeholder').droppable({
-        accept: ".command-object",
-        drop: function(event, ui){
-
-            //Remove the existing text
-            $(this).find('h4').remove();
-
-            //Create a new command-object
-            $(ui.draggable).clone().appendTo(this);
-
-            //Create a new placeholder
-            $("#workspace-main .workspace-row").first().clone().appendTo($(this).parent().parent()).removeClass("hidden");
-
-            //Save data
-            var data = $(event.target).find('.command-object').data();
-            var rowData = $(this).data();
-            console.log(rowData);
-            //console.log(lineData);
-            workspace[workspace.length]={
-                line: rowData.line,
-                nestLevel: rowData.nestlevel,
-                type: data.type,
-                direction: data.direction,
-                steps: data.steps
-            };
-
-            console.log("Current workspace state: " + JSON.stringify(workspace));
-
-        }
-    });
-}
