@@ -46,3 +46,20 @@
 .command-object .input-group > :nth-child(2) button{
     width: 100%;
 }
+
+.close-button{
+    background-color: #eee;
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    color: #e0e0e0;
+}
+
+.close-button:hover{
+    background-color: #eee;
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-left-color: #cccccc;
+    color: #c0c0c0;
+}
