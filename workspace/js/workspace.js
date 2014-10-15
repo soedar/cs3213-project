@@ -20,7 +20,7 @@
 		  }
 
 		$scope.sendData = function(){
-			console.log($scope.commandsWorkspace);
+			console.log(JSON.stringify($scope.commandsWorkspace));
 		};
 
         $scope.removeCommands = function(index) {
