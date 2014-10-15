@@ -49,7 +49,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#">Run</a></li>
                         <li><a href="#" id="save-workspace" ng-click="sendData()">Save</a></li>
-                        <li><a href="#">Clear all</a></li>
+                        <li><a href="#" ng-click="clearCommands()">Clear all</a></li>
                     </ul>
                 </div>
             </div>
@@ -128,6 +128,8 @@
                                     </button>
                                 </div>
                                 <input type="text" class="form-control" ng-model="item.steps"/>
+                                <!--a href="" ng-click="removeCommands($index)">X</a>
+
 
                             </li>
                             <li class="placeholder" ng-hide="hideMe()">Add your items here</li>
