@@ -6,7 +6,6 @@
 }
 
 #workspace-container{
-
     max-height:1000px;
     overflow-y:scroll;
 }
@@ -20,7 +19,6 @@
 }
 
 .command-placeholder{
-
 }
 
 .workspace-row div{
@@ -33,14 +31,14 @@
     border-right: solid 1px #e0e0e0;
 }
 
-.command-placeholder > :first-child, .move-command > :first-child{
+.command-object > :first-child{
     width: 100px;
 }
 
-.command-placeholder > :nth-child(2), .move-command > :nth-child(2){
+.command-object > :nth-child(2){
     width: 100px;
 }
 
-.command-placeholder > :nth-child(2) button, .move-command > :nth-child(2) button{
+.command-object > :nth-child(2) button{
     width: 100%;
 }

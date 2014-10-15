@@ -76,10 +76,10 @@
             </div>
             <div class="panel-body">
                 <div class="command-object-wrapper">
-                    <div ng-repeat='navCommand in navigation' ng-show="navCommand.command" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="navigation" jqyoui-draggable="{index: {{$index}},animate:true, placeholder: 'keep'}" class="input-group command-object move-command" data-type="move" data-direction="up" data-steps="0" >
-                        <span class="input-group-addon">{{ navCommand.command }} </span>
+                    <div ng-repeat='navCommand in navigation' ng-show="navCommand.command" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="navigation" jqyoui-draggable="{index: {{$index}},animate:false, placeholder: 'keep'}" class="input-group command-object move-command" data-type="move" data-direction="up" data-steps="0" >
+                        <span class="input-group-addon">{{ navCommand.command }}</span>
                         <div class="input-group-btn">
-                            <button type="button" class="btn btn-default " data-toggle="dropdown" data-option="move-direction">
+                            <button type="button" class="btn btn-default" data-toggle="dropdown">
                                 <span class="text-only">{{ navCommand.direction }}&nbsp;&nbsp;&nbsp;</span> </button>
 
                             </div>
@@ -119,23 +119,24 @@
                 <div class="panel-body" id="workspace-main" data-drop="true" ng-model="commandsWorkspace" jqyoui-droppable="{multiple:true}" >
 
 
-                    <div class="row command-object" ng-repeat="item in commandsWorkspace track by $index" ng-show="item.command" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="commandsWorkspace" jqyoui-draggable="{index: {{$index}}, animate:true}">
+                    <div class="row" ng-repeat="item in commandsWorkspace track by $index" ng-show="item.command" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="commandsWorkspace" jqyoui-draggable="{index: {{$index}}, animate:false}">
                         <div class="col-xs-1 text-center line-number">
                             <h4>{{ $index+1 }}</h4>
                         </div>
-                        <div class="col-xs-11 command-placeholder input-group">
-
-                            <span class="input-group-addon">{{ item.command }}</span>
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-default" data-toggle="dropdown">
-                                    <span class="text-only">{{ item.direction }}</span>
-                                </button>
+                        <div class="col-xs-11 command-object">
+                            <div class="input-group">
+                                <span class="input-group-addon">{{ item.command }}</span>
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default" data-toggle="dropdown">
+                                        <span class="text-only">{{ item.direction }}</span>
+                                    </button>
+                                </div>
+                                <input type="text" class="form-control" ng-model="item.steps"/>
                             </div>
-                            <input type="text" class="form-control" ng-model="item.steps"/>
                             <!--a href="" ng-click="removeCommands($index)">X</a-->
                         </div>
                     </div>
-                    
+
 
                     <div class="placeholder">
                         <div class="row">
