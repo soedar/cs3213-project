@@ -20,6 +20,8 @@ Assets.load(function() {
     $.get('player.json', function(playerMoves) {
         var map = new Map(4);
         map.addPlayer("testPlayer", "blue", 100, {x: 0, y: 2});
+        map.addCoin({x: 1, y: 2});
+        map.addCoin({x: 2, y: 2});
         var engine = new Engine(map, playerMoves);
 
         var gameData = engine.run();

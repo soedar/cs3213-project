@@ -22,8 +22,13 @@ Engine.prototype.run = function() {
     // Assume we only have one player for now
     var player = players[0];
     this.playerActions.forEach(function(action) {
-        gameOutput.events.push(this.makeEvent(action, player, objectsMemory));
+        var e = this.makeEvent(action, player, objectsMemory);
+        if (e) {
+            gameOutput.events.push(e);
+        }
     }.bind(this));
+
+    console.log(gameOutput);
 
     return gameOutput;
 };
@@ -32,38 +37,63 @@ Engine.prototype.makeEvent = function(action, player, objectsMemory) {
     if (action.command === 'Move') {
         player.model.health -= 1;
 
+        var new_xy = _.clone(player.xy);
         switch(action.direction) {
             case 'Left':
-                player.xy.x -= action.steps;
+                new_xy.x -= action.steps;
                 break;
             case 'Right':
-                player.xy.x += action.steps;
+                new_xy.x += action.steps;
                 break;
             case 'Up':
-                player.xy.y -= action.steps;
+                new_xy.y -= action.steps;
                 break;
             case 'Down':
-                player.xy.y += action.steps;
+                new_xy.y += action.steps;
                 break;
         }
 
-        player.xy.x = player.xy.x % this.map.mapSize;
-        player.xy.y = player.xy.y % this.map.mapSize;
+        // Ignore moves that goes out of the boundary
+        if (new_xy.x < 0 || new_xy.y < 0 ||
+            new_xy.x >= this.map.mapSize || new_xy.y >= this.map.mapSize) {
+            return null;
+        }
 
-        if (player.xy.x < 0) {
-            player.xy.x += this.map.mapSize;
-        }
-        if (player.xy.y < 0) {
-            player.xy.y += this.map.mapSize;
-        }
+        // See if there are any objects that has the coordinate
+        var obj = objectsMemory.filter(function(object) {
+            return new_xy.x === object.xy.x && new_xy.y === object.xy.y;
+        });
+        
 
         var e = {
-            type: 'move',
             id: player.id,
             xy: _.clone(player.xy),
             update: {}
         };
+
+        // Player will definitely reduce health at every turn
         e.update[player.id] = {health: player.model.health};
+
+        // There is an object at the same location as the new location
+        if (obj.length > 0) {
+            // Assume that only one object can be at a position
+            if (obj[0].type === "coin") {
+                player.xy = new_xy;
+                player.model.coin++;
+
+                e.type = 'pickCoin';
+                e.target = obj[0].id;
+                e.update[player.id].coin = player.model.coin;
+            }
+        }
+
+        // Nothing there, so we can move to the new location
+        else {
+            player.xy = new_xy;
+
+            e.type = 'move';
+            e.xy = _.clone(new_xy);
+        }
         return e;
     }
 };

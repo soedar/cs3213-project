@@ -11,12 +11,12 @@
     },
     {
         "command": "Move",
-        "direction": "Right",
+        "direction": "Left",
         "steps": 1
     },
     {
         "command": "Move",
-        "direction": "Left",
+        "direction": "Right",
         "steps": 1
     }
 ]
