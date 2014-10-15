@@ -49,7 +49,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#">Run</a></li>
                         <li><a href="#" id="save-workspace" ng-click="sendData()">Save</a></li>
-                        <li><a href="#">Clear all</a></li>
+                        <li><a href="#" ng-click="clearCommands()">Clear all</a></li>
                     </ul>
                 </div>
             </div>
@@ -131,8 +131,11 @@
 
                                 </div>
                                 </div>
-                                <div class="col-xs-6">
+                                <div class="col-xs-3">
                                 <input type="text" class="form-control" value="{{ item.steps }}">
+                                </div>
+                                <div class="col-xs-3">
+                                    [ <a href="" ng-click="removeCommands($index)">X</a> ]
                                 </div>
                                 </div>
 
