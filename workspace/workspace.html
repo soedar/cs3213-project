@@ -116,30 +116,29 @@
         </div>
         <div class="col-xs-8">
             <div class="panel panel-primary">
-                <div class="panel-body" id="workspace-main">
-                    <ol data-drop="true" ng-model="commandsWorkspace" jqyoui-droppable="{multiple:true}" >
+                <div class="panel-body" id="workspace-main" data-drop="true" ng-model="commandsWorkspace" jqyoui-droppable="{multiple:true}" >
 
-                        <li class="command-object" ng-repeat="item in commandsWorkspace track by $index" ng-show="item.command" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="commandsWorkspace" jqyoui-draggable="{index: {{$index}}, animate:true}">
-                            <div class="row">
-                            <div class="col-xs-1 text-center line-number">
-                                <h4>{{ $index+1 }}</h4>
-                            </div>
-                            <div class="col-xs-11 command-placeholder input-group">
 
-                                <span class="input-group-addon">{{ item.command }}</span>
-                                <div class="input-group-btn">
-                                    <button type="button" class="btn btn-default" data-toggle="dropdown">
-                                        <span class="text-only">{{ item.direction }}</span>
-                                    </button>
-                                </div>
-                                <input type="text" class="form-control" ng-model="item.steps"/>
-                                <!--a href="" ng-click="removeCommands($index)">X</a-->
-                            </div>
+                    <div class="row command-object" ng-repeat="item in commandsWorkspace track by $index" ng-show="item.command" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="commandsWorkspace" jqyoui-draggable="{index: {{$index}}, animate:true}">
+                        <div class="col-xs-1 text-center line-number">
+                            <h4>{{ $index+1 }}</h4>
                         </div>
-                        </li>
+                        <div class="col-xs-11 command-placeholder input-group">
 
-                        <li class="placeholder">
-                            <div class="row">
+                            <span class="input-group-addon">{{ item.command }}</span>
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default" data-toggle="dropdown">
+                                    <span class="text-only">{{ item.direction }}</span>
+                                </button>
+                            </div>
+                            <input type="text" class="form-control" ng-model="item.steps"/>
+                            <!--a href="" ng-click="removeCommands($index)">X</a-->
+                        </div>
+                    </div>
+                    
+
+                    <div class="placeholder">
+                        <div class="row">
                             <div class="col-xs-1 text-center line-number">
                                 <h4>{{ commandsWorkspace.length+1 }}</h4>
                             </div>
@@ -147,14 +146,14 @@
                                 <h4>Add your items here</h4>
                             </div>
                         </div>
-                        </li>
-                    </ol>
-
+                    </div>
                 </div>
+
             </div>
         </div>
-
     </div>
+
+</div>
 </div>
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery-ui.min.js"></script>
