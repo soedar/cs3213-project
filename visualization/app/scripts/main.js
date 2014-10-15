@@ -15,6 +15,9 @@ var stage = new Kinetic.Stage({
 var Assets = new AssetManager();
 var nextEvent = null;
 var game;
+var Config = {
+    stepDuration: 0.5
+};
 
 Assets.load(function() {
     $.get('player.json', function(playerMoves) {
