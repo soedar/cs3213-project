@@ -31,3 +31,15 @@
 .line-number{
     border-right: solid 1px #e0e0e0;
 }
+
+.move-command > :first-child{
+    width: 100px;
+}
+
+.move-command > :nth-child(2){
+    width: 100px;
+}
+
+.move-command > :nth-child(2) button{
+    width: 100%;
+}
