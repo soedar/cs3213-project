@@ -16,6 +16,7 @@
 }
 .command-object{
     z-index:10;
+    margin-bottom:5px;
 }
 
 .command-placeholder{
@@ -30,13 +31,6 @@
 
 .line-number{
     border-right: solid 1px #e0e0e0;
-}
-
-ol[ng-model="commandsWorkspace"]{
-    padding:0px;
-}
-li[class*="command-object"] {
-    display:block;
 }
 
 .command-placeholder > :first-child, .move-command > :first-child{
