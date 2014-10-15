@@ -13,6 +13,10 @@
 #workspace-main{
     background-color: #eee;
 }
+
+#command-palette .panel-body .row{
+    margin: auto;
+}
 .command-object{
     z-index:10;
     margin-bottom:5px;
@@ -31,14 +35,14 @@
     border-right: solid 1px #e0e0e0;
 }
 
-.command-object > :first-child{
+.command-object .input-group > :first-child{
     width: 100px;
 }
 
-.command-object > :nth-child(2){
+.command-object .input-group > :nth-child(2){
     width: 100px;
 }
 
-.command-object > :nth-child(2) button{
+.command-object .input-group > :nth-child(2) button{
     width: 100%;
 }

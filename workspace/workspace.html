@@ -74,24 +74,28 @@
             <div class="panel-heading">
                 <h3 class="panel-title">Statements</h3>
             </div>
-            <div class="panel-body">
-                <div class="command-object-wrapper">
-                    <div ng-repeat='navCommand in navigation' ng-show="navCommand.command" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="navigation" jqyoui-draggable="{index: {{$index}},animate:false, placeholder: 'keep'}" class="input-group command-object move-command" data-type="move" data-direction="up" data-steps="0" >
-                        <span class="input-group-addon">{{ navCommand.command }}</span>
-                        <div class="input-group-btn">
-                            <button type="button" class="btn btn-default" data-toggle="dropdown">
-                                <span class="text-only">{{ navCommand.direction }}&nbsp;&nbsp;&nbsp;</span> </button>
+            <div class="panel-body" id="move-command-palette">
 
+                    <div  class="row" ng-repeat='navCommand in navigation' ng-show="navCommand.command" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="navigation" jqyoui-draggable="{index: {{$index}},animate:false, placeholder: 'keep'}" data-type="move" data-direction="up" data-steps="0" >
+                        <div class="command-object move-command">
+                            <div class="input-group">
+                                <span class="input-group-addon">{{ navCommand.command }}</span>
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default" data-toggle="dropdown">
+                                        <span class="text-only">{{ navCommand.direction }}&nbsp;&nbsp;&nbsp;</span> </button>
+
+                                    </div>
+                                    <input type="text" class="form-control" ng-model="navCommand.steps" >
+
+                                    <br />
+
+                                </div>
                             </div>
-                            <input type="text" class="form-control" ng-model="navCommand.steps" >
-
-                            <br />
-
                         </div>
 
                     </div>
 
-                </div>
+
             </div>
             <div class="panel panel-primary">
                 <div class="panel-heading">
