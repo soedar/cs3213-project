@@ -32,14 +32,21 @@
     border-right: solid 1px #e0e0e0;
 }
 
-.move-command > :first-child{
+ol[ng-model="commandsWorkspace"]{
+    padding:0px;
+}
+li[class*="command-object"] {
+    display:block;
+}
+
+.command-placeholder > :first-child, .move-command > :first-child{
     width: 100px;
 }
 
-.move-command > :nth-child(2){
+.command-placeholder > :nth-child(2), .move-command > :nth-child(2){
     width: 100px;
 }
 
-.move-command > :nth-child(2) button{
+.command-placeholder > :nth-child(2) button, .move-command > :nth-child(2) button{
     width: 100%;
 }
