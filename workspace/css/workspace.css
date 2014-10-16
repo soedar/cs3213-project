@@ -6,7 +6,6 @@
 }
 
 #workspace-container{
-
     max-height:1000px;
     overflow-y:scroll;
 }
@@ -14,12 +13,16 @@
 #workspace-main{
     background-color: #eee;
 }
+
+#command-palette .panel-body .row{
+    margin: auto;
+}
 .command-object{
     z-index:10;
+    margin-bottom:5px;
 }
 
 .command-placeholder{
-
 }
 
 .workspace-row div{
@@ -32,14 +35,31 @@
     border-right: solid 1px #e0e0e0;
 }
 
-.move-command > :first-child{
+.command-object .input-group > :first-child{
     width: 100px;
 }
 
-.move-command > :nth-child(2){
+.command-object .input-group > :nth-child(2){
     width: 100px;
 }
 
-.move-command > :nth-child(2) button{
+.command-object .input-group > :nth-child(2) button{
     width: 100%;
+}
+
+.close-button{
+    background-color: #eee;
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    color: #e0e0e0;
+}
+
+.close-button:hover{
+    background-color: #eee;
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-left-color: #cccccc;
+    color: #c0c0c0;
 }
