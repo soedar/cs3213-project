@@ -48,9 +48,17 @@ angular.module('frontendApp')
             });
         });
 
-        function updateScope() {
-            $scope.$apply();
+        function updateScope(done) {
+            if (!done) {
+                $scope.$apply();
+            } else {
+                $scope.$apply(function() {
+                    $scope.hasMoves = false;
+                });
+            }
         }
+
+        $scope.hasMoves = true;
 
         $scope.execute = function() {
             $scope.game.executeEvents(updateScope);

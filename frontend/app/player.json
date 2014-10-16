@@ -6,7 +6,7 @@
     },
     {
         "command": "Move",
-        "direction": "Down",
+        "direction": "Up",
         "steps": 1
     },
     {

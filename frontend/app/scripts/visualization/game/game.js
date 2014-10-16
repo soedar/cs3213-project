@@ -144,4 +144,4 @@ Game.prototype.executeEvents = function(callback) {
             this.executeEvents(callback);
         }
     }.bind(this));;
-}
+};
