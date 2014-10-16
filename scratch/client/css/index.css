@@ -1,0 +1,14 @@
+.title {
+  padding-top: 20px;
+  text-align: center;
+  font-size: 72px;
+  font-family: sans-serif;
+}
+
+.views {
+  padding: 20px;
+}
+
+.tab {
+  cursor: pointer;
+}
