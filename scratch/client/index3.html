@@ -1,0 +1,30 @@
+<!doctype html>
+<html ng-app="index">
+  <head>
+    <title>Scratch</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" data-ng-href="css/index.css" />
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="js/controllers/workspace.js"></script>
+    <script src="js/controllers/gameroom.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js">
+    </script>
+
+    <!-- Controllers -->
+    <script src="js/controllers/index.js"></script>
+  </head>
+<body>
+  <div class="title">Scratch!</div>
+  <div ng-controller="TabsController">
+    <tabset>
+      <tab class="tab"
+        ng-repeat="tab in tabs"
+        heading="{{tab.heading}}"
+        active="tab.active"
+        select="go(tab.route)">
+      </tab>
+    </tabset>
+    <div ui-view class="views"></div>
+  </div>
+</body>
