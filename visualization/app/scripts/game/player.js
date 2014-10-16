@@ -96,3 +96,34 @@ Player.prototype.animatePickCoin = function(coinId, callback) {
         }.bind(this)
     }).play();
 };
+
+Player.prototype.animatePickSpinach = function(spinachId, callback) {
+	this.repr.moveToTop();
+	
+	var spinach = game.objects[spinachId];
+	var gridX = spinach.gridX;
+	var gridY = spinach.gridY;
+	this.setGrid(gridX, gridY, true);
+
+
+    new Kinetic.Tween({
+        node: spinach.repr,
+        duration: Config.stepDuration * 0.9,
+        opacity: 0
+    }).play();
+
+
+    new Kinetic.Tween({
+        node: this.repr, 
+        duration: Config.stepDuration,
+        x: this.gridToReprCoord(gridX),
+        y: this.gridToReprCoord(gridY),
+        onFinish: function() {
+			spinach.repr.remove();
+			delete game.objects[spinachId];
+            if (callback) {
+                callback();
+            }
+        }.bind(this)
+    }).play();
+};

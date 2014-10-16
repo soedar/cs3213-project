@@ -26,6 +26,14 @@ Map.prototype.addCoin = function(xy) {
     this.objects.push(coin);
 };
 
+Map.prototype.addSpinach = function(xy) {
+	var spinach = this.createObject('spinach', xy);
+	spinach.model = {
+		value: 20
+	};
+	this.objects.push(spinach);
+};
+
 Map.prototype.createObject = function(type, xy) {
     function uuid() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
