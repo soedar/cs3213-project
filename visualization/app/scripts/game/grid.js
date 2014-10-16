@@ -1,4 +1,5 @@
 'use strict';
+/*global Config:false */
 
 function Grid(model, repr) {
     this.gridX = 0;
@@ -43,7 +44,7 @@ Grid.prototype.animateTo = function(gridX, gridY, callback) {
 
     new Kinetic.Tween({
         node: this.repr, 
-        duration: 1,
+        duration: Config.stepDuration,
         x: this.gridToReprCoord(gridX),
         y: this.gridToReprCoord(gridY),
         onFinish: function() {

@@ -1,5 +1,5 @@
 'use strict';
-/*global Kinetic:false, Grid:false, Assets:false */
+/*global Kinetic:false, Grid:false, Assets:false, Config:false */
 
 function Player(model) {
     var image;
@@ -41,7 +41,7 @@ Player.prototype.animateAttack = function(target, callback) {
 
     var tweenIn = {
         node: this.repr,
-        duration: 0.5,
+        duration: Config.stepDuration * 0.5,
         easing: Kinetic.Easings.BackEaseIn,
         x: this.gridToReprCoord(target.gridX),
         y: this.gridToReprCoord(target.gridY),
@@ -52,7 +52,7 @@ Player.prototype.animateAttack = function(target, callback) {
 
     var tweenOut = {
         node: this.repr,
-        duration: 0.5,
+        duration: Config.stepDuration * 0.5,
         easing: Kinetic.Easings.BackEaseIn,
         x: this.gridToReprCoord(this.gridX),
         y: this.gridToReprCoord(this.gridY),
@@ -60,22 +60,10 @@ Player.prototype.animateAttack = function(target, callback) {
             if (callback) {
                 callback();
             }
-			if (target.model.color === "blue")
-				target.updateHealth();
         }.bind(this)
     };
 
     (new Kinetic.Tween(tweenIn)).play();
-};
-
-Player.prototype.updateHealth = function() {
-	var healthText = document.getElementById("localPlayerHealth");
-	healthText.innerHTML = 'Health: ' + this.model.health;
-};
-
-Player.prototype.updateCoin = function() {
-	var coinText = document.getElementById("localPlayerCoin");
-	coinText.innerHTML = 'Coin: ' + this.model.coin;
 };
 
 Player.prototype.animatePickCoin = function(coinId, callback) {
@@ -86,9 +74,17 @@ Player.prototype.animatePickCoin = function(coinId, callback) {
 	var gridY = coin.gridY;
 	this.setGrid(gridX, gridY, true);
 
+
+    new Kinetic.Tween({
+        node: coin.repr,
+        duration: Config.stepDuration * 0.9,
+        opacity: 0
+    }).play();
+
+
     new Kinetic.Tween({
         node: this.repr, 
-        duration: 1,
+        duration: Config.stepDuration,
         x: this.gridToReprCoord(gridX),
         y: this.gridToReprCoord(gridY),
         onFinish: function() {
@@ -97,8 +93,6 @@ Player.prototype.animatePickCoin = function(coinId, callback) {
             if (callback) {
                 callback();
             }
-			if (this.model.color === "blue")
-				this.updateCoin();
         }.bind(this)
     }).play();
 };

@@ -11,10 +11,19 @@ Map.prototype.addPlayer = function(name, color, health, xy) {
     player.model = {
         name: name,
         color: color,
-        health: health
+        health: health,
+        coin: 0,
     };
 
     this.objects.push(player);
+};
+
+Map.prototype.addCoin = function(xy) {
+    var coin = this.createObject('coin', xy);
+    coin.model = {
+        value: 10
+    };
+    this.objects.push(coin);
 };
 
 Map.prototype.createObject = function(type, xy) {
