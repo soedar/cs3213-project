@@ -16,14 +16,16 @@ angular
     'ngSanitize',
     'ngTouch',
     'ui.router',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'ngDragDrop'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
       $urlRouterProvider.otherwise('/');
       $stateProvider
       .state('main', {
           url: '/',
-          templateUrl: 'views/workspace.html'
+          templateUrl: 'views/workspace.html',
+          controller: 'WorkspaceCtrl'
       })
       .state('visualizer', {
           url: '/visualizer',
