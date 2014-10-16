@@ -9,7 +9,6 @@
  */
 angular.module('frontendApp')
   .controller('VisualizationCtrl', function ($scope) {
-       
         var stage = new Kinetic.Stage({
             container: 'container',
             width: 500,
@@ -32,7 +31,32 @@ angular.module('frontendApp')
                     stage.add(layer);
                 });
 
-                $scope.game = game;
+                var player;
+                // We assume that there is only one player for now
+                for (var id in game.objects) {
+                    var object = game.objects[id];
+                    if (object instanceof Player) {
+                        player = object;
+                        break;
+                    }
+                }
+                
+                $scope.$apply(function() {
+                    $scope.game = game;
+                    $scope.player = player;
+                });
             });
         });
+
+        function updateScope() {
+            $scope.$apply();
+        }
+
+        $scope.execute = function() {
+            $scope.game.executeEvents(updateScope);
+        };
+
+        $scope.executeNextEvent = function() {
+            $scope.game.executeNextEvent(updateScope);
+        };
   });

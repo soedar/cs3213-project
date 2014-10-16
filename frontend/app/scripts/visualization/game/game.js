@@ -114,7 +114,12 @@ Game.prototype.executeNextEvent = function(callback) {
 			return;
 		}
 		
-		charater.animatePickCoin(nextEvent.target, updateModelAndCallback);
+		charater.animatePickCoin(coin, function() {
+            // Remove coin from game
+            delete this.objects[nextEvent.target];
+            updateModelAndCallback();
+        }.bind(this));
+
 	} else if (nextEvent.type === 'pickSpinach') {
 		var charater = this.objects[nextEvent.id];
 		var spinach = this.objects[nextEvent.target];
@@ -124,15 +129,19 @@ Game.prototype.executeNextEvent = function(callback) {
 			return;
 		}
 		
-		charater.animatePickSpinach(nextEvent.target, updateModelAndCallback);
+		charater.animatePickSpinach(spinach, function() {
+            delete this.objects[nextEvent.target];
+            updateModelAndCallback()
+        }.bind(this));
 	}
 	
 };
 
-Game.prototype.executeEvents = function() {
+Game.prototype.executeEvents = function(callback) {
     this.executeNextEvent(function(done) {
+        callback(done);
         if (!done) {
-            this.executeEvents();
+            this.executeEvents(callback);
         }
     }.bind(this));;
 }

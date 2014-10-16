@@ -35,8 +35,6 @@ Engine.prototype.run = function() {
 
 Engine.prototype.makeEvent = function(action, player, objectsMemory) {
     if (action.command === 'Move') {
-        player.model.health -= 1;
-
         var new_xy = _.clone(player.xy);
         switch(action.direction) {
             case 'Left':
@@ -58,6 +56,9 @@ Engine.prototype.makeEvent = function(action, player, objectsMemory) {
             new_xy.x >= this.map.mapSize || new_xy.y >= this.map.mapSize) {
             return null;
         }
+
+        // We have determine a valid move, so we reduce the health
+        player.model.health -= 1;
 
         // See if there are any objects that has the coordinate
         var obj = objectsMemory.filter(function(object) {

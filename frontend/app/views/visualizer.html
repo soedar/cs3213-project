@@ -8,11 +8,12 @@
             	<div class="panel-heading">
                 	<h3 class="panel-title">Statistics</h3>
              	</div>
-              <div class="panel-body" id="localPlayerHealth">Health: 3</div>
-              <div class="panel-body" id="localPlayerCoin">Coins: 0</div>
+                <div class="panel-body" id="localPlayerHealth">Health: {{player.model.health}}</div>
+                <div class="panel-body" id="localPlayerCoin">Coins: {{player.model.coin}}</div>
             </div>
+
+            <button class="btn btn-primary" ng-click="executeNextEvent()">Execute Next Event</button>
+            <button class="btn btn-primary" ng-click="execute()">Play All Events</button>
         </div>
     </div>
 </div>
-
-

@@ -30,9 +30,6 @@ function Player(model) {
         fillPatternRepeat: 'no-repeat',
         fillPatternScale: {x: scale, y: scale}
     }));
-	
-	this.model.health = 3;
-	this.model.coin = 0;
 }
 Player.prototype = Object.create(Grid.prototype);
 
@@ -66,14 +63,12 @@ Player.prototype.animateAttack = function(target, callback) {
     (new Kinetic.Tween(tweenIn)).play();
 };
 
-Player.prototype.animatePickCoin = function(coinId, callback) {
+Player.prototype.animatePickCoin = function(coin, callback) {
 	this.repr.moveToTop();
 	
-	var coin = game.objects[coinId];
 	var gridX = coin.gridX;
 	var gridY = coin.gridY;
 	this.setGrid(gridX, gridY, true);
-
 
     new Kinetic.Tween({
         node: coin.repr,
@@ -89,7 +84,6 @@ Player.prototype.animatePickCoin = function(coinId, callback) {
         y: this.gridToReprCoord(gridY),
         onFinish: function() {
 			coin.repr.remove();
-			delete game.objects[coinId];
             if (callback) {
                 callback();
             }
@@ -97,10 +91,9 @@ Player.prototype.animatePickCoin = function(coinId, callback) {
     }).play();
 };
 
-Player.prototype.animatePickSpinach = function(spinachId, callback) {
+Player.prototype.animatePickSpinach = function(spinach, callback) {
 	this.repr.moveToTop();
 	
-	var spinach = game.objects[spinachId];
 	var gridX = spinach.gridX;
 	var gridY = spinach.gridY;
 	this.setGrid(gridX, gridY, true);
@@ -120,7 +113,6 @@ Player.prototype.animatePickSpinach = function(spinachId, callback) {
         y: this.gridToReprCoord(gridY),
         onFinish: function() {
 			spinach.repr.remove();
-			delete game.objects[spinachId];
             if (callback) {
                 callback();
             }
