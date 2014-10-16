@@ -54,7 +54,9 @@ Game.prototype.getObjectLayer = function() {
             object = new Player(obj.model);
         } else if (obj.type === 'coin') {
             object = new Coin();
-        }
+        } else if (obj.type === 'spinach') {
+			object = new Spinach();
+		}
 
         if (object) {
             object.setGrid(obj.xy.x, obj.xy.y);
@@ -104,15 +106,25 @@ Game.prototype.executeNextEvent = function(callback) {
 
         object.animateAttack(target, updateModelAndCallback);
     } else if (nextEvent.type === 'pickCoin') {
-		var charaterId = this.objects[nextEvent.id];
+		var charater = this.objects[nextEvent.id];
 		var coin = this.objects[nextEvent.target];
 		
-		if (!charaterId || !coin) {
+		if (!charater || !coin) {
 			DEBUG('Invalid id for object or target in event');
 			return;
 		}
 		
-		charaterId.animatePickCoin(nextEvent.target, updateModelAndCallback);
+		charater.animatePickCoin(nextEvent.target, updateModelAndCallback);
+	} else if (nextEvent.type === 'pickSpinach') {
+		var charater = this.objects[nextEvent.id];
+		var spinach = this.objects[nextEvent.target];
+		
+		if (!charater || !spinach) {
+			DEBUG('Invalid id for object or target in event');
+			return;
+		}
+		
+		charater.animatePickSpinach(nextEvent.target, updateModelAndCallback);
 	}
 	
 };
