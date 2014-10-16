@@ -1,0 +1,22 @@
+[
+    {
+        "command": "Move",
+        "direction": "Up",
+        "steps": 1
+    },
+    {
+        "command": "Move",
+        "direction": "Down",
+        "steps": 1
+    },
+    {
+        "command": "Move",
+        "direction": "Left",
+        "steps": 1
+    },
+    {
+        "command": "Move",
+        "direction": "Right",
+        "steps": 1
+    }
+]
