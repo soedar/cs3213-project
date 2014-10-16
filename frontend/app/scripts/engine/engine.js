@@ -28,8 +28,6 @@ Engine.prototype.run = function() {
         }
     }.bind(this));
 
-    console.log(gameOutput);
-
     return gameOutput;
 };
 
@@ -65,10 +63,8 @@ Engine.prototype.makeEvent = function(action, player, objectsMemory) {
             return new_xy.x === object.xy.x && new_xy.y === object.xy.y;
         });
         
-
         var e = {
             id: player.id,
-            xy: _.clone(player.xy),
             update: {}
         };
 
@@ -86,15 +82,25 @@ Engine.prototype.makeEvent = function(action, player, objectsMemory) {
                 e.target = obj[0].id;
                 e.update[player.id].coin = player.model.coin;
             }
+            else if (obj[0].type === "spinach") {
+                player.xy = new_xy;
+                player.model.health += 5;
+
+                e.type = 'pickSpinach';
+                e.target = obj[0].id;
+                e.update[player.id].health = player.model.health;
+            }
         }
 
         // Nothing there, so we can move to the new location
         else {
             player.xy = new_xy;
-
             e.type = 'move';
-            e.xy = _.clone(new_xy);
         }
+
+
+        // Update the location of the player
+        e.xy = _.clone(player.xy);
         return e;
     }
 };
