@@ -142,7 +142,13 @@ module.exports = function (grunt) {
           ]
         }]
       },
-      server: '.tmp'
+      server: '.tmp',
+      backend: {
+          src: ['../scratch/client/*'],
+          options: {
+            force: true
+          }
+      }
     },
 
     // Add vendor prefixed styles
@@ -241,6 +247,12 @@ module.exports = function (grunt) {
           cwd: '<%= yeoman.app %>/images',
           src: '{,*/}*.{png,jpg,jpeg,gif}',
           dest: '<%= yeoman.dist %>/images'
+        },
+        {
+          expand: true,
+          cwd: '<%= yeoman.app %>/game_images',
+          src: '{,*/}*.{png,jpg,jpeg,gif}',
+          dest: '<%= yeoman.dist %>/game_images'
         }]
       }
     },
@@ -331,7 +343,7 @@ module.exports = function (grunt) {
       toBackend: {
           expand: true,
           cwd: 'dist/',
-          src: '*',
+          src: '**',
           dest: '../scratch/client/'
       }
     },
@@ -404,6 +416,7 @@ module.exports = function (grunt) {
     'filerev',
     'usemin',
     'htmlmin',
+    'clean:backend',
     'copy:toBackend'
   ]);
 
