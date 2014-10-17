@@ -3,12 +3,18 @@
 
 function Coin() {
   var coinImage = Assets.coin;
-  var scale = this.size / coinImage.width;
+  var coinScale = 0.80;
+
+  var scale = (this.size / coinImage.width) * coinScale;
+
+  var offsetX = -(this.size * coinScale) / 2;
+  var offsetY = -this.size * coinScale;
 
   Grid.call(this, {}, new Kinetic.Rect({
     fillPatternImage: coinImage,
     fillPatternRepeat: 'no-repeat',
-    fillPatternScale: {x: scale, y: scale}
+    fillPatternScale: {x: scale, y: scale},
+    fillPatternOffset: {x: offsetX, y: offsetY}
   }));
 
 }
