@@ -84,7 +84,14 @@ Engine.prototype.makeEvent = function(action, player, objectsMemory) {
                 e.type = 'pickCoin';
                 e.target = obj[0].id;
                 e.update[player.id].coin = player.model.coin;
-            }
+            } else if (obj[0].type === "spinach") {
+				player.xy = new_xy;
+				player.model.health++; //we should declair a const of amount of health or coin you get
+				
+				e.type = 'pickSpinach';
+				e.target = obj[0].id;
+				e.update[player.id].health = player.model.health;
+			}
         }
 
         // Nothing there, so we can move to the new location
