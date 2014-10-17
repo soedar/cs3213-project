@@ -25,7 +25,7 @@ Assets.load(function() {
         map.addPlayer("testPlayer", "blue", 100, {x: 0, y: 2});
         map.addCoin({x: 1, y: 2});
         map.addCoin({x: 2, y: 2});
-		map.addSpinach({x: 1, y: 0});
+		map.addSpinach({x: 0, y: 1});
         var engine = new Engine(map, playerMoves);
 
         var gameData = engine.run();

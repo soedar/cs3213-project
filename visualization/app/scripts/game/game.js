@@ -115,6 +115,7 @@ Game.prototype.executeNextEvent = function(callback) {
 		}
 		
 		charater.animatePickCoin(nextEvent.target, updateModelAndCallback);
+		document.getElementById("localPlayerCoin").innerHTML = "Coin: " + nextEvent.update[nextEvent.id].coin;
 	} else if (nextEvent.type === 'pickSpinach') {
 		var charater = this.objects[nextEvent.id];
 		var spinach = this.objects[nextEvent.target];
@@ -125,6 +126,7 @@ Game.prototype.executeNextEvent = function(callback) {
 		}
 		
 		charater.animatePickSpinach(nextEvent.target, updateModelAndCallback);
+		document.getElementById("localPlayerHealth").innerHTML = "Health: " + nextEvent.update[nextEvent.id].health;
 	}
 	
 };
