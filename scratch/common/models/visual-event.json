@@ -1,0 +1,24 @@
+{
+  "name": "VisualEvent",
+  "base": "PersistedModel",
+  "properties": {
+    "events": {
+      "type": "object",
+      "required": true
+    },
+    "commandId": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "command": {
+      "type": "belongsTo",
+      "model": "Command",
+      "foreignKey": "commandId"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

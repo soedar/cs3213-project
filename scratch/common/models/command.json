@@ -1,0 +1,21 @@
+{
+  "name": "Command",
+  "base": "PersistedModel",
+  "properties": {
+    "commands": {
+      "type": ["object"],
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "event": {
+      "type": "hasMany",
+      "model": "VisualEvent",
+      "foreignKey": "commandId"
+    }
+  },
+
+  "acls": [],
+  "methods": []
+}

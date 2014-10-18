@@ -23,5 +23,13 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "Command": {
+    "dataSource": "database",
+    "public": true
+  },
+  "VisualEvent": {
+    "dataSource": "database",
+    "public": false
   }
 }
