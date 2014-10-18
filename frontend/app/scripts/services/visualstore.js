@@ -8,12 +8,11 @@
  * Factory in the frontendApp.
  */
 angular.module('frontendApp')
-  .factory('visualStore', function () {
+  .factory('visualStore', function ($http) {
     var visualStates = {};
 
     function addLocal(gameEvents) {
       var key = 'local_' + lil.uuid();
-      console.log(gameEvents);
       visualStates[key] = gameEvents;
       return key;
     }
@@ -23,8 +22,17 @@ angular.module('frontendApp')
       if (callback) {
         if (visualStates[key]) {
           callback(null, visualStates[key]);
-        } else {
-          callback('no_such_id');
+          return;
+        }
+        else {
+          var url = 'api/Commands/visualization';
+          $http.get(url, {params: {id: key}})
+            .success(function(data) {
+              callback(null, data);
+            })
+            .error(function(data) {
+              callback('error');
+            });
         }
       }
     }

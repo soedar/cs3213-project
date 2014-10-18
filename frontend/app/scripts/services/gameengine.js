@@ -29,6 +29,7 @@ angular.module('frontendApp')
 
     // Public API here
     return {
-      run: run
+      run: run,
+      defaultMap: defaultMap
     };
   });

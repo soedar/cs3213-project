@@ -1,7 +1,7 @@
 var Engine = require('../../engine/engine.js');
+var _ = require('lodash');
 
 module.exports = function(Command) {
-  console.log(Engine);
   Command.afterRemote('create', function(ctx, unused, next) {
     var VisualEvent = Command.app.models.VisualEvent;
 
@@ -10,4 +10,19 @@ module.exports = function(Command) {
       ctx.res.send(ctx.result);
     });
   });
+
+  Command.visualization = function(id, cb) {
+    Command.findOne({where: {id: id}, limit: 1, include: 'event'}, function(error, command) {
+      if (command) {
+        cb(null, command.commands, command.event()[0].events);
+      } else {
+        cb('no_such_id');
+      }
+    });
+  };
+
+  Command.remoteMethod('visualization', {accepts: {arg: 'id', type: 'string'},
+                                         returns: [{arg: 'commands', type: 'object'},
+                                                   {arg: 'events', type: 'object'}],
+                                         http: {verb: 'get'}});
 };

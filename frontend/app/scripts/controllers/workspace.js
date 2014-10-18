@@ -8,7 +8,7 @@
  * Controller of the frontendApp
  */
 angular.module('frontendApp')
-  .controller('WorkspaceCtrl', function ($scope, $state, visualStore, gameEngine) {
+  .controller('WorkspaceCtrl', function ($scope, $state, $http, visualStore, gameEngine) {
         $scope.navigation = [
             {'command':'Move', 'commandType':'Up','parameters':1},
             {'command':'Move', 'commandType':'Down','parameters':1},
@@ -47,13 +47,22 @@ angular.module('frontendApp')
         }
 
 		    $scope.sendData = function(){
-            console.log(JSON.stringify(getCommands()));
+            // For now, assume that the map is default
+            var commands = getCommands();
+            var map = gameEngine.defaultMap();
+
+            var data = {commands: commands, map: map};
+            $http.post('api/Commands', data)
+              .success(function(data) {
+                $state.go('visualizer', {id: data.id});
+              }).error(function(data) {
+                alert('Error saving to server');
+              });
         };
 
         $scope.run = function() {
             var commands = getCommands();
             var gameEvents = gameEngine.run(commands);
-            console.log(gameEvents);
 
             var key = visualStore.addLocal(gameEvents);
             $state.go('visualizer', {id: key});

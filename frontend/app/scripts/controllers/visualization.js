@@ -8,7 +8,7 @@
  * Controller of the frontendApp
  */
 angular.module('frontendApp')
-  .controller('VisualizationCtrl', function ($scope, $stateParams, visualStore, gameEngine) {
+  .controller('VisualizationCtrl', function ($scope, $stateParams, $timeout, visualStore, gameEngine) {
     var stage = new Kinetic.Stage({
       container: 'container',
         width: 500,
@@ -31,7 +31,7 @@ angular.module('frontendApp')
         }
       }
 
-      $scope.$apply(function() {
+      $timeout(function() {
         $scope.hasMoves = (game.events.length > 0);
         $scope.game = game;
         $scope.player = player;
@@ -43,9 +43,8 @@ angular.module('frontendApp')
     Assets.load(function() {
       if ($stateParams.id) {
         visualStore.load($stateParams.id, function(error, gameData) {
-          console.log(gameData);
           if (error) {
-            $scope.$apply(function() {
+            $timeout(function() {
               $scope.error = 'No such game id';
             });
             return;
@@ -59,14 +58,13 @@ angular.module('frontendApp')
 
     function updateScope(done) {
       if (!done) {
-        $scope.$apply();
+        $timeout(function() {});
       } else {
-        $scope.$apply(function() {
+        $timeout(function() {
           $scope.hasMoves = false;
         });
       }
     }
-
 
     $scope.execute = function() {
       $scope.game.executeEvents(updateScope);

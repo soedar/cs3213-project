@@ -22,26 +22,9 @@ angular.module('frontendApp')
         return $state.is(route);
     };
 
-
-    $scope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams) {
-        //console.log("start change state", toState, fromState);
-        //console.log(toParams, fromParams);
-    });
-
     $scope.$on("$stateChangeSuccess", function(event, toState, toParams, fromState, fromParams) {
-        //console.log("change state success", toState, fromState);
-        //console.log(toParams, fromParams);
-        //console.log('---');
         $scope.tabs.forEach(function(tab) {
             tab.active = $scope.active(tab.route);
         });
-    });
-
-    $scope.$on("$stateNotFound", function() {
-      console.log("state not found");
-    });
-
-    $scope.$on("$stateChangeError", function() {
-      console.log("state change error");
     });
   });
