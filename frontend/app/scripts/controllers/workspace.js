@@ -17,7 +17,7 @@ angular.module('frontendApp')
         ];
 
         $scope.loopCommands = [
-            {'command':'While', 'commandType':'Loop', 'parameters':1}, 
+            {'command':'While', 'commandType':'Loop', 'parameters':1},
             {'command':'End While', 'commandType':'Loop'}
             // {'command':'For', 'commandType':'Loop', 'parameters':1},
             // {'command':'Do While','commandType':'Loop', 'parameters':1}
