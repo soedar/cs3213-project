@@ -8,7 +8,7 @@
  * Controller of the frontendApp
  */
 angular.module('frontendApp')
-  .controller('WorkspaceCtrl', function ($scope) {
+  .controller('WorkspaceCtrl', function ($scope, $state, visualStore) {
         $scope.navigation = [
             {'command':'Move', 'commandType':'Up','parameters':1},
             {'command':'Move', 'commandType':'Down','parameters':1},
@@ -25,10 +25,10 @@ angular.module('frontendApp')
 
         $scope.commandsWorkspace = [];
 
-		$scope.sendData = function(){
+        function getCommands() {
             var stackCommandIds = [];
-            for(var i=0; i<$scope.commandsWorkspace.length; i++){
-                if($scope.commandsWorkspace[i].commandId){
+            for(var i=0; i<$scope.commandsWorkspace.length; i++) {
+                if($scope.commandsWorkspace[i].commandId) {
                     if($scope.commandsWorkspace[i].command === 'While'){
                         stackCommandIds.push($scope.commandsWorkspace[i].commandId)
                     }
@@ -37,13 +37,33 @@ angular.module('frontendApp')
                     }
                 }
             }
-            if(stackCommandIds.length === 0){
-                console.log(JSON.stringify($scope.commandsWorkspace));
+
+            if (stackCommandIds.length === 0) {
+                return $scope.commandsWorkspace;
+            } else {
+                // Error in command order
+                return null;
             }
-			else{
-                alert("error in command order");
-            }
-		};
+        }
+
+		    $scope.sendData = function(){
+            console.log(JSON.stringify(getCommands()));
+        };
+
+        $scope.run = function() {
+            var commands = getCommands();
+
+            var map = new Map(4);
+            map.addPlayer("testPlayer", "blue", 100, {x: 0, y: 2});
+            map.addCoin({x: 1, y: 2});
+            map.addCoin({x: 2, y: 2});
+        	  map.addSpinach({x: 1, y: 0});
+            var engine = new Engine(map, commands);
+            var gameData = engine.run();
+
+            var key = visualStore.addLocal(gameData);
+            $state.go('visualizer', {id: key});
+        };
 
         $scope.removeCommands = function(index) {
             if($scope.commandsWorkspace[index].commandId){

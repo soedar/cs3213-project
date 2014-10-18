@@ -34,18 +34,18 @@ Engine.prototype.run = function() {
 Engine.prototype.makeEvent = function(action, player, objectsMemory) {
   if (action.command === 'Move') {
     var new_xy = _.clone(player.xy);
-    switch(action.direction) {
+    switch(action.commandType) {
       case 'Left':
-        new_xy.x -= action.steps;
+        new_xy.x -= action.parameters;
         break;
       case 'Right':
-        new_xy.x += action.steps;
+        new_xy.x += action.parameters;
         break;
       case 'Up':
-        new_xy.y -= action.steps;
+        new_xy.y -= action.parameters;
         break;
       case 'Down':
-        new_xy.y += action.steps;
+        new_xy.y += action.parameters;
         break;
     }
 

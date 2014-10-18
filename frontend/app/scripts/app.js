@@ -20,7 +20,8 @@ angular
     'ngDragDrop'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
-      $urlRouterProvider.otherwise('/');
+      $urlRouterProvider.otherwise('/error');
+
       $stateProvider
       .state('main', {
           url: '/',
@@ -28,7 +29,7 @@ angular
           controller: 'WorkspaceCtrl'
       })
       .state('visualizer', {
-          url: '/visualizer',
+          url: '^/visualizer/:id',
           templateUrl: 'views/visualizer.html'
       });
   });
