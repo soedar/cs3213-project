@@ -96,10 +96,18 @@ Engine.prototype.makeEvent = function(action, player, objectsMemory) {
     player.model.health -= 1;
 
     // See if there are any objects that has the coordinate
-    var obj = objectsMemory.filter(function(object) {
-      return new_xy.x === object.xy.x && new_xy.y === object.xy.y;
-    });
-
+	//If there is, get and delete the object
+	var obj;
+	var i;
+	for (i = 0; i < objectsMemory.length; i++) {
+		var object = objectsMemory[i];
+		if (new_xy.x === object.xy.x && new_xy.y === object.xy.y) {
+			obj = object;
+			objectsMemory.splice(i, 1);
+			break;
+		}
+	}
+	
     var e = {
       id: player.id,
       update: {}
@@ -109,22 +117,23 @@ Engine.prototype.makeEvent = function(action, player, objectsMemory) {
     e.update[player.id] = {health: player.model.health};
 
     // There is an object at the same location as the new location
-    if (obj.length > 0) {
+    if (obj) {
       // Assume that only one object can be at a position
-      if (obj[0].type === "coin") {
+      if (obj.type === "coin") {
         player.xy = new_xy;
         player.model.coin++;
 
         e.type = 'pickCoin';
-        e.target = obj[0].id;
+        e.target = obj.id;
         e.update[player.id].coin = player.model.coin;
+		
       }
-      else if (obj[0].type === "spinach") {
+      else if (obj.type === "spinach") {
         player.xy = new_xy;
         player.model.health += 5;
 
         e.type = 'pickSpinach';
-        e.target = obj[0].id;
+        e.target = obj.id;
         e.update[player.id].health = player.model.health;
       }
     }
