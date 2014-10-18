@@ -5,6 +5,10 @@
     "commands": {
       "type": ["object"],
       "required": true
+    },
+    "map": {
+      "type": "object",
+      "required": true
     }
   },
   "validations": [],
