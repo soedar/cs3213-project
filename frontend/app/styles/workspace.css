@@ -1,6 +1,13 @@
-.input-group-addon{
+.input-group-addon-black{
     background-color: #222222;
     border-color: #222222;
+    color: #FFF;
+    font-size: 15px;
+}
+
+.input-group-addon-green{
+    background-color: #3fb618;
+    border-color: #3fb618;
     color: #FFF;
     font-size: 15px;
 }
