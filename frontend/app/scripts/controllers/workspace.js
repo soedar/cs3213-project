@@ -59,9 +59,9 @@ angular.module('frontendApp')
             map.addCoin({x: 2, y: 2});
         	  map.addSpinach({x: 1, y: 0});
             var engine = new Engine(map, commands);
-            var gameData = engine.run();
+            var gameEvents = engine.run();
 
-            var key = visualStore.addLocal(gameData);
+            var key = visualStore.addLocal(commands, gameEvents);
             $state.go('visualizer', {id: key});
         };
 

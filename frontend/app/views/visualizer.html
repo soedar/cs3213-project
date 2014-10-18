@@ -1,19 +1,36 @@
 <div class="container" ng-controller="VisualizationCtrl">
-    <div class="row">
-    	<div class="col-md-9">
-	    	<div id="container" align="center"></div>
-        </div>
-        <div class="col-md-3">
-        	<div class="panel panel-default">
-            	<div class="panel-heading">
-                	<h3 class="panel-title">Statistics</h3>
-             	</div>
-                <div class="panel-body" id="localPlayerHealth">Health: {{player.model.health}}</div>
-                <div class="panel-body" id="localPlayerCoin">Coins: {{player.model.coin}}</div>
-            </div>
 
-            <button class="btn btn-primary" ng-disabled="!hasMoves" ng-click="executeNextEvent()">Execute Next Event</button>
-            <button class="btn btn-primary" ng-disabled="!hasMoves" ng-click="execute()">Play All Events</button>
-        </div>
+  <alert type="danger" ng-show="error">{{error}}</alert>
+
+  <div class="row" ng-show="game">
+    <div class="col-md-9">
+      <div id="container" align="center"></div>
     </div>
+    <div class="col-md-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Statistics</h3>
+        </div>
+        <div class="panel-body">
+          Health: {{player.model.health}} <br />
+          Coins: {{player.model.coin}}
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Commands</h3>
+        </div>
+
+        <div class="panel-body">
+          <ul>
+            <li ng-repeat="command in gameData.commands">{{command.command}} {{command.commandType}} {{command.parameters}}</li>
+          </ul>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" ng-disabled="!hasMoves" ng-click="executeNextEvent()">Execute Next Event</button>
+      <button class="btn btn-primary" ng-disabled="!hasMoves" ng-click="execute()">Play All Events</button>
+    </div>
+  </div>
 </div>

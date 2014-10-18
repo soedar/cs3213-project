@@ -11,9 +11,9 @@ angular.module('frontendApp')
   .factory('visualStore', function () {
     var visualStates = {};
 
-    function addLocal(state) {
+    function addLocal(commands, gameEvents) {
       var key = 'local_' + lil.uuid();
-      visualStates[key] = _.clone(state);
+      visualStates[key] = {commands: commands, events: gameEvents};
       return key;
     }
 
@@ -22,6 +22,8 @@ angular.module('frontendApp')
       if (callback) {
         if (visualStates[key]) {
           callback(null, visualStates[key]);
+        } else {
+          callback('no_such_id');
         }
       }
     }

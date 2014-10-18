@@ -23,6 +23,7 @@ function Game(game, canvasSize) {
 
   this.objects = {};
 
+  this.events = this.game.events;
   this.eventCounter = 0;
   Grid.prototype.size = this.gridSize;
 }
@@ -70,13 +71,13 @@ Game.prototype.getObjectLayer = function() {
 
 Game.prototype.executeNextEvent = function(callback) {
   // We have run out of events to execute
-  if (this.eventCounter >= this.game.events.length) {
+  if (this.eventCounter >= this.events.length) {
     if (callback) {
       callback(true);
     }
     return;
   }
-  var nextEvent = this.game.events[this.eventCounter++];
+  var nextEvent = this.events[this.eventCounter++];
 
   var updateModelAndCallback = function() {
     for (var objId in nextEvent.update) {
