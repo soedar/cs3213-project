@@ -20,7 +20,7 @@ angular
     'ngDragDrop'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
-      $urlRouterProvider.otherwise('/error');
+      $urlRouterProvider.otherwise('/');
 
       $stateProvider
       .state('main', {
