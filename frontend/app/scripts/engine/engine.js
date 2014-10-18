@@ -21,15 +21,52 @@ Engine.prototype.run = function() {
 
   // Assume we only have one player for now
   var player = players[0];
-  this.playerActions.forEach(function(action) {
-    var e = this.makeEvent(action, player, objectsMemory);
-    if (e) {
-      gameOutput.events.push(e);
-    }
-  }.bind(this));
-
+  
+  DEBUG(objectsMemory);
+  if(this.playerActions) {
+	  gameOutput.events = this.makeEvents(this.playerActions, player, objectsMemory);
+  }
   return gameOutput;
 };
+
+Engine.prototype.makeEvents = function(actions, player, objectsMemory) {
+	var i;
+	var events = [];
+	for (i = 0; i < actions.length; i++) {
+		if (actions[i].commandType === 'Loop') {
+			if (actions[i].command === 'While') {
+				var whileActions = this.getWhileActionList(actions, i);
+				var j;
+				var whileActionsFull = [];
+				for (j = 0; j < actions[i].parameters; j++) {
+					Array.prototype.push.apply(whileActionsFull, whileActions);
+				}
+				Array.prototype.push.apply(events, this.makeEvents(whileActionsFull, player, objectsMemory));
+				i += whileActions.length + 1;
+			}
+		} else {
+			var e = this.makeEvent(actions[i], player, objectsMemory);
+		    if (e) {
+		      events.push(e);
+		    }
+		}
+	}
+	return events
+};
+
+Engine.prototype.getWhileActionList = function(actions, startingPoint) {
+	var whileActions = [];
+	if (actions[startingPoint].command === 'While') {
+		var i;
+		for (i = startingPoint + 1; i < actions.length; i++) {
+			if (actions[i].command === 'End While') {
+				break;
+			}
+			whileActions.push(actions[i]);
+		}
+		return whileActions;
+	}
+}
 
 Engine.prototype.makeEvent = function(action, player, objectsMemory) {
   if (action.command === 'Move') {
@@ -91,13 +128,11 @@ Engine.prototype.makeEvent = function(action, player, objectsMemory) {
         e.update[player.id].health = player.model.health;
       }
     }
-
     // Nothing there, so we can move to the new location
     else {
       player.xy = new_xy;
       e.type = 'move';
     }
-
 
     // Update the location of the player
     e.xy = _.clone(player.xy);
