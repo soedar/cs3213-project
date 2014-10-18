@@ -11,9 +11,10 @@ angular.module('frontendApp')
   .factory('visualStore', function () {
     var visualStates = {};
 
-    function addLocal(commands, gameEvents) {
+    function addLocal(gameEvents) {
       var key = 'local_' + lil.uuid();
-      visualStates[key] = {commands: commands, events: gameEvents};
+      console.log(gameEvents);
+      visualStates[key] = gameEvents;
       return key;
     }
 

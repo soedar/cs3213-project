@@ -8,7 +8,7 @@
  * Controller of the frontendApp
  */
 angular.module('frontendApp')
-  .controller('WorkspaceCtrl', function ($scope, $state, visualStore) {
+  .controller('WorkspaceCtrl', function ($scope, $state, visualStore, gameEngine) {
         $scope.navigation = [
             {'command':'Move', 'commandType':'Up','parameters':1},
             {'command':'Move', 'commandType':'Down','parameters':1},
@@ -52,16 +52,10 @@ angular.module('frontendApp')
 
         $scope.run = function() {
             var commands = getCommands();
+            var gameEvents = gameEngine.run(commands);
+            console.log(gameEvents);
 
-            var map = new Map(4);
-            map.addPlayer("testPlayer", "blue", 100, {x: 0, y: 2});
-            map.addCoin({x: 1, y: 2});
-            map.addCoin({x: 2, y: 2});
-        	  map.addSpinach({x: 1, y: 0});
-            var engine = new Engine(map, commands);
-            var gameEvents = engine.run();
-
-            var key = visualStore.addLocal(commands, gameEvents);
+            var key = visualStore.addLocal(gameEvents);
             $state.go('visualizer', {id: key});
         };
 

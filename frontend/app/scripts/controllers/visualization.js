@@ -8,7 +8,7 @@
  * Controller of the frontendApp
  */
 angular.module('frontendApp')
-  .controller('VisualizationCtrl', function ($scope, $stateParams, visualStore) {
+  .controller('VisualizationCtrl', function ($scope, $stateParams, visualStore, gameEngine) {
     var stage = new Kinetic.Stage({
       container: 'container',
         width: 500,
@@ -53,6 +53,7 @@ angular.module('frontendApp')
           loadBoard(gameData);
         });
       } else {
+        loadBoard(gameEngine.run([]));
       }
     });
 
