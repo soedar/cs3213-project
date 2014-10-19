@@ -23,21 +23,15 @@ angular.module('frontendApp')
             // {'command':'Do While','commandType':'Loop', 'parameters':1}
         ];
 
-        $scope.playerColor = [
-            {'name':'player-color', 'value':'red', 'url':'../game_images/ninja-red.png', 'selected':false, 'height':'50px'},
-            {'name':'player-color', 'value':'blue', 'url':'../game_images/ninja-blue.png', 'selected':true, 'height':'50px'},
-            {'name':'player-color', 'value':'yellow', 'url':'../game_images/ninja-yellow.png', 'selected':false, 'height':'50px'},
-            {'name':'player-color', 'value':'green', 'url':'../game_images/ninja-green.png', 'selected':false, 'height':'50px'}
-        ];
+        $scope.playerColors = ['blue', 'red', 'yellow', 'green'];
+
+        $scope.ninjaColor = "blue";
+        $scope.$watch('ninjaColor', function(value) {
+
+        });
+
 
         $scope.commandsWorkspace = [];
-        $scope.selectedColor = {'name':'player-color', 'value':'blue', 'url':'../game_images/ninja-blue.png', 'selected':true, 'height':'50px'};
-
-        $scope.setPlayerColor = function(color) {
-            color.selected = true;
-            $scope.selectedColor = color;
-            console.log($scope.selectedColor);
-        };
 
         function getCommands() {
             var stackCommandIds = [];

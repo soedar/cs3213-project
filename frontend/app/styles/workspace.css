@@ -70,3 +70,24 @@
     border-left-color: #cccccc;
     color: #c0c0c0;
 }
+
+
+/* image as radio button */
+/* http://stackoverflow.com/questions/17541614/use-thumbnail-image-instead-of-radio-button */
+label.ninjas > input {
+  visibility: hidden;
+  position: absolute;
+}
+
+label > input + img {
+  cursor: pointer;
+
+  opacity: 0.3;
+  filter: alpha(opacity=30);
+  width: 100%;
+  height: 100%;
+}
+label > input:checked + img {
+  opacity: 1.0;
+  filter: alpha(opacity=100);
+}
