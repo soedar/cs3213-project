@@ -21,8 +21,7 @@ Engine.prototype.run = function() {
 
   // Assume we only have one player for now
   var player = players[0];
-  
-  DEBUG(objectsMemory);
+
   if(this.playerActions) {
 	  gameOutput.events = this.makeEvents(this.playerActions, player, objectsMemory);
   }

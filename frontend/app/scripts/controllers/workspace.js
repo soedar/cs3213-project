@@ -57,7 +57,7 @@ angular.module('frontendApp')
 		    $scope.sendData = function(){
             // For now, assume that the map is default
             var commands = getCommands();
-            var map = gameEngine.defaultMap();
+            var map = gameEngine.defaultMap($scope.ninjaColor);
 
             var data = {commands: commands, map: map};
             $http.post('api/Commands', data)
@@ -70,7 +70,8 @@ angular.module('frontendApp')
 
         $scope.run = function() {
             var commands = getCommands();
-            var gameEvents = gameEngine.run(commands);
+            var map = gameEngine.defaultMap($scope.ninjaColor);
+            var gameEvents = gameEngine.run(commands, map);
 
             var key = visualStore.addLocal(gameEvents);
             $state.go('visualizer', {id: key});
