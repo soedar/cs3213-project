@@ -1,0 +1,39 @@
+<!doctype html>
+<html ng-app="login">
+  <head>
+    <title>Scratch</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" data-ng-href="css/index.css" />
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="bower_components/angular-facebook/lib/angular-facebook.js"></script>
+
+    <!-- Controllers -->
+    <script src="/scripts/controllers/login.js"></script>
+  </head>
+
+  <body data-ng-controller="LoginController">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+
+          <div class="page-header">
+            <h1>Welcome to Scratch Ninja!</h1>
+            <div ng-show="!logged">
+              <h3>To continue, please log in with Facebook</h3>
+            </div>
+          </div>
+
+          <div class="alert alert-info" data-ng-show="salutation">Hello, {{user.name}}</div>
+
+          <!-- This is the button for redirect; the plan is to do automatic redirect -->
+          <button type="button" class="btn btn-primary btn-large" data-ng-show="logged" data-ng-disabled="!facebookReady" data-ng-click="">Continue to Scratch Ninja!</button>
+          <div class="alert alert-warning" data-ng-show="byebye">See you again soon!</div>
+
+          <button type="button" class="btn btn-primary btn-large" data-ng-show="!logged" data-ng-disabled="!facebookReady" data-ng-click="IntentLogin()">Login with Facebook</button>
+          <button type="button" class="btn btn-danger btn-large" data-ng-show="logged" data-ng-disabled="!facebookReady" data-ng-click="logout()">Logout</button>
+
+        </div>
+      </div>
+    </div>
+  </body>
