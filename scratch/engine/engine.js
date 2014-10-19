@@ -21,15 +21,53 @@ Engine.prototype.run = function() {
 
   // Assume we only have one player for now
   var player = players[0];
-  this.playerActions.forEach(function(action) {
-    var e = this.makeEvent(action, player, objectsMemory);
-    if (e) {
-      gameOutput.events.push(e);
-    }
-  }.bind(this));
-
+  
+  DEBUG(objectsMemory);
+  if(this.playerActions) {
+	  gameOutput.events = this.makeEvents(this.playerActions, player, objectsMemory);
+  }
   return gameOutput;
 };
+
+Engine.prototype.makeEvents = function(actions, player, objectsMemory) {
+	var i;
+	var events = [];
+	for (i = 0; i < actions.length; i++) {
+		if (actions[i].commandType === 'Loop') {
+			if (actions[i].command === 'While') {
+				var whileActions = this.getWhileActionList(actions, i);
+				var j;
+				var whileActionsFull = [];
+				for (j = 0; j < actions[i].parameters; j++) {
+					Array.prototype.push.apply(whileActionsFull, whileActions);
+				}
+				Array.prototype.push.apply(events, this.makeEvents(whileActionsFull, player, objectsMemory));
+				i += whileActions.length + 1;
+			}
+		} else {
+			var e = this.makeEvent(actions[i], player, objectsMemory);
+		    if (e) {
+		      events.push(e);
+		    }
+		}
+	}
+	return events
+};
+
+
+Engine.prototype.getWhileActionList = function(actions, startingPoint) {
+	var whileActions = [];
+	if (actions[startingPoint].command === 'While') {
+		var i;
+		for (i = startingPoint + 1; i < actions.length; i++) {
+			if (actions[i].command === 'End While') {
+				break;
+			}
+			whileActions.push(actions[i]);
+		}
+		return whileActions;
+	}
+}
 
 Engine.prototype.makeEvent = function(action, player, objectsMemory) {
   if (action.command === 'Move') {
@@ -59,9 +97,17 @@ Engine.prototype.makeEvent = function(action, player, objectsMemory) {
     player.model.health -= 1;
 
     // See if there are any objects that has the coordinate
-    var obj = objectsMemory.filter(function(object) {
-      return new_xy.x === object.xy.x && new_xy.y === object.xy.y;
-    });
+    //If there is, get and delete the object
+	var obj;
+	var i;
+	for (i = 0; i < objectsMemory.length; i++) {
+		var object = objectsMemory[i];
+		if (new_xy.x === object.xy.x && new_xy.y === object.xy.y) {
+			obj = object;
+			objectsMemory.splice(i, 1);
+			break;
+		}
+	}
 
     var e = {
       id: player.id,
@@ -72,22 +118,22 @@ Engine.prototype.makeEvent = function(action, player, objectsMemory) {
     e.update[player.id] = {health: player.model.health};
 
     // There is an object at the same location as the new location
-    if (obj.length > 0) {
+    if (obj) {
       // Assume that only one object can be at a position
-      if (obj[0].type === "coin") {
+      if (obj.type === "coin") {
         player.xy = new_xy;
         player.model.coin++;
 
         e.type = 'pickCoin';
-        e.target = obj[0].id;
+        e.target = obj.id;
         e.update[player.id].coin = player.model.coin;
       }
-      else if (obj[0].type === "spinach") {
+      else if (obj.type === "spinach") {
         player.xy = new_xy;
         player.model.health += 5;
 
         e.type = 'pickSpinach';
-        e.target = obj[0].id;
+        e.target = obj.id;
         e.update[player.id].health = player.model.health;
       }
     }
