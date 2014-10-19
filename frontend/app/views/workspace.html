@@ -93,7 +93,7 @@
                 </div>
             </div>
             </div>
-             <div class="panel panel-primary">
+             <!-- <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">Control</h3>
                 </div>
@@ -102,8 +102,56 @@
                     <button type="button" class="btn btn-default btn-block text-left">Else If ( ... )</button>
                     <button type="button" class="btn btn-default btn-block text-left">Else</button>
                 </div>
+            </div> -->
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Player Color</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-3" ng-repeat="color in playerColor">
+                             <input type="radio" name="{{ color.name }}" value="{{ color.value }}" ng-click="setPlayerColor(color)" ng-checked="color.selected"> 
+                        </div>
+                        <!-- <div class="col-xs-3">
+                            <input type="radio" name="player-color" value="blue">  
+                        </div>
+                        <div class="col-xs-3">
+                            <input type="radio" name="player-color" value="yellow"> 
+                        </div>
+                        <div class="col-xs-3">
+                            <input type="radio" name="player-color" value="green"> 
+                        </div> -->
+                    </div>
+                     <div class="row">
+                        <div class="col-xs-3">
+                            <span>Red</span>
+                        </div>
+                        <div class="col-xs-3">
+                            <span>Blue</span>
+                        </div>
+                        <div class="col-xs-3">
+                            <span>Yellow</span>
+                        </div>
+                        <div class="col-xs-3">
+                            <span>Green</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3" ng-repeat="color in playerColor">
+                            <img src="{{ color.url }}" height="{{ color.height }}">
+                        </div>
+                       <!--  <div class="col-xs-3">
+                            <img src="../game_images/ninja-blue.png" height="50px">
+                        </div>
+                        <div class="col-xs-3">
+                            <img src="../game_images/ninja-yellow.png" height="50px">
+                        </div>
+                        <div class="col-xs-3">
+                            <img src="../game_images/ninja-green.png" height="50px">
+                        </div> -->
+                    </div>
+                </div>
             </div>
-
         </div>
         <div class="col-xs-8">
             <div class="panel panel-primary">
