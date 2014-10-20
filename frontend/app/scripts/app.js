@@ -17,9 +17,13 @@ angular
     'ngTouch',
     'ui.router',
     'ui.bootstrap',
-    'ngDragDrop'
+    'ngDragDrop',
+    'facebook'
   ])
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config(function (FacebookProvider, $stateProvider, $urlRouterProvider) {
+      var myAppId = '1567060866849242';
+      FacebookProvider.init(myAppId);
+
       $urlRouterProvider.otherwise('/');
 
       $stateProvider

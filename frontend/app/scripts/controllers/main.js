@@ -7,27 +7,14 @@
  * # MainCtrl
  * Controller of the frontendApp
  */
-angular.module('frontendApp', ['facebook', 'ui.bootstrap', 'ui.router'])
-  .config([
-    'FacebookProvider', '$stateProvider', '$urlRouterProvider',
-    function(FacebookProvider, $stateProvider, $urlRouterProvider) {
-      var myAppId = '1567060866849242';
-      FacebookProvider.init(myAppId);
-
-      $urlRouterProvider.otherwise('/');
-
-      $stateProvider
-        .state('main', { abstract: true, url:'/', templateUrl:'views/workspace.html' })
-        .state('workspace', { templateUrl: 'views/workspace.html' })
-        .state('gameroom', { templateUrl: 'views/gameroom.html' })
-    }
-  ])
+angular.module('frontendApp')
   .controller('MainCtrl', ['$scope', '$state', '$timeout','Facebook',
     function($scope, $state, $timeout, Facebook) {
 
       //============= FACEBOOK ============//
       $scope.user = {};
       $scope.logged = false;
+      $scope.waiting = true;
 
       $scope.byebye = false;
       $scope.greeting = false;
@@ -45,10 +32,11 @@ angular.module('frontendApp', ['facebook', 'ui.bootstrap', 'ui.router'])
       var userIsConnected = false;
 
       Facebook.getLoginStatus(function(response) {
+        $scope.waiting = false;
         if (response.status == 'connected') {
           userIsConnected = true;
           $scope.logged = true;
-          $scope.login();
+          $scope.me();
         }
       });
 
@@ -100,27 +88,6 @@ angular.module('frontendApp', ['facebook', 'ui.bootstrap', 'ui.router'])
             }, 2000)
           });
         }
-      });
-
-
-      //============= TABS ============//
-      $scope.tabs = [
-        { heading: 'Workspace', route:'workspace', active:false },
-        { heading: 'Game Room', route:'gameroom', active:false }
-      ];
-
-      $scope.go = function(route) {
-            $state.go(route);
-      };
-
-      $scope.active = function(route) {
-          return $state.is(route);
-      };
-
-      $scope.$on('$stateChangeSuccess', function() {
-        $scope.tabs.forEach(function(tab) {
-            tab.active = $scope.active(tab.route);
-        });
       });
     }
 ]);
