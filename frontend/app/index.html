@@ -17,49 +17,47 @@
     <link rel="stylesheet" href="styles/workspace.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="frontendApp">
+  <body ng-app="frontendApp" ng-controller="MainCtrl">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
 
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '1567060866849242',
-          xfbml      : true,
-          version    : 'v2.1'
-        });
-      };
-
-      (function(d, s, id){
-         var js, fjs = d.getElementsByTagName(s)[0];
-         if (d.getElementById(id)) {return;}
-         js = d.createElement(s); js.id = id;
-         js.src = "//connect.facebook.net/en_US/sdk.js";
-         fjs.parentNode.insertBefore(js, fjs);
-       }(document, 'script', 'facebook-jssdk'));
-    </script>
-
-    <div class="container">
-      <!-- <div class="header">
-        <h3 class="text-muted">Scratch!</h3>
-      </div> -->
-
-        <div ng-controller="TabsCtrl">
-            <tabset>
-                <tab
-                    ng-repeat="t in tabs"
-                    heading="{{t.heading}}"
-                    select="go(t.route)"
-                    active="t.active">
-                </tab>
-            </tabset>
+    <div class ="container">
+      <div class="col-md-8">
+        <h1 ng-show="!logged">Welcome to Scratch Ninja!</h1>
+        <h1 ng-show="logged">Scratch Ninja!</h1>
+        <div ng-show="!logged">
+          <h5>To continue, please login with Facebook</h5>
         </div>
-      <div ui-view=""></div>
+      </div>
+
+      <div class="col-md-4">
+        <button type="button" class="btn btn-primary btn-large facebook" ng-show="!logged" ng-disabled="!facebookReady" ng-click="IntentLogin()">Login with Facebook</button>
+        <button type="button" class="btn btn-danger btn-large facebook" ng-show="logged" ng-disabled="!facebookReady" ng-click="logout()">Logout</button>
+      </div>
+
+      <div class="alert alert-info col-md-6" ng-show="greeting">Hello, {{user.name}}</div>
+      <div class="alert alert-warning col-md-6" ng-show="byebye">See you again soon!</div>
     </div>
 
+    <div ng-show="!logged">
+      <img src="app/game_images/ninja-blue.png">
+    </div>
+
+    <div class="tabset" ng-show="logged">
+      <tabset>
+        <tab class="tab"
+          ng-repeat="tab in tabs"
+          heading="{{tab.heading}}"
+          active="tab.active"
+          select="go(tab.route)">
+        </tab>
+      </tabset>
+
+      <div ui-view class="views"></div>
+    </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -97,6 +95,7 @@
     <script src="bower_components/kineticjs/kinetic.js"></script>
     <script src="bower_components/lodash/dist/lodash.compat.js"></script>
     <script src="bower_components/lil-uuid/uuid.js"></script>
+    <script src="bower_components/angular-facebook/lib/angular-facebook.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -106,7 +105,7 @@
     <script src="scripts/visualization/game/coin.js"></script>
     <script src="scripts/visualization/game/assets.js"></script>
     <script src="scripts/visualization/game/game.js"></script>
-	<script src="scripts/visualization/game/spinach.js"></script>
+  	<script src="scripts/visualization/game/spinach.js"></script>
 
     <script src="scripts/visualization/main.js"></script>
     <!-- endbuild -->
@@ -123,6 +122,7 @@
     <script src="scripts/controllers/visualization.js"></script>
     <script src="scripts/services/visualstore.js"></script>
     <script src="scripts/services/gameengine.js"></script>
+    <script src="scripts/controllers/main.js"></script>
     <!-- endbuild -->
 </body>
 </html>

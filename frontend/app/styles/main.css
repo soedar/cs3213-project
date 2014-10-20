@@ -1,7 +1,25 @@
-/* Space out content a bit */
-body {
+.views {
+  padding: 20px;
+}
+
+.tab {
+  cursor: pointer;
+}
+
+.col-md-4 {
+  padding-top: 30px;
+}
+
+.col-md-6 {
+  margin-left: 10px;
+}
+
+button.facebook {
+  width: 200px;
+}
+
+.tabset {
   padding-top: 20px;
-  padding-bottom: 20px;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
