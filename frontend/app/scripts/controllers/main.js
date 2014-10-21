@@ -68,6 +68,7 @@ angular.module('frontendApp')
           $scope.$apply(function() {
             $scope.user   = {};
             $scope.logged = false;
+            userIsConnected = false;
           });
         });
       };
