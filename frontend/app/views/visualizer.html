@@ -28,9 +28,9 @@
           </ul>
         </div>
       </div>
+      <button class="btn btn-primary play" ng-disabled="!hasMoves" ng-click="executeNextEvent()">Execute Next Event</button>
 
-      <button class="btn btn-primary" ng-disabled="!hasMoves" ng-click="executeNextEvent()">Execute Next Event</button>
-      <button class="btn btn-primary" ng-disabled="!hasMoves" ng-click="execute()">Play All Events</button>
+      <button class="btn btn-primary play" ng-disabled="!hasMoves" ng-click="execute()">Play All Events</button>
     </div>
   </div>
 </div>

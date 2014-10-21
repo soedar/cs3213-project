@@ -56,9 +56,9 @@
           select="go(tab.route)">
         </tab>
       </tabset>
-
-      <div ui-view class="views"></div>
     </div>
+
+    <div ui-view class="views" ng-show="logged" ng-controller="TabsCtrl"></div>
 
   </div> <!-- Main Div //-->
 

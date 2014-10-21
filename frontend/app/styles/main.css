@@ -1,5 +1,9 @@
+body {
+  padding-bottom: 20px;
+}
+
 .views {
-  padding: 20px;
+  padding-top: 20px;
 }
 
 .tab {
@@ -8,18 +12,48 @@
 
 .col-md-4 {
   padding-top: 30px;
+  padding-right: 0px;
+  text-align: right;
 }
 
-.col-md-6 {
-  margin-left: 10px;
+.col-md-8 {
+  padding-left: 0px;
 }
 
 button.facebook {
-  width: 200px;
+  width: 263px;
+}
+
+button.btn-danger {
+  background-color: transparent;
+  color: #ac1600;
+  border-color: #ac1600;
+}
+
+button.play {
+  width: 263px;
+  margin-top: 20px;
 }
 
 .tabset {
-  padding-top: 20px;
+  padding-left: 70px;
+  padding-right: 70px;
+}
+
+.alert-warning {
+  color: #c09853;
+  background-color: #fcf8e3;
+  border-color: #fbeed5;
+}
+
+.alert-info {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+.button-spacing {
+  padding:20px;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
