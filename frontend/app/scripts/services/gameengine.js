@@ -11,7 +11,7 @@ angular.module('frontendApp')
   .factory('gameEngine', function () {
 
     function defaultMap(color) {
-      var map = new Map(4);
+      var map = new Map(7);
       map.addPlayer("localPlayer", color, 100, {x: 0, y: 2});
       map.addCoin({x: 1, y: 2});
       map.addCoin({x: 2, y: 2});

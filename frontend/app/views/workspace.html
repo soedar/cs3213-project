@@ -39,6 +39,7 @@
 
   <div class="row">
     <div class="col-xs-4" id="command-palette">
+
       <div class="panel panel-primary">
         <div class="panel-heading">
           <h3 class="panel-title">Choose your ninja!</h3>
@@ -62,6 +63,16 @@
             </div>
           </div>
           //-->
+        </div>
+      </div>
+
+
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Level</h3>
+        </div>
+        <div class="panel-body" ng-controller="VisualizationCtrl" visualsize="328">
+          <div id="container" align="center"></div>
         </div>
       </div>
 
@@ -132,6 +143,11 @@
             </div> -->
     </div>
     <div class="col-xs-8">
+
+      <div>
+
+      </div>
+
       <div class="panel panel-primary">
         <div class="panel-body" id="workspace-main" data-drop="true" ng-model="commandsWorkspace" jqyoui-droppable="{multiple:true, onDrop: 'setNestLevel'}" >
 
@@ -156,7 +172,6 @@
 
             </div>
           </div>
-
 
           <div class="placeholder">
             <div class="row">

@@ -8,15 +8,18 @@
  * Controller of the frontendApp
  */
 angular.module('frontendApp')
-  .controller('VisualizationCtrl', function ($scope, $stateParams, $timeout, visualStore, gameEngine) {
+  .controller('VisualizationCtrl', function ($scope, $stateParams, $attrs, $timeout, visualStore, gameEngine) {
+
+    var size = (!$attrs.visualsize) ? 500 : $attrs.visualsize;
+
     var stage = new Kinetic.Stage({
       container: 'container',
-        width: 500,
-        height: 500
+        width: size,
+        height: size
     });
 
     function loadBoard(gameData) {
-      var game = new Game(gameData.events, 500);
+      var game = new Game(gameData.events, size);
       game.getLayers().forEach(function(layer) {
         stage.add(layer);
       });
