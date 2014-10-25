@@ -124,12 +124,20 @@
                     <h3 class="panel-title">Control</h3>
                 </div>
                 <div class="panel-body">
-                    <button type="button" class="btn btn-default btn-block text-left">If </button>
-                    <button type="button" class="btn btn-default btn-block text-left">End If </button>
-                    <select ng-model="selectedObject" ng-options="gameObject.name group by gameObject.effect for gameObject in gameObjects">
-                    </select>
+                  <div class="row" ng-repeat="control in controlCommands" ng-show="control.command" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="controlCommands" jqyoui-draggable="{index: {{$index}}, animate: false, placeholder: 'keep'}">
+                    <div class="command-object">
+                      <div class="input-group">
+                        <span class="input-group-addon input-group-addon-brown">{{ control.command}} </span>
+                         <select ng-show="control.gameObject" ng-model="$parent.selectedObject" ng-options="game.name group by game.effect for game in gameObjects">
+                        </select>
+                        <span class="input-group-addon input-group-addon-brown" ng-show="control.filler"> {{ control.filler }} </span>
+                        <button class="btn btn-primary" ng-show="control.variable"> {{ control.variable }} </button>
+                      <!-- <button type="button" class="btn btn-default btn-block text-left">End If </button> -->
+                      </div>
+                     </div>
                 </div>
             </div>
+          </div>
     </div>
     <div class="col-xs-8">
       <div class="panel panel-primary">
@@ -142,13 +150,17 @@
             </div>
             <div class="col-xs-offset-{{item.nestLevel}} col-xs-{{11-item.nestLevel}} command-object">
               <div class="input-group">
-                <span class="input-group-addon" ng-show="item.command" ng-class="{'input-group-addon-black':item.command=='Move','input-group-addon-green':item.commandType=='Loop'}">{{ item.command }}</span>
+                <span class="input-group-addon" ng-show="item.command" ng-class="{'input-group-addon-black':item.command=='Move','input-group-addon-green':item.commandType=='Loop', 'input-group-addon-brown':item.command=='If' || 'End If'}">{{ item.command }}</span>
                 <div class="input-group-btn" ng-show="item.commandType">
                   <button type="button" class="btn" data-toggle="dropdown" ng-class="{'btn-default':item.command=='Move','btn-success':item.commandType=='Loop'}">
                     <span class="text-only">{{ item.commandType }}</span>
                   </button>
                 </div>
+                <select ng-show="item.gameObject" ng-model="item.dataObject" ng-options="game.name group by game.effect for game in gameObjects">
+                        </select>
                 <input type="text" class="form-control" ng-model="item.parameters" ng-model-options="{ updateOn: 'blur' }" ng-show="showField(item)" />
+                <span class="input-group-addon input-group-addon-brown" ng-show="item.filler"> {{ item.filler }} </span>
+                <button class="btn btn-primary" ng-show="item.variable"> {{ item.variable }} </button>
                 <span class="input-group-btn">
                   <button class="btn btn-default close-button" type="button" ng-click="removeCommands($index)">X</button>
                 </span>

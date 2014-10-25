@@ -12,6 +12,13 @@
     font-size: 15px;
 }
 
+.input-group-addon-brown{
+    background-color: brown;
+    border-color: brown;
+    color: #FFF;
+    font-size: 15px;
+}
+
 #workspace-container{
     max-height:1000px;
     overflow-y:scroll;

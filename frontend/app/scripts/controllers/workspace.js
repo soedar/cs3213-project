@@ -23,12 +23,25 @@ angular.module('frontendApp')
             // {'command':'Do While','commandType':'Loop', 'parameters':1}
         ];
 
+       $scope.controlCommands = [
+            {'command':'If', 'gameObject': 'coin', 'filler' : 'in', 'variable':'Direction'},
+            {'command':'End If'}
+        ];
+
         $scope.gameObjects = [ 
             {name:'coin', effect:'positive'},
             {name:'spinach', effect:'positive'}
         ];
         $scope.selectedObject = $scope.gameObjects[0];
-        
+        $scope.$watch('selectedObject', function(value) {
+            //console.log(value);
+            //console.log($scope.selectedObject);
+            $scope.controlCommands[0].dataObject = $scope.selectedObject;
+            console.log($scope.controlCommands[0]);
+        });
+
+
+
         $scope.playerColors = ['blue', 'red', 'yellow', 'green'];
 
         $scope.ninjaColor = "blue";
