@@ -33,17 +33,26 @@ angular.module('frontendApp')
 
         $scope.commandsWorkspace = [];
 
+        function checkInput(value) {
+            if(/^[0-9]+$/.test(value)){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
         function getCommands() {
             var stackCommandIds = [];
             for(var i=0; i<$scope.commandsWorkspace.length; i++) {
                 if($scope.commandsWorkspace[i].commandId) {
                     if($scope.commandsWorkspace[i].command === 'While'){
-                        stackCommandIds.push($scope.commandsWorkspace[i].commandId);
-                        // not able to check the below if condition because of reference error lil is not defined
-                        if($scope.commandsWorkspace[i].parameters === 0){
-                            console.log('executed');
-                            alert('cannot be empty');
+                        // input validation
+                        if(checkInput($scope.commandsWorkspace[i].parameters) === false){
+                            alert('only numbers');
+                           return null;
                         }
+                        stackCommandIds.push($scope.commandsWorkspace[i].commandId);
+                        
                     }
                     if($scope.commandsWorkspace[i].command === 'End While'){
                         stackCommandIds.pop();
