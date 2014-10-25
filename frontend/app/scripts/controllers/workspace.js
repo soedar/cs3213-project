@@ -10,10 +10,10 @@
 angular.module('frontendApp')
   .controller('WorkspaceCtrl', function ($scope, $state, $http, visualStore, gameEngine) {
         $scope.navigation = [
-            {'command':'Move', 'commandType':'Up','parameters':1},
-            {'command':'Move', 'commandType':'Down','parameters':1},
-            {'command':'Move', 'commandType':'Left','parameters':1},
-            {'command':'Move', 'commandType':'Right','parameters':1}
+            {'command':'Move', 'commandType':'Up'},
+            {'command':'Move', 'commandType':'Down'},
+            {'command':'Move', 'commandType':'Left'},
+            {'command':'Move', 'commandType':'Right'}
         ];
 
         $scope.loopCommands = [
@@ -39,6 +39,11 @@ angular.module('frontendApp')
                 if($scope.commandsWorkspace[i].commandId) {
                     if($scope.commandsWorkspace[i].command === 'While'){
                         stackCommandIds.push($scope.commandsWorkspace[i].commandId);
+                        // not able to check the below if condition because of reference error lil is not defined
+                        if($scope.commandsWorkspace[i].parameters === 0){
+                            console.log('executed');
+                            alert('cannot be empty');
+                        }
                     }
                     if($scope.commandsWorkspace[i].command === 'End While'){
                         stackCommandIds.pop();
@@ -116,4 +121,13 @@ angular.module('frontendApp')
                 console.log($scope.commandsWorkspace[i]);
             }
         };
+
+        $scope.showField = function(item) {
+            if(typeof item.parameters === 'undefined'){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
   });
