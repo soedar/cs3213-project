@@ -119,16 +119,17 @@
           </div>
         </div>
       </div>
-      <!-- <div class="panel panel-primary">
+      <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">Control</h3>
                 </div>
                 <div class="panel-body">
-                    <button type="button" class="btn btn-default btn-block text-left">If ( ... ) </button>
-                    <button type="button" class="btn btn-default btn-block text-left">Else If ( ... )</button>
-                    <button type="button" class="btn btn-default btn-block text-left">Else</button>
+                    <button type="button" class="btn btn-default btn-block text-left">If </button>
+                    <button type="button" class="btn btn-default btn-block text-left">End If </button>
+                    <select ng-model="selectedObject" ng-options="gameObject.name group by gameObject.effect for gameObject in gameObjects">
+                    </select>
                 </div>
-            </div> -->
+            </div>
     </div>
     <div class="col-xs-8">
       <div class="panel panel-primary">

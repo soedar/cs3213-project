@@ -23,6 +23,12 @@ angular.module('frontendApp')
             // {'command':'Do While','commandType':'Loop', 'parameters':1}
         ];
 
+        $scope.gameObjects = [ 
+            {name:'coin', effect:'positive'},
+            {name:'spinach', effect:'positive'}
+        ];
+        $scope.selectedObject = $scope.gameObjects[0];
+        
         $scope.playerColors = ['blue', 'red', 'yellow', 'green'];
 
         $scope.ninjaColor = "blue";
