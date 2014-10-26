@@ -73,9 +73,15 @@ angular.module('frontendApp')
                         stackCommandIds.push($scope.commandsWorkspace[i].commandId);
                         
                     }
-                    if($scope.commandsWorkspace[i].command === 'End While'){
+                    if($scope.commandsWorkspace[i].command === 'End While'  ){
                         stackCommandIds.pop();
                     }
+                     if($scope.commandsWorkspace[i].command === 'If') {
+                        stackCommandIds.push($scope.commandsWorkspace[i].commandId);
+                     }
+                     if($scope.commandsWorkspace[i].command === 'End If') {
+                        stackCommandIds.pop();
+                     }
                 }
             }
 
@@ -135,12 +141,12 @@ angular.module('frontendApp')
             var commandId = 0;
             for(var i=0; i<$scope.commandsWorkspace.length; i++){
                 $scope.commandsWorkspace[i].nestLevel = nestLevel;
-                if($scope.commandsWorkspace[i].command === 'While'){
+                if($scope.commandsWorkspace[i].command === 'While' || $scope.commandsWorkspace[i].command === 'If'){
                     nestLevel+=1;
                     commandId+=1;
                     $scope.commandsWorkspace[i].commandId = commandId;
                 }
-                if($scope.commandsWorkspace[i].command === 'End While'){
+                if($scope.commandsWorkspace[i].command === 'End While' || $scope.commandsWorkspace[i].command === 'End If'){
                     nestLevel-=1;
                     $scope.commandsWorkspace[i].nestLevel = nestLevel;
                     $scope.commandsWorkspace[i].commandId = commandId;

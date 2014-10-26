@@ -150,7 +150,7 @@
             </div>
             <div class="col-xs-offset-{{item.nestLevel}} col-xs-{{11-item.nestLevel}} command-object">
               <div class="input-group">
-                <span class="input-group-addon" ng-show="item.command" ng-class="{'input-group-addon-black':item.command=='Move','input-group-addon-green':item.commandType=='Loop', 'input-group-addon-brown':item.command=='If' || 'End If'}">{{ item.command }}</span>
+                <span class="input-group-addon" ng-show="item.command" ng-class="{'input-group-addon-black':item.command=='Move','input-group-addon-green':item.commandType=='Loop', 'input-group-addon-brown':item.command=='If', 'input-group-addon-brown':item.command=='End If'}">{{ item.command }}</span>
                 <div class="input-group-btn" ng-show="item.commandType">
                   <button type="button" class="btn" data-toggle="dropdown" ng-class="{'btn-default':item.command=='Move','btn-success':item.commandType=='Loop'}">
                     <span class="text-only">{{ item.commandType }}</span>
