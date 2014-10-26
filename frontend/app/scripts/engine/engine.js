@@ -22,7 +22,7 @@ Engine.prototype.run = function() {
   // Assume we only have one player for now
   var player = players[0];
   
-  DEBUG(objectsMemory);
+  DEBUG(this.playerActions);
   if(this.playerActions) {
 	  gameOutput.events = this.makeEvents(this.playerActions, player, objectsMemory);
   }
@@ -44,6 +44,13 @@ Engine.prototype.makeEvents = function(actions, player, objectsMemory) {
 				Array.prototype.push.apply(events, this.makeEvents(whileActionsFull, player, objectsMemory));
 				i += whileActions.length + 1;
 			}
+		} else if (actions[i].command === 'If') {
+			var ifActions = this.getIfActionList(actions, i);
+			var objectsInRange = this.getObjectsInRange(actions[i].gameObject, 1);
+			if (objectsInRange.length > 0) {
+				Array.prototype.push.apply(events, this.makeEvents(ifActions, player, objectsMemory));
+			}
+			i += ifActions.length + 1;
 		} else {
 			var e = this.makeEvent(actions[i], player, objectsMemory);
 		    if (e) {
@@ -54,12 +61,37 @@ Engine.prototype.makeEvents = function(actions, player, objectsMemory) {
 	return events
 };
 
+Engine.prototype.getObjectsInRange = function(checkedObject, range) {
+	var results = [];
+	var player = this.map.objects.filter(function(value) { return value.type === 'player'; })[0];
+	var checkedTargets = this.map.objects.filter(function(value) { return value.type === checkedObject;});
+	checkedTargets.forEach(function(object) {
+		var distance = Math.abs(player.xy.x - object.xy.x) + Math.abs(player.xy.y - object.xy.y);
+		if (distance <= range)
+			results.push(object);
+	});
+	return results;
+}
+
+Engine.prototype.getIfActionList = function(actions, startingPoint) {
+	var ifActions = [];
+	if (actions[startingPoint].command === 'If') {
+		var i;
+		for (i = startingPoint + 1; i < actions.length; i++) {
+			if (actions[i].command === 'End If' && actions[startingPoint].nestLevel == actions[i].nestLevel)
+				break;
+			ifActions.push(actions[i]);
+		}
+	}
+	return ifActions;
+}
+
 Engine.prototype.getWhileActionList = function(actions, startingPoint) {
 	var whileActions = [];
 	if (actions[startingPoint].command === 'While') {
 		var i;
 		for (i = startingPoint + 1; i < actions.length; i++) {
-			if (actions[i].command === 'End While') {
+			if (actions[i].command === 'End While' && actions[startingPoint].nestLevel == actions[i].nestLevel) {
 				break;
 			}
 			whileActions.push(actions[i]);
