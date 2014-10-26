@@ -73,16 +73,16 @@ Engine.prototype.makeEvent = function(action, player, objectsMemory) {
     var new_xy = _.clone(player.xy);
     switch(action.commandType) {
       case 'Left':
-        new_xy.x -= action.parameters;
+        new_xy.x --;
         break;
       case 'Right':
-        new_xy.x += action.parameters;
+        new_xy.x ++;
         break;
       case 'Up':
-        new_xy.y -= action.parameters;
+        new_xy.y --;
         break;
       case 'Down':
-        new_xy.y += action.parameters;
+        new_xy.y ++;
         break;
     }
 
