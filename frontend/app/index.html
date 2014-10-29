@@ -18,6 +18,13 @@
     <!-- endbuild -->
   </head>
   <body ng-app="frontendApp" ng-controller="MainCtrl">
+    <!--TODO (EC) - is this the right way to include? -->
+    <script type="text/ng-template" id="move-command-template.html">
+      {{ navCommand.command }}, {{ navCommand.commandType }}
+    </script>
+    <script type="text/ng-template" id="loop-command-template.html">
+      {{ loop.command }}, {{ loop.commandType }}
+    </script>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->

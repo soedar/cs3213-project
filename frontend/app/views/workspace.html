@@ -74,18 +74,8 @@
         <div class="panel-body" id="move-command-palette">
 
           <div  class="row" ng-repeat='navCommand in navigation' ng-show="navCommand.command" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="navigation" jqyoui-draggable="{index: {{$index}}, animate: false, placeholder: 'keep'}" data-type="move" data-direction="up" data-steps="0" >
-            <div class="command-object move-command">
-              <div class="input-group">
-                <span class="input-group-addon input-group-addon-black">{{ navCommand.command }}</span>
-                <div class="input-group-btn">
-                  <button type="button" class="btn btn-default" data-toggle="dropdown">
-                    <span class="text-only">{{ navCommand.commandType }}&nbsp;&nbsp;&nbsp;</span> </button>
+            <div class="command-object move-command" ng-include="'views/move-command-template.html'">
 
-                </div>
-
-                <br />
-
-              </div>
             </div>
           </div>
 
@@ -98,22 +88,10 @@
         <div class="panel-heading">
           <h3 class="panel-title">Iteration</h3>
         </div>
-        <div class="panel-body">
+        <div class="panel-body" id="loop-command-palette">
           <div class="row" ng-repeat="loop in loopCommands" ng-show="loop.command" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="loopCommands" jqyoui-draggable="{index: {{$index}}, animate: false, placeholder: 'keep'}">
-            <div class="command-object">
-              <div class="input-group">
-                <span class="input-group-addon input-group-addon-green" ng-show="loop.command">{{ loop.command }}</span>
-                <div class="input-group-btn"  ng-show="loop.commandType">
-                  <button type="button" class="btn btn-success" data-toggle="dropdown">
-                    <span class="text-only">{{ loop.commandType }}&nbsp;&nbsp;&nbsp;</span> </button>
-
-                </div>
-                <input type="text" class="form-control" ng-model="loop.parameters" ng-show="loop.parameters">
-
-                <br />
-
+              <div class="command-object" ng-include="'views/loop-command-template.html'">
               </div>
-            </div>
             <!-- <button type="button" class="btn btn-default btn-block text-left">For ( ... )</button>
                     <button type="button" class="btn btn-default btn-block text-left">Do While</button> -->
           </div>
@@ -123,11 +101,12 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Control</h3>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body" id="control-command-palette">
                   <div class="row" ng-repeat="control in controlCommands" ng-show="control.command" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="controlCommands" jqyoui-draggable="{index: {{$index}}, animate: false, placeholder: 'keep'}">
                     <div class="command-object">
                       <div class="input-group">
                         <span class="input-group-addon input-group-addon-brown">{{ control.command}} </span>
+
                          <select ng-show="control.gameObject" ng-model="$parent.selectedObject" ng-options="game.name group by game.effect for game in gameObjects">
                         </select>
                         <span class="input-group-addon input-group-addon-brown" ng-show="control.filler"> {{ control.filler }} </span>
