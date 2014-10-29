@@ -4,6 +4,7 @@
 function Engine(map, playerActions) {
   this.map = map;
   this.playerActions = playerActions;
+  this.variables = [];
 }
 
 Engine.prototype.run = function() {
@@ -22,7 +23,6 @@ Engine.prototype.run = function() {
   // Assume we only have one player for now
   var player = players[0];
   
-  DEBUG(this.playerActions);
   if(this.playerActions) {
 	  gameOutput.events = this.makeEvents(this.playerActions, player, objectsMemory);
   }
@@ -33,8 +33,7 @@ Engine.prototype.makeEvents = function(actions, player, objectsMemory) {
 	var i;
 	var events = [];
 	for (i = 0; i < actions.length; i++) {
-		if (actions[i].commandType === 'Loop') {
-			if (actions[i].command === 'While') {
+		if (actions[i].command === 'While') {
 				var whileActions = this.getWhileActionList(actions, i);
 				var j;
 				var whileActionsFull = [];
@@ -43,27 +42,43 @@ Engine.prototype.makeEvents = function(actions, player, objectsMemory) {
 				}
 				Array.prototype.push.apply(events, this.makeEvents(whileActionsFull, player, objectsMemory));
 				i += whileActions.length + 1;
-			}
 		} else if (actions[i].command === 'If') {
 			var ifActions = this.getIfActionList(actions, i);
-			var objectsInRange = this.getObjectsInRange(actions[i].gameObject, 1);
-			if (objectsInRange.length > 0) {
+			var direction = this.getDirection(actions[i].gameObject, 1, player);
+			if (direction !== 'none') {
+				this.variables['direction'] = direction;
 				Array.prototype.push.apply(events, this.makeEvents(ifActions, player, objectsMemory));
 			}
 			i += ifActions.length + 1;
 		} else {
 			var e = this.makeEvent(actions[i], player, objectsMemory);
-		    if (e) {
-		      events.push(e);
-		    }
+		    if (e) { events.push(e); }
 		}
 	}
 	return events
 };
 
-Engine.prototype.getObjectsInRange = function(checkedObject, range) {
+Engine.prototype.getDirection = function (checkedObject, range, player) {
+	var objectsInRange = this.getObjectsInRange(checkedObject, range, player);
+	var object;
+	if (objectsInRange.length > 0) { //if there is objects around player, get the first one
+		object = objectsInRange[0];
+	} else {
+		return 'none';
+	}
+	
+	if (object.xy.x < player.xy.x)
+		return 'Left';
+	if (object.xy.x > player.xy.x)
+		return 'Right';
+	if (object.xy.y < player.xy.y)
+		return 'Up';
+	if (object.xy.y > player.xy.y)
+		return 'Down';
+}
+
+Engine.prototype.getObjectsInRange = function(checkedObject, range, player) {
 	var results = [];
-	var player = this.map.objects.filter(function(value) { return value.type === 'player'; })[0];
 	var checkedTargets = this.map.objects.filter(function(value) { return value.type === checkedObject;});
 	checkedTargets.forEach(function(object) {
 		var distance = Math.abs(player.xy.x - object.xy.x) + Math.abs(player.xy.y - object.xy.y);
@@ -103,7 +118,14 @@ Engine.prototype.getWhileActionList = function(actions, startingPoint) {
 Engine.prototype.makeEvent = function(action, player, objectsMemory) {
   if (action.command === 'Move') {
     var new_xy = _.clone(player.xy);
-    switch(action.commandType) {
+	var direction;
+	if (action.commandType === 'Direction') {
+		direction = this.variables['direction'];
+	} else {
+		direction = action.commandType;
+	}
+	
+    switch(direction) {
       case 'Left':
         new_xy.x --;
         break;
