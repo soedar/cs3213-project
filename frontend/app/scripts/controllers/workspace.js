@@ -13,7 +13,8 @@ angular.module('frontendApp')
             {'command':'Move', 'commandType':'Up'},
             {'command':'Move', 'commandType':'Down'},
             {'command':'Move', 'commandType':'Left'},
-            {'command':'Move', 'commandType':'Right'}
+            {'command':'Move', 'commandType':'Right'},
+            {'command':'Move', 'commandType':'Direction'}
         ];
 
         $scope.loopCommands = [
