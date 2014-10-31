@@ -10,26 +10,26 @@
 angular.module('frontendApp')
   .controller('WorkspaceCtrl', function ($scope, $state, $http, visualStore, gameEngine) {
         $scope.navigation = [
-            {'command':'Move', 'commandType':'Up'},
-            {'command':'Move', 'commandType':'Down'},
-            {'command':'Move', 'commandType':'Left'},
-            {'command':'Move', 'commandType':'Right'},
-            {'command':'Move', 'commandType':'Direction'}
+            {'command':'Move', 'template':'views/move-command-template.html', 'commandType':'Up'},
+            {'command':'Move', 'template':'views/move-command-template.html', 'commandType':'Down'},
+            {'command':'Move', 'template':'views/move-command-template.html', 'commandType':'Left'},
+            {'command':'Move', 'template':'views/move-command-template.html', 'commandType':'Right'},
+            {'command':'Move', 'template':'views/move-command-template.html', 'commandType':'Direction'}
         ];
 
         $scope.loopCommands = [
-            {'command':'While', 'commandType':'Loop', 'parameters':1},
-            {'command':'End While', 'commandType':'Loop'}
+            {'command':'While', 'template':'views/loop-command-template.html', 'commandType':'Loop', 'parameters':1},
+            {'command':'End While', 'template':'views/loop-command-template.html', 'commandType':'Loop'}
             // {'command':'For', 'commandType':'Loop', 'parameters':1},
             // {'command':'Do While','commandType':'Loop', 'parameters':1}
         ];
 
        $scope.controlCommands = [
-            {'command':'If', 'gameObject': 'coin', 'filler' : 'in', 'variable':'Direction'},
-            {'command':'End If'}
+            {'command':'If', 'template':'views/control-command-template.html', 'gameObject': 'coin', 'filler' : 'in', 'variable':'Direction'},
+            {'command':'End If', 'template':'views/control-command-template.html'}
         ];
 
-        $scope.gameObjects = [ 
+        $scope.gameObjects = [
             {name:'coin', effect:'positive'},
             {name:'spinach', effect:'positive'}
         ];
@@ -72,7 +72,7 @@ angular.module('frontendApp')
                            return null;
                         }
                         stackCommandIds.push($scope.commandsWorkspace[i].commandId);
-                        
+
                     }
                     if($scope.commandsWorkspace[i].command === 'End While'  ){
                         stackCommandIds.pop();

@@ -1,0 +1,9 @@
+<div class="input-group">
+  <span class="input-group-addon input-group-addon-brown">{{ control.command}} </span>
+
+  <select ng-show="control.gameObject" ng-model="$parent.selectedObject" ng-options="game.name group by game.effect for game in gameObjects">
+  </select>
+  <span class="input-group-addon input-group-addon-brown" ng-show="control.filler"> {{ control.filler }} </span>
+  <button class="btn btn-primary" ng-show="control.variable"> {{ control.variable }} </button>
+  <!-- <button type="button" class="btn btn-default btn-block text-left">End If </button> -->
+</div>

@@ -10,29 +10,29 @@
       </div>
       <div class="navbar-collapse collapse navbar-inverse-collapse">
         <!-- <ul class="nav navbar-nav">
-                    <li><a href="#">Undo</a></li>
-                    <li><a href="#">Redo</a></li>
-                    <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Dropdown header</li>
-                        <li><a href="#">Separated link</a></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                    </li>
-                </ul> -->
-        <ul class="nav navbar-nav navbar-right">
-          <li><a ng-click="run()">Run</a></li>
-          <li><a id="save-workspace" ng-click="sendData()">Save</a></li>
-          <li><a ng-click="clearCommands()">Clear all</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
+        <li><a href="#">Undo</a></li>
+        <li><a href="#">Redo</a></li>
+        <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+        <li><a href="#">Action</a></li>
+        <li><a href="#">Another action</a></li>
+        <li><a href="#">Something else here</a></li>
+        <li class="divider"></li>
+        <li class="dropdown-header">Dropdown header</li>
+        <li><a href="#">Separated link</a></li>
+        <li><a href="#">One more separated link</a></li>
+      </ul>
+    </li>
+  </ul> -->
+  <ul class="nav navbar-nav navbar-right">
+    <li><a ng-click="run()">Run</a></li>
+    <li><a id="save-workspace" ng-click="sendData()">Save</a></li>
+    <li><a ng-click="clearCommands()">Clear all</a></li>
+  </ul>
+</div>
+</div>
+</div>
 </div>
 
 <div class="container" >
@@ -57,110 +57,91 @@
 
           <!--
           <div class="row">
-            <div class="col-xs-3" ng-repeat="color in playerColor">
-              <input type="radio" name="{{ color.name }}" value="{{ color.value }}" ng-click="setPlayerColor(color)" ng-checked="color.selected">
-            </div>
-          </div>
-          //-->
+          <div class="col-xs-3" ng-repeat="color in playerColor">
+          <input type="radio" name="{{ color.name }}" value="{{ color.value }}" ng-click="setPlayerColor(color)" ng-checked="color.selected">
         </div>
       </div>
-
-
-
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <h3 class="panel-title">Navigation</h3>
-        </div>
-        <div class="panel-body" id="move-command-palette">
-
-          <div  class="row" ng-repeat='navCommand in navigation' ng-show="navCommand.command" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="navigation" jqyoui-draggable="{index: {{$index}}, animate: false, placeholder: 'keep'}" data-type="move" data-direction="up" data-steps="0" >
-            <div class="command-object move-command" ng-include="'views/move-command-template.html'">
-
-            </div>
-          </div>
-
-        </div>
-
-
-      </div>
-
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <h3 class="panel-title">Iteration</h3>
-        </div>
-        <div class="panel-body" id="loop-command-palette">
-          <div class="row" ng-repeat="loop in loopCommands" ng-show="loop.command" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="loopCommands" jqyoui-draggable="{index: {{$index}}, animate: false, placeholder: 'keep'}">
-              <div class="command-object" ng-include="'views/loop-command-template.html'">
-              </div>
-            <!-- <button type="button" class="btn btn-default btn-block text-left">For ( ... )</button>
-                    <button type="button" class="btn btn-default btn-block text-left">Do While</button> -->
-          </div>
-        </div>
-      </div>
-      <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Control</h3>
-                </div>
-                <div class="panel-body" id="control-command-palette">
-                  <div class="row" ng-repeat="control in controlCommands" ng-show="control.command" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="controlCommands" jqyoui-draggable="{index: {{$index}}, animate: false, placeholder: 'keep'}">
-                    <div class="command-object">
-                      <div class="input-group">
-                        <span class="input-group-addon input-group-addon-brown">{{ control.command}} </span>
-
-                         <select ng-show="control.gameObject" ng-model="$parent.selectedObject" ng-options="game.name group by game.effect for game in gameObjects">
-                        </select>
-                        <span class="input-group-addon input-group-addon-brown" ng-show="control.filler"> {{ control.filler }} </span>
-                        <button class="btn btn-primary" ng-show="control.variable"> {{ control.variable }} </button>
-                      <!-- <button type="button" class="btn btn-default btn-block text-left">End If </button> -->
-                      </div>
-                     </div>
-                </div>
-            </div>
-          </div>
+      //-->
     </div>
-    <div class="col-xs-8">
-      <div class="panel panel-primary">
-        <div class="panel-body" id="workspace-main" data-drop="true" ng-model="commandsWorkspace" jqyoui-droppable="{multiple:true, onDrop: 'setNestLevel'}" >
+  </div>
 
 
-          <div class="row" ng-repeat="item in commandsWorkspace track by $index" ng-show="item.command" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="commandsWorkspace" jqyoui-draggable="{index: {{$index}}, animate:false}">
-            <div class="col-xs-1 text-center line-number">
-              <h4>{{ $index+1 }}</h4>
-            </div>
-            <div class="col-xs-offset-{{item.nestLevel}} col-xs-{{11-item.nestLevel}} command-object">
-              <div class="input-group">
-                <span class="input-group-addon" ng-show="item.command" ng-class="{'input-group-addon-black':item.command=='Move','input-group-addon-green':item.commandType=='Loop', 'input-group-addon-brown':item.command=='If', 'input-group-addon-brown':item.command=='End If'}">{{ item.command }}</span>
-                <div class="input-group-btn" ng-show="item.commandType">
-                  <button type="button" class="btn" data-toggle="dropdown" ng-class="{'btn-default':item.command=='Move','btn-success':item.commandType=='Loop'}">
-                    <span class="text-only">{{ item.commandType }}</span>
-                  </button>
-                </div>
-                <select ng-show="item.gameObject" ng-model="item.dataObject" ng-options="game.name group by game.effect for game in gameObjects">
-                        </select>
-                <input type="text" class="form-control" ng-model="item.parameters" ng-model-options="{ updateOn: 'blur' }" ng-show="showField(item)" />
-                <span class="input-group-addon input-group-addon-brown" ng-show="item.filler"> {{ item.filler }} </span>
-                <button class="btn btn-primary" ng-show="item.variable"> {{ item.variable }} </button>
-                <span class="input-group-btn">
-                  <button class="btn btn-default close-button" type="button" ng-click="removeCommands($index)">X</button>
-                </span>
-              </div>
 
-            </div>
-          </div>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Navigation</h3>
+    </div>
+    <div class="panel-body" id="move-command-palette">
+
+      <div  class="row" ng-repeat='navCommand in navigation' ng-show="navCommand.command" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="navigation" jqyoui-draggable="{index: {{$index}}, animate: false, placeholder: 'keep'}" data-type="move" data-direction="up" data-steps="0" >
+        <div class="command-object move-command" ng-include="'views/move-command-template.html'">
+
+        </div>
+      </div>
+
+    </div>
 
 
-          <div class="placeholder">
-            <div class="row">
-              <div class="col-xs-1 text-center line-number">
-                <h4>{{ commandsWorkspace.length+1 }}</h4>
-              </div>
-              <div class="col-xs-11">
-                <h4>Add your items here</h4>
-              </div>
-            </div>
-          </div>
+  </div>
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Iteration</h3>
+    </div>
+    <div class="panel-body" id="loop-command-palette">
+      <div class="row" ng-repeat="loop in loopCommands" ng-show="loop.command" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="loopCommands" jqyoui-draggable="{index: {{$index}}, animate: false, placeholder: 'keep'}">
+        <div class="command-object" ng-include="'views/loop-command-template.html'">
+        </div>
+        <!-- <button type="button" class="btn btn-default btn-block text-left">For ( ... )</button>
+        <button type="button" class="btn btn-default btn-block text-left">Do While</button> -->
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Control</h3>
+    </div>
+    <div class="panel-body" id="control-command-palette">
+      <div class="row" ng-repeat="control in controlCommands" ng-show="control.command" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="controlCommands" jqyoui-draggable="{index: {{$index}}, animate: false, placeholder: 'keep'}">
+        <div class="command-object" ng-include="'views/control-command-template.html'">
+
         </div>
       </div>
     </div>
   </div>
+</div>
+<div class="col-xs-8">
+  <div class="panel panel-primary">
+    <div class="panel-body" id="workspace-main" data-drop="true" ng-model="commandsWorkspace" jqyoui-droppable="{multiple:true, onDrop: 'setNestLevel'}" >
+
+
+      <div class="row" ng-repeat="item in commandsWorkspace track by $index" ng-show="item.command" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="commandsWorkspace" jqyoui-draggable="{index: {{$index}}, animate:false}">
+        <div class="col-xs-1 text-center line-number">
+          <h4>{{ $index+1 }}</h4>
+        </div>
+        <div class="col-xs-offset-{{item.nestLevel}} col-xs-{{11-item.nestLevel}} command-object" ng-include="item.template">
+
+          <span class="input-group-btn">
+            <button class="btn btn-default close-button" type="button" ng-click="removeCommands($index)">X</button>
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="placeholder">
+      <div class="row">
+        <div class="col-xs-1 text-center line-number">
+          <h4>{{ commandsWorkspace.length+1 }}</h4>
+        </div>
+        <div class="col-xs-11">
+          <h4>Add your items here</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
 </div>
