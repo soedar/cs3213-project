@@ -9,24 +9,22 @@
  */
 angular.module('frontendApp')
   .controller('WorkspaceCtrl', function ($scope, $state, $http, visualStore, gameEngine) {
-        $scope.navigation = [
-            {'command':'Move', 'template':'views/move-command-template.html', 'commandType':'Up'},
-            {'command':'Move', 'template':'views/move-command-template.html', 'commandType':'Down'},
-            {'command':'Move', 'template':'views/move-command-template.html', 'commandType':'Left'},
-            {'command':'Move', 'template':'views/move-command-template.html', 'commandType':'Right'},
-            {'command':'Move', 'template':'views/move-command-template.html', 'commandType':'Direction'}
+        $scope.navCommands = [
+            {'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Up'},
+            {'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Down'},
+            {'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Left'},
+            {'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Right'},
+            {'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Direction'}
         ];
-
         $scope.loopCommands = [
-            {'command':'While', 'template':'views/loop-command-template.html', 'commandType':'Loop', 'parameters':1},
-            {'command':'End While', 'template':'views/loop-command-template.html', 'commandType':'Loop'}
+            {'type' : 'loop','command':'While', 'template':'views/loop-command-template.html', 'commandType':'Loop', 'parameters':1},
+            {'type' : 'loop','command':'End While', 'template':'views/loop-command-template.html', 'commandType':'Loop'}
             // {'command':'For', 'commandType':'Loop', 'parameters':1},
             // {'command':'Do While','commandType':'Loop', 'parameters':1}
         ];
-
-       $scope.controlCommands = [
-            {'command':'If', 'template':'views/control-command-template.html', 'gameObject': 'coin', 'filler' : 'in', 'variable':'Direction'},
-            {'command':'End If', 'template':'views/control-command-template.html'}
+        $scope.controlCommands = [
+            {'type' : 'control', 'command':'If', 'template':'views/control-command-template.html', 'gameObject': 'coin', 'filler' : 'in', 'variable':'Direction'},
+            {'type' : 'control','command':'End If', 'template':'views/control-command-template.html'}
         ];
 
         $scope.gameObjects = [
@@ -37,8 +35,8 @@ angular.module('frontendApp')
         $scope.$watch('selectedObject', function(value) {
             //console.log(value);
             //console.log($scope.selectedObject);
-            $scope.controlCommands[0].dataObject = $scope.selectedObject;
-            console.log($scope.controlCommands[0]);
+            $scope.commandList[7].gameObject = $scope.selectedObject;
+            //console.log($scope.commandList[7]);
         });
 
 

@@ -1,12 +1,12 @@
 <div class="input-group">
-  <span class="input-group-addon input-group-addon-green" ng-show="loop.command">{{ loop.command }}</span>
-  <div class="input-group-btn"  ng-show="loop.commandType">
+  <span class="input-group-addon input-group-addon-green" ng-show="command.command">{{ command.command }}</span>
+  <div class="input-group-btn"  ng-show="command.commandType">
     <button type="button" class="btn btn-success" data-toggle="dropdown">
-      <span class="text-only">{{ loop.commandType }}&nbsp;&nbsp;&nbsp;</span>
+      <span class="text-only">{{ command.commandType }}&nbsp;&nbsp;&nbsp;</span>
     </button>
 
   </div>
-  <input type="text" class="form-control" ng-model="loop.parameters" ng-show="loop.parameters">
+  <input type="text" class="form-control" ng-model="command.parameters" ng-show="command.parameters">
 
   <br />
 
