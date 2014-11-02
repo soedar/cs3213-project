@@ -35,8 +35,8 @@ angular.module('frontendApp')
         $scope.$watch('selectedObject', function(value) {
             //console.log(value);
             //console.log($scope.selectedObject);
-            $scope.commandList[7].gameObject = $scope.selectedObject;
-            //console.log($scope.commandList[7]);
+            $scope.controlCommands[0].dataObject = $scope.selectedObject;
+            console.log($scope.controlCommands[0]);
         });
 
 
