@@ -13,8 +13,8 @@
 }
 
 .input-group-addon-brown{
-    background-color: brown;
-    border-color: brown;
+    background-color: #ff7518;
+    border-color: #ff7518;
     color: #FFF;
     font-size: 15px;
 }
@@ -78,6 +78,12 @@
     color: #c0c0c0;
 }
 
+.row{
+  z-index:0;
+}
+.dropdown-menu{
+  z-index:999;
+}
 
 /* image as radio button */
 /* http://stackoverflow.com/questions/17541614/use-thumbnail-image-instead-of-radio-button */

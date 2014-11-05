@@ -23,7 +23,7 @@ angular.module('frontendApp')
             // {'command':'Do While','commandType':'Loop', 'parameters':1}
         ];
         $scope.controlCommands = [
-            {'type' : 'control', 'command':'If', 'template':'views/control-command-template.html', 'gameObject': 'coin', 'filler' : 'in', 'variable':'Direction'},
+            {'type' : 'control', 'command':'If', 'template':'views/control-command-template.html', 'gameObject': 'type', 'filler' : 'in', 'variable':'Direction'},
             {'type' : 'control','command':'End If', 'template':'views/control-command-template.html'}
         ];
 
@@ -31,13 +31,13 @@ angular.module('frontendApp')
             {name:'coin', effect:'positive'},
             {name:'spinach', effect:'positive'}
         ];
-        $scope.selectedObject = $scope.gameObjects[0];
-        $scope.$watch('selectedObject', function(value) {
+        //$scope.selectedObject = $scope.gameObjects[0];
+        //$scope.$watch('selectedObject', function(value) {
             //console.log(value);
             //console.log($scope.selectedObject);
-            $scope.controlCommands[0].dataObject = $scope.selectedObject;
-            console.log($scope.controlCommands[0]);
-        });
+         //   $scope.controlCommands[0].dataObject = $scope.selectedObject;
+         //   console.log($scope.controlCommands[0]);
+        //});
 
 
 

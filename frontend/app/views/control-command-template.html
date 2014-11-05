@@ -1,9 +1,19 @@
 <div class="input-group">
-  <span class="input-group-addon input-group-addon-brown">{{ command.command}} </span>
+	<span class="input-group-addon input-group-addon-brown">{{ command.command}} </span>
 
-  <select ng-show="command.gameObject" ng-model="$parent.selectedObject" ng-options="game.name group by game.effect for game in gameObjects">
-  </select>
-  <span class="input-group-addon input-group-addon-brown" ng-show="command.filler"> {{ command.filler }} </span>
-  <button class="btn btn-primary" ng-show="command.variable"> {{ command.variable }} </button>
-  <!-- <button type="button" class="btn btn-default btn-block text-left">End If </button> -->
+	<!-- select ng-show="command.gameObject" ng-model="$parent.selectedObject" ng-options="game.name group by game.effect for game in gameObjects">  </select-->
+
+	<div class="btn-group" ng-show="command.gameObject">
+		<a href="#" class="btn btn-warning">{{command.gameObject}}</a>
+		<a href="#" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
+		<ul class="dropdown-menu">
+			<li><a href="#" ng-click="command.gameObject = 'coin'">Coin</a></li>
+			<li><a href="#" ng-click="command.gameObject = 'spinach'">Spinach</a></li>
+		</ul>
+	</div>
+
+
+	<span class="input-group-addon input-group-addon-brown" ng-show="command.filler"> {{ command.filler }} </span>
+	<button class="btn btn-warning" ng-show="command.variable"> {{ command.variable }} </button>
+	<!-- <button type="button" class="btn btn-default btn-block text-left">End If </button> -->
 </div>
