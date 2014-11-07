@@ -13,8 +13,8 @@ angular.module('frontendApp')
             {'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Up'},
             {'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Down'},
             {'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Left'},
-            {'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Right'},
-            {'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Direction'}
+            {'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Right'}
+           // {'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Direction'}
         ];
         $scope.loopCommands = [
             {'type' : 'loop','command':'While', 'template':'views/loop-command-template.html', 'commandType':'Loop', 'parameters':1},
@@ -23,7 +23,7 @@ angular.module('frontendApp')
             // {'command':'Do While','commandType':'Loop', 'parameters':1}
         ];
         $scope.controlCommands = [
-            {'type' : 'control', 'command':'If', 'template':'views/control-command-template.html', 'gameObject': 'type', 'filler' : 'in', 'variable':'Direction'},
+            {'type' : 'control', 'command':'If', 'template':'views/control-command-template.html', 'gameObject': 'type', 'operator' : 'logical', 'parameters':1},
             {'type' : 'control','command':'End If', 'template':'views/control-command-template.html'}
         ];
 
@@ -31,19 +31,28 @@ angular.module('frontendApp')
             {name:'coin', effect:'positive'},
             {name:'spinach', effect:'positive'}
         ];
-        //$scope.selectedObject = $scope.gameObjects[0];
-        //$scope.$watch('selectedObject', function(value) {
-            //console.log(value);
-            //console.log($scope.selectedObject);
-         //   $scope.controlCommands[0].dataObject = $scope.selectedObject;
-         //   console.log($scope.controlCommands[0]);
-        //});
+
+        $scope.operators = [
+            {name: '=='},
+            {name: '>='},
+            {name: '<='},
+            {name: '>'},
+            {name: '<'}
+        ];
+
+        // $scope.selectedObject = $scope.operators[0];
+        // $scope.$watch('selectedObject', function(value) {
+        //     console.log(value);
+        //    // console.log($scope.selectedObject);
+        //    $scope.controlCommands[0].operator = $scope.selectedObject;
+        //    //console.log($scope.controlCommands[0]);
+        // });
 
 
 
         $scope.playerColors = ['blue', 'red', 'yellow', 'green'];
 
-        $scope.ninjaColor = "blue";
+        $scope.ninjaColor = 'blue';
         $scope.$watch('ninjaColor', function(value) {
 
         });
@@ -95,6 +104,7 @@ angular.module('frontendApp')
 		    $scope.sendData = function(){
             // For now, assume that the map is default
             var commands = getCommands();
+            console.log(commands);
             var map = gameEngine.defaultMap($scope.ninjaColor);
 
             var data = {commands: commands, map: map};
@@ -162,5 +172,5 @@ angular.module('frontendApp')
             else{
                 return true;
             }
-        }
+        };
   });
