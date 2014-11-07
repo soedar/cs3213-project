@@ -4,7 +4,6 @@
 function Engine(map, playerActions) {
   this.map = map;
   this.playerActions = playerActions;
-  this.variables = [];
 }
 
 //main methods
@@ -37,10 +36,8 @@ Engine.prototype.makeEvents = function(actions) {
 				Array.prototype.push.apply(events, this.makeEvents(whileActionsFull));
 				i += whileActions.length + 1;
 		} else if (actions[i].command === 'If') {
-			var ifActions = this.getIfActionList(actions, i);
-			var direction = this.getDirection(actions[i].gameObject, 1);
-			if (direction !== 'none') {
-				this.variables['direction'] = direction;
+			if (this.isConditionSatisfied(actions[i].object, actions[i].operation, actions[i].parameter)) {
+				var ifActions = this.getIfActionList(actions, i);
 				Array.prototype.push.apply(events, this.makeEvents(ifActions));
 			}
 			i += ifActions.length + 1;
@@ -101,6 +98,36 @@ Engine.prototype.makeEvent = function(action) {
 };
 
 //helping methods
+
+Engine.prototype.isConditionSatisfied = function(object, operation, parameter) {
+	if (object === "coin") {
+		var player = this.getPlayer();
+		switch (operation) {
+			case '==':
+				return player.model.coin == parameter;
+				break;
+			case '!=':
+				return player.model.coin != parameter;
+				break;
+			case '>':
+				return player.model.coin > parameter;
+				break;
+			case '>=':
+				return player.model.coin >= parameter;
+				break;
+			case '<':
+				return player.model.coin < parameter;
+				break;
+			case '<=':
+				return player.model.coin <= parameter;
+				break;
+		}
+	} else if (object === "spinach") {
+	
+	} else if (object === "wall") {
+	
+	}
+}
 
 Engine.prototype.popObjectAtPosition = function(xy) {
 	var obj;
