@@ -7,6 +7,8 @@ function Engine(map, playerActions) {
   this.variables = [];
 }
 
+//main methods
+
 Engine.prototype.run = function() {
   var objectsMemory = _.cloneDeep(this.map.objects);
 
@@ -57,63 +59,6 @@ Engine.prototype.makeEvents = function(actions, player, objectsMemory) {
 	}
 	return events
 };
-
-Engine.prototype.getDirection = function (checkedObject, range, player) {
-	var objectsInRange = this.getObjectsInRange(checkedObject, range, player);
-	var object;
-	if (objectsInRange.length > 0) { //if there is objects around player, get the first one
-		object = objectsInRange[0];
-	} else {
-		return 'none';
-	}
-	
-	if (object.xy.x < player.xy.x)
-		return 'Left';
-	if (object.xy.x > player.xy.x)
-		return 'Right';
-	if (object.xy.y < player.xy.y)
-		return 'Up';
-	if (object.xy.y > player.xy.y)
-		return 'Down';
-}
-
-Engine.prototype.getObjectsInRange = function(checkedObject, range, player) {
-	var results = [];
-	var checkedTargets = this.map.objects.filter(function(value) { return value.type === checkedObject;});
-	checkedTargets.forEach(function(object) {
-		var distance = Math.abs(player.xy.x - object.xy.x) + Math.abs(player.xy.y - object.xy.y);
-		if (distance <= range)
-			results.push(object);
-	});
-	return results;
-}
-
-Engine.prototype.getIfActionList = function(actions, startingPoint) {
-	var ifActions = [];
-	if (actions[startingPoint].command === 'If') {
-		var i;
-		for (i = startingPoint + 1; i < actions.length; i++) {
-			if (actions[i].command === 'End If' && actions[startingPoint].nestLevel == actions[i].nestLevel)
-				break;
-			ifActions.push(actions[i]);
-		}
-	}
-	return ifActions;
-}
-
-Engine.prototype.getWhileActionList = function(actions, startingPoint) {
-	var whileActions = [];
-	if (actions[startingPoint].command === 'While') {
-		var i;
-		for (i = startingPoint + 1; i < actions.length; i++) {
-			if (actions[i].command === 'End While' && actions[startingPoint].nestLevel == actions[i].nestLevel) {
-				break;
-			}
-			whileActions.push(actions[i]);
-		}
-		return whileActions;
-	}
-}
 
 Engine.prototype.makeEvent = function(action, player, objectsMemory) {
   if (action.command === 'Move') {
@@ -202,3 +147,62 @@ Engine.prototype.makeEvent = function(action, player, objectsMemory) {
     return e;
   }
 };
+
+//helping methods
+
+Engine.prototype.getIfActionList = function(actions, startingPoint) {
+	var ifActions = [];
+	if (actions[startingPoint].command === 'If') {
+		var i;
+		for (i = startingPoint + 1; i < actions.length; i++) {
+			if (actions[i].command === 'End If' && actions[startingPoint].nestLevel == actions[i].nestLevel)
+				break;
+			ifActions.push(actions[i]);
+		}
+	}
+	return ifActions;
+}
+
+Engine.prototype.getWhileActionList = function(actions, startingPoint) {
+	var whileActions = [];
+	if (actions[startingPoint].command === 'While') {
+		var i;
+		for (i = startingPoint + 1; i < actions.length; i++) {
+			if (actions[i].command === 'End While' && actions[startingPoint].nestLevel == actions[i].nestLevel) {
+				break;
+			}
+			whileActions.push(actions[i]);
+		}
+		return whileActions;
+	}
+}
+
+Engine.prototype.getObjectsInRange = function(checkedObject, range, player) {
+	var results = [];
+	var checkedTargets = this.map.objects.filter(function(value) { return value.type === checkedObject;});
+	checkedTargets.forEach(function(object) {
+		var distance = Math.abs(player.xy.x - object.xy.x) + Math.abs(player.xy.y - object.xy.y);
+		if (distance <= range)
+			results.push(object);
+	});
+	return results;
+}
+
+Engine.prototype.getDirection = function (checkedObject, range, player) {
+	var objectsInRange = this.getObjectsInRange(checkedObject, range, player);
+	var object;
+	if (objectsInRange.length > 0) { //if there is objects around player, get the first one
+		object = objectsInRange[0];
+	} else {
+		return 'none';
+	}
+	
+	if (object.xy.x < player.xy.x)
+		return 'Left';
+	if (object.xy.x > player.xy.x)
+		return 'Right';
+	if (object.xy.y < player.xy.y)
+		return 'Up';
+	if (object.xy.y > player.xy.y)
+		return 'Down';
+}
