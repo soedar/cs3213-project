@@ -10,28 +10,20 @@ function Engine(map, playerActions) {
 //main methods
 
 Engine.prototype.run = function() {
-  var objectsMemory = _.cloneDeep(this.map.objects);
-
+  console.log("START ENGINE");
   var gameOutput = {};
   gameOutput.mapSize = this.map.mapSize;
   gameOutput.objects = _.cloneDeep(this.map.objects);
   gameOutput.events = [];
-
-
-  var players = objectsMemory.filter(function(object) {
-    return object.type === 'player';
-  });
-
-  // Assume we only have one player for now
-  var player = players[0];
   
   if(this.playerActions) {
-	  gameOutput.events = this.makeEvents(this.playerActions, player, objectsMemory);
+	  gameOutput.events = this.makeEvents(this.playerActions);
   }
+  console.log(gameOutput.events);
   return gameOutput;
 };
 
-Engine.prototype.makeEvents = function(actions, player, objectsMemory) {
+Engine.prototype.makeEvents = function(actions) {
 	var i;
 	var events = [];
 	for (i = 0; i < actions.length; i++) {
@@ -42,27 +34,27 @@ Engine.prototype.makeEvents = function(actions, player, objectsMemory) {
 				for (j = 0; j < actions[i].parameters; j++) {
 					Array.prototype.push.apply(whileActionsFull, whileActions);
 				}
-				Array.prototype.push.apply(events, this.makeEvents(whileActionsFull, player, objectsMemory));
+				Array.prototype.push.apply(events, this.makeEvents(whileActionsFull));
 				i += whileActions.length + 1;
 		} else if (actions[i].command === 'If') {
 			var ifActions = this.getIfActionList(actions, i);
-			var direction = this.getDirection(actions[i].gameObject, 1, player);
+			var direction = this.getDirection(actions[i].gameObject, 1);
 			if (direction !== 'none') {
 				this.variables['direction'] = direction;
-				Array.prototype.push.apply(events, this.makeEvents(ifActions, player, objectsMemory));
+				Array.prototype.push.apply(events, this.makeEvents(ifActions));
 			}
 			i += ifActions.length + 1;
 		} else {
-			var e = this.makeEvent(actions[i], player, objectsMemory);
+			var e = this.makeEvent(actions[i]);
 		    if (e) { events.push(e); }
 		}
 	}
 	return events
 };
 
-Engine.prototype.makeEvent = function(action, player, objectsMemory) {
+Engine.prototype.makeEvent = function(action) {
   if (action.command === 'Move') {
-    var new_xy = _.clone(player.xy);
+	var player = this.getPlayer();
 	var direction;
 	if (action.commandType === 'Direction') {
 		direction = this.variables['direction'];
@@ -70,85 +62,107 @@ Engine.prototype.makeEvent = function(action, player, objectsMemory) {
 		direction = action.commandType;
 	}
 	
-    switch(direction) {
-      case 'Left':
-        new_xy.x --;
-        break;
-      case 'Right':
-        new_xy.x ++;
-        break;
-      case 'Up':
-        new_xy.y --;
-        break;
-      case 'Down':
-        new_xy.y ++;
-        break;
-    }
-
-    // Ignore moves that goes out of the boundary
-    if (new_xy.x < 0 || new_xy.y < 0 ||
-        new_xy.x >= this.map.mapSize || new_xy.y >= this.map.mapSize) {
-          return null;
-        }
-
-    // We have determine a valid move, so we reduce the health
+	console.log(player.xy.x + " " + player.xy.y + " " + direction);
+	if (!this.isValidMove(direction))
+		return null;
+	console.log("VALID");
+	
+	this.updatePlayerPosition(direction);
+	var obj = this.popObjectAtPosition(player.xy); //get and delete an object at a specific location
     player.model.health -= 1;
-
-    // See if there are any objects that has the coordinate
-	//If there is, get and delete the object
-	var obj;
-	var i;
-	for (i = 0; i < objectsMemory.length; i++) {
-		var object = objectsMemory[i];
-		if (new_xy.x === object.xy.x && new_xy.y === object.xy.y) {
-			obj = object;
-			objectsMemory.splice(i, 1);
-			break;
-		}
-	}
 	
     var e = {
       id: player.id,
+	  xy: _.clone(player.xy),
       update: {}
     };
-
     // Player will definitely reduce health at every turn
     e.update[player.id] = {health: player.model.health};
-
     // There is an object at the same location as the new location
     if (obj) {
       // Assume that only one object can be at a position
       if (obj.type === "coin") {
-        player.xy = new_xy;
         player.model.coin++;
-
         e.type = 'pickCoin';
         e.target = obj.id;
         e.update[player.id].coin = player.model.coin;
-		
       }
       else if (obj.type === "spinach") {
-        player.xy = new_xy;
         player.model.health += 5;
-
         e.type = 'pickSpinach';
         e.target = obj.id;
         e.update[player.id].health = player.model.health;
       }
+    } else {
+		e.type = 'move';
     }
-    // Nothing there, so we can move to the new location
-    else {
-      player.xy = new_xy;
-      e.type = 'move';
-    }
-
-    // Update the location of the player
-    e.xy = _.clone(player.xy);
     return e;
   }
 };
 
 //helping methods
+
+Engine.prototype.popObjectAtPosition = function(xy) {
+	var obj;
+	var i;
+	for (i = 0; i < this.map.objects.length; i++) {
+		var object = this.map.objects[i];
+		if (object.type !== "player" && (xy.x === object.xy.x && xy.y === object.xy.y)) {
+			obj = object;
+			this.map.objects.splice(i, 1);
+			return obj;
+		}
+	}
+	return null;
+}
+
+Engine.prototype.isValidMove = function(direction) {
+	var player = this.getPlayer();
+	switch(direction) {
+      case 'Left':
+        if (player.xy.x > 0)
+			return true;
+		break;
+      case 'Right':
+        if (player.xy.x < this.map.mapSize - 1)
+			return true;
+		break;
+      case 'Up':
+        if (player.xy.y > 0)
+			return true;
+		break;
+      case 'Down':
+        if (player.xy.y < this.map.mapSize - 1)
+			return true;
+		break;
+    }
+	return false;
+}
+
+Engine.prototype.updatePlayerPosition = function(direction) {
+	var player = this.getPlayer();
+	switch(direction) {
+      case 'Left':
+		player.xy.x--;
+		break;
+      case 'Right':
+        player.xy.x++;
+		break;
+      case 'Up':
+        player.xy.y--;
+		break;
+      case 'Down':
+        player.xy.y++;
+		break;
+    }
+}
+
+Engine.prototype.getPlayer = function () {
+	var players = this.map.objects.filter(function(object) {
+		return object.type === 'player';
+	  });
+	return players[0];
+}
 
 Engine.prototype.getIfActionList = function(actions, startingPoint) {
 	var ifActions = [];
