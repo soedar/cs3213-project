@@ -42,7 +42,7 @@
       <div id="stage-left"></div>
 
       <div ng-show="events">
-        <input type="range" min="0" max="{{events[0].length}}" step="1" value="0">
+        <input type="range" min="0" max="{{events[0].length}}" step="1" value="0" ng-mouseup="changeFrame(0)" ng-model="sliders[0]">
       </div>
     </div>
 

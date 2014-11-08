@@ -124,6 +124,12 @@ angular.module('frontendApp')
             //$state.go('visualizer', {id: key});
 
             $scope.events = levelViewer.getEvents();
+
+            $scope.sliders = $scope.events.map(function() { return 0 });
+
+            $scope.changeFrame = function(eventid) {
+              levelViewer.gotoFrame(eventid, $scope.sliders[eventid]);
+            }
         };
 
         $scope.removeCommands = function(index) {

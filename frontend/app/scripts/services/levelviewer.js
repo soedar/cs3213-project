@@ -36,6 +36,15 @@ angular.module('frontendApp')
       });
     }
 
+    function gotoFrame(gameIndex, newFrame) {
+      var game = games[gameIndex];
+      var delta = newFrame - game.eventCounter;
+      if (delta > 0) {
+        game.executeNEvents(delta, function() {
+        });
+      }
+    }
+
     function getEvents() {
       return games.map(function(game) {
         return game.events;
@@ -47,6 +56,7 @@ angular.module('frontendApp')
       setMaps: setMaps,
       loadStage: loadStage,
       run: run,
-      getEvents: getEvents
+      getEvents: getEvents,
+      gotoFrame: gotoFrame
     };
   });
