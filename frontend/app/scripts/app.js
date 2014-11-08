@@ -18,7 +18,8 @@ angular
     'ui.router',
     'ui.bootstrap',
     'ngDragDrop',
-    'facebook'
+    'facebook',
+    'lbServices'
   ])
   .config(function (FacebookProvider, $stateProvider, $urlRouterProvider) {
       var myAppId = '1567060866849242';

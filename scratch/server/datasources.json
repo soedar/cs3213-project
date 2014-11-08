@@ -4,9 +4,9 @@
     "connector": "memory"
   },
   "database": {
-    "name": "database",
-    "connector": "mongodb",
+    "host": "127.0.0.1",
     "database": "scratchninja",
-    "host": "127.0.0.1"
+    "name": "database",
+    "connector": "mongodb"
   }
 }

@@ -31,8 +31,18 @@ angular.module('frontendApp')
       });
 
       games.forEach(function(game) {
-        game.executeEvents(function() {
-        });
+        game.executeEvents(function() {});
+      });
+    }
+
+    function gotoFrame(gameIndex, newFrame) {
+      var game = games[gameIndex];
+      game.gotoFrame(newFrame);
+    }
+
+    function getEvents() {
+      return games.map(function(game) {
+        return game.events;
       });
     }
 
@@ -40,6 +50,8 @@ angular.module('frontendApp')
     return {
       setMaps: setMaps,
       loadStage: loadStage,
-      run: run
+      run: run,
+      getEvents: getEvents,
+      gotoFrame: gotoFrame
     };
   });

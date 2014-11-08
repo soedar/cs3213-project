@@ -36,7 +36,15 @@
     "dataSource": "database",
     "public": true
   },
-  "program": {
+  "Program": {
+    "dataSource": "database",
+    "public": true
+  },
+  "Level": {
+    "dataSource": "database",
+    "public": true
+  },
+  "Map": {
     "dataSource": "database",
     "public": true
   }
