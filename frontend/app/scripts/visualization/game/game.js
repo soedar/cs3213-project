@@ -122,6 +122,7 @@ Game.prototype.executeNextEvent = function(callback) {
 
     charater.animatePickCoin(coin, function() {
       // Remove coin from game
+      console.log(this.objects[nextEvent.target]);
       delete this.objects[nextEvent.target];
       updateModelAndCallback();
     }.bind(this));
@@ -140,7 +141,19 @@ Game.prototype.executeNextEvent = function(callback) {
       updateModelAndCallback()
     }.bind(this));
   }
+};
 
+Game.prototype.executeNEvents = function(n, callback) {
+  var helper = function(counter) {
+    this.executeNextEvent(function(done) {
+      callback(done);
+      if (!done && counter+1 < n) {
+        helper(counter+1);
+      }
+    });
+  }.bind(this);
+
+  helper(0);
 };
 
 Game.prototype.executeEvents = function(callback) {

@@ -31,8 +31,14 @@ angular.module('frontendApp')
       });
 
       games.forEach(function(game) {
-        game.executeEvents(function() {
-        });
+        //game.executeNEvents(2, function() {
+        //});
+      });
+    }
+
+    function getEvents() {
+      return games.map(function(game) {
+        return game.events;
       });
     }
 
@@ -40,6 +46,7 @@ angular.module('frontendApp')
     return {
       setMaps: setMaps,
       loadStage: loadStage,
-      run: run
+      run: run,
+      getEvents: getEvents
     };
   });

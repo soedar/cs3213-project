@@ -122,6 +122,8 @@ angular.module('frontendApp')
 
             //var key = visualStore.addLocal(gameEvents);
             //$state.go('visualizer', {id: key});
+
+            $scope.events = levelViewer.getEvents();
         };
 
         $scope.removeCommands = function(index) {

@@ -39,12 +39,17 @@
 
   <div class="row" ng-controller="VisualizationCtrl">
     <div class="col-xs-6">
-      <div id="stage-left">
+      <div id="stage-left"></div>
+
+      <div ng-show="events">
+        <input type="range" min="0" max="{{events[0].length}}" step="1" value="0">
       </div>
     </div>
 
     <div class="col-xs-6">
-      <div id="stage-right">
+      <div id="stage-right"></div>
+      <div ng-show="events">
+        <input type="range" min="0" max="{{events[1].length}}" step="1" value="0">
       </div>
     </div>
   </div>
