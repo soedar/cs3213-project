@@ -1,6 +1,6 @@
 {
   "name": "Gamer",
-  "base": "User",
+  "base": "PersistedModel",
   "properties": {
     "facebookId": {
       "type": "string",
@@ -9,6 +9,9 @@
     "username": {
       "type": "string",
       "required": true
+    },
+    "lastLevelCompleted": {
+      "type": "number"
     }
   },
   "validations": [],
