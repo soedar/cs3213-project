@@ -9,8 +9,9 @@
         </button>
       </div>
       <div class="navbar-collapse collapse navbar-inverse-collapse">
-        <!-- <ul class="nav navbar-nav">
-        <li><a href="#">Undo</a></li>
+         <ul class="nav navbar-nav">
+        <li><a ng-click="tryLogic()">Try Logic</a></li>
+        <!--
         <li><a href="#">Redo</a></li>
         <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
@@ -23,9 +24,10 @@
         <li><a href="#">Separated link</a></li>
         <li><a href="#">One more separated link</a></li>
       </ul>
+       -->
     </li>
-  </ul> -->
-  <ul class="nav navbar-nav navbar-right">
+  </ul>
+  <ul class="nav navbar-nav navbar-right" ng-show="historyValue">
     <li><a ng-click="run()">Run</a></li>
     <li><a id="save-workspace" ng-click="sendData()">Save</a></li>
     <li><a ng-click="clearCommands()">Clear all</a></li>
@@ -35,7 +37,7 @@
 </div>
 </div>
 
-<div class="container" >
+<div class="container">
 
   <div class="row" ng-controller="VisualizationCtrl">
     <div class="col-xs-6">
@@ -49,7 +51,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row"  ng-show="historyValue">
     <div class="col-xs-4" id="command-palette">
       <div class="panel panel-primary">
         <div class="panel-heading">
