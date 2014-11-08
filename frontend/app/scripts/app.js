@@ -36,5 +36,9 @@ angular
       .state('visualizer', {
           url: '^/visualizer/:id',
           templateUrl: 'views/visualizer.html'
+      })
+      .state('map-maker', {
+        url: '/map-maker/',
+        templateUrl: 'views/map-maker.html'
       });
   });
