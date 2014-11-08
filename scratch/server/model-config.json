@@ -47,5 +47,9 @@
   "Map": {
     "dataSource": "database",
     "public": true
+  },
+  "CustomMap": {
+    "dataSource": "database",
+    "public": true
   }
 }

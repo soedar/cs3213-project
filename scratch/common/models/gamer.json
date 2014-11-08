@@ -20,6 +20,11 @@
       "type": "hasMany",
       "model": "Program",
       "foreignKey": "gamerId"
+    },
+    "customMaps": {
+      "type": "hasMany",
+      "model": "CustomMap",
+      "foreignKey": "gamerId"
     }
   },
   "acls": [],

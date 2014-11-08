@@ -1,0 +1,16 @@
+{
+  "name": "CustomMap",
+  "base": "PersistedModel",
+  "properties": {
+    "map": {
+      "type": "object"
+    },
+    "name": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}
