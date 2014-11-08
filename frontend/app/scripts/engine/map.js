@@ -34,6 +34,11 @@ Map.prototype.addSpinach = function(xy) {
   this.objects.push(spinach);
 };
 
+Map.prototype.addWall = function (xy) {
+	var wall = this.createObject('wall', xy);
+	this.objects.push(wall);
+};
+
 Map.prototype.createObject = function(type, xy) {
   function uuid() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {

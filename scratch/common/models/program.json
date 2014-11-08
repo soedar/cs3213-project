@@ -1,0 +1,25 @@
+{
+  "name": "Program",
+  "base": "PersistedModel",
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "commands": {
+      "type": [
+        "object"
+      ]
+    },
+    "created": {
+      "type": "date"
+    },
+    "lastModified": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

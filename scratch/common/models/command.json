@@ -3,7 +3,9 @@
   "base": "PersistedModel",
   "properties": {
     "commands": {
-      "type": ["object"],
+      "type": [
+        "object"
+      ],
       "required": true
     },
     "map": {
@@ -19,7 +21,6 @@
       "foreignKey": "commandId"
     }
   },
-
   "acls": [],
   "methods": []
 }

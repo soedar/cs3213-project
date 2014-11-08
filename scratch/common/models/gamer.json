@@ -1,0 +1,27 @@
+{
+  "name": "Gamer",
+  "base": "PersistedModel",
+  "properties": {
+    "facebookId": {
+      "type": "string",
+      "required": true
+    },
+    "username": {
+      "type": "string",
+      "required": true
+    },
+    "lastLevelCompleted": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "programs": {
+      "type": "hasMany",
+      "model": "Program",
+      "foreignKey": "gamerId"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Map",
+  "base": "PersistedModel",
+  "properties": {
+    "map": {
+      "type": "object",
+      "required": true
+    },
+    "name": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

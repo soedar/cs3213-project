@@ -4,6 +4,7 @@ var ASSET_PREFIX = 'game_images/';
 var ASSET_LIST = {  grass: 'grass.jpg',
   coin: 'coin.png',
   spinach: 'spinach.png',
+  wall: 'wall.png',
   playerBlue: 'ninja-blue.png',
   playerRed: 'ninja-red.png',
   playerGreen: 'ninja-green.png',

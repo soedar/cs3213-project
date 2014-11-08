@@ -5,19 +5,39 @@
     font-size: 15px;
 }
 
-.input-group-addon-green{
+.loop-command, .loop-command span{
     background-color: #3fb618;
     border-color: #3fb618;
     color: #FFF;
     font-size: 15px;
 }
 
-.input-group-addon-brown{
+.loop-command select, .loop-command input, .loop-command option{
+  background: transparent;
+  border:none;
+  white-space: nowrap;
+  vertical-align: middle;
+  height:37px;
+  text-align:center;
+}
+
+.control-command, .control-command span{
     background-color: #ff7518;
     border-color: #ff7518;
     color: #FFF;
     font-size: 15px;
 }
+
+.control-command select, .control-command input, .control-command option{
+  background: transparent;
+  border:none;
+  white-space: nowrap;
+  vertical-align: middle;
+  height:37px;
+  text-align:center;
+}
+
+
 
 #workspace-container{
     max-height:1000px;
@@ -61,6 +81,10 @@
     width: 100%;
 }
 
+.command-object .control-command input:last-child, .command-object .loop-command input:last-child{
+  width:50px;
+}
+
 .close-button{
     background-color: #eee;
     border-top: none;
@@ -84,6 +108,7 @@
 .dropdown-menu{
   z-index:999;
 }
+
 
 /* image as radio button */
 /* http://stackoverflow.com/questions/17541614/use-thumbnail-image-instead-of-radio-button */

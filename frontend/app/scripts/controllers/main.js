@@ -8,8 +8,8 @@
  * Controller of the frontendApp
  */
 angular.module('frontendApp')
-  .controller('MainCtrl', ['$scope', '$state', '$timeout','Facebook',
-    function($scope, $state, $timeout, Facebook) {
+  .controller('MainCtrl',
+    function($scope, $timeout, Facebook, Gamer) {
 
       //============= FACEBOOK ============//
       $scope.user = {};
@@ -24,8 +24,9 @@ angular.module('frontendApp')
           return Facebook.isReady();
         },
         function(newVal) {
-          if (newVal)
+          if (newVal) {
             $scope.facebookReady = true;
+          }
         }
       );
 
@@ -60,7 +61,33 @@ angular.module('frontendApp')
           $scope.$apply(function() {
             $scope.user = response;
           });
+          $scope.dbFetch();
         });
+      };
+
+      $scope.dbFetch = function() {
+
+        var gamer = Gamer.findOne(
+          {
+            filter: {
+              where: {facebookId: $scope.user.id},
+              include: 'programs'
+            }
+          }, function success (val, res) {
+            $scope.gamer = gamer;
+            console.log('success');
+          }, function error (res) {
+
+            var data = {
+              'facebookId': $scope.user.id,
+              'username' : $scope.user.name,
+              'lastLevelCompleted': 1
+            };
+
+            $scope.gamer = Gamer.create(data);
+            console.log('user is not in database. created new user.');
+          }
+        );
       };
 
       $scope.logout = function() {
@@ -86,9 +113,9 @@ angular.module('frontendApp')
 
             $timeout(function() {
               $scope.byebye = false;
-            }, 2000)
+            }, 2000);
           });
         }
       });
     }
-]);
+);

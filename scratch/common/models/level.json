@@ -1,0 +1,20 @@
+{
+  "name": "Level",
+  "base": "PersistedModel",
+  "properties": {
+    "number": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "maps": {
+      "type": "hasMany",
+      "model": "Map",
+      "foreignKey": "levelId"
+    }
+  },
+  "acls": [],
+  "methods": []
+}
