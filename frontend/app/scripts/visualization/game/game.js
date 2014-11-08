@@ -12,19 +12,19 @@ function Tile() {
 Tile.prototype = Object.create(Grid.prototype);
 
 
-function Game(game, canvasSize) {
-  this.size = game.mapSize;
+function Game(map, canvasSize) {
+  this.size = map.mapSize;
   this.canvasSize = canvasSize;
   this.gridSize = canvasSize / this.size;
-  this.game = game;
+  this.map = map;
 
   this._backgroundLayer = new Kinetic.Layer();
   this._objectLayer = new Kinetic.Layer();
 
   this.objects = {};
 
-  this.events = this.game.events;
-  this.eventCounter = 0;
+  //this.events = this.game.events;
+  //this.eventCounter = 0;
   Grid.prototype.size = this.gridSize;
 }
 
@@ -49,7 +49,7 @@ Game.prototype.getBackgroundLayer = function() {
 };
 
 Game.prototype.getObjectLayer = function() {
-  this.game.objects.forEach(function(obj) {
+  this.map.objects.forEach(function(obj) {
     var object;
     if (obj.type === 'player') {
       object = new Player(obj.model);
@@ -68,6 +68,11 @@ Game.prototype.getObjectLayer = function() {
 
   return this._objectLayer;
 };
+
+Game.prototype.loadEvents = function(events) {
+  this.events = events;
+  this.eventCounter = 0;
+}
 
 Game.prototype.executeNextEvent = function(callback) {
   // We have run out of events to execute

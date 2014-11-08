@@ -8,69 +8,39 @@
  * Controller of the frontendApp
  */
 angular.module('frontendApp')
-  .controller('VisualizationCtrl', function ($scope, $stateParams, $timeout, visualStore, gameEngine) {
-    var stage = new Kinetic.Stage({
-      container: 'container',
-        width: 500,
-        height: 500
+  .controller('VisualizationCtrl', function ($scope, $stateParams, $timeout, visualStore, gameEngine, levelViewer) {
+     var map1 = new Map(4);
+     map1.addPlayer('localPlayer', 'blue', 100, {x: 0, y: 2});
+     map1.addCoin({x: 1, y: 2});
+     map1.addCoin({x: 2, y: 2});
+     map1.addSpinach({x: 1, y: 0});
+
+     var map2 = new Map(4);
+     map2.addPlayer('localPlayer', 'blue', 100, {x: 0, y: 0});
+     map2.addCoin({x: 1, y: 2});
+     map2.addCoin({x: 2, y: 2});
+     map2.addSpinach({x: 1, y: 0});
+
+    var maps = [map1, map2];
+    levelViewer.setMaps(maps);
+
+    var stageLeft = new Kinetic.Stage({
+      container: 'stage-left',
+        width: 350,
+        height: 350
     });
 
-    function loadBoard(gameData) {
-      var game = new Game(gameData.events, 500);
-      game.getLayers().forEach(function(layer) {
-        stage.add(layer);
-      });
+    var stageRight = new Kinetic.Stage({
+      container: 'stage-right',
+        width: 350,
+        height: 350
+    });
 
-      var player;
-      // We assume that there is only one player for now
-      for (var id in game.objects) {
-        var object = game.objects[id];
-        if (object instanceof Player) {
-          player = object;
-          break;
-        }
-      }
-
-      $timeout(function() {
-        $scope.hasMoves = (game.events.length > 0);
-        $scope.game = game;
-        $scope.player = player;
-        $scope.gameData = gameData;
-      });
-    }
-
+    var stages = [stageLeft, stageRight];
 
     Assets.load(function() {
-      if ($stateParams.id) {
-        visualStore.load($stateParams.id, function(error, gameData) {
-          if (error) {
-            $timeout(function() {
-              $scope.error = 'No such game id';
-            });
-            return;
-          }
-          loadBoard(gameData);
-        });
-      } else {
-        loadBoard(gameEngine.run([]));
-      }
+      stages.forEach(function(stage, i) {
+        levelViewer.loadStage(i, stage);
+      });
     });
-
-    function updateScope(done) {
-      if (!done) {
-        $timeout(function() {});
-      } else {
-        $timeout(function() {
-          $scope.hasMoves = false;
-        });
-      }
-    }
-
-    $scope.execute = function() {
-      $scope.game.executeEvents(updateScope);
-    };
-
-    $scope.executeNextEvent = function() {
-      $scope.game.executeNextEvent(updateScope);
-    };
   });
