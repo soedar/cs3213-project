@@ -125,7 +125,7 @@ angular.module('frontendApp')
 
             $scope.events = levelViewer.getEvents();
 
-            $scope.sliders = $scope.events.map(function() { return 0 });
+            $scope.sliders = $scope.events.map(function(e) { return e.length  });
 
             $scope.changeFrame = function(eventid) {
               levelViewer.gotoFrame(eventid, $scope.sliders[eventid]);

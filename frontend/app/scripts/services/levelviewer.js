@@ -31,18 +31,13 @@ angular.module('frontendApp')
       });
 
       games.forEach(function(game) {
-        //game.executeNEvents(2, function() {
-        //});
+        game.executeEvents(function() {});
       });
     }
 
     function gotoFrame(gameIndex, newFrame) {
       var game = games[gameIndex];
-      var delta = newFrame - game.eventCounter;
-      if (delta > 0) {
-        game.executeNEvents(delta, function() {
-        });
-      }
+      game.gotoFrame(newFrame);
     }
 
     function getEvents() {

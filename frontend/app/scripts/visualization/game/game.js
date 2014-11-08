@@ -26,6 +26,8 @@ function Game(map, canvasSize) {
   //this.events = this.game.events;
   //this.eventCounter = 0;
   Grid.prototype.size = this.gridSize;
+
+  this.objectStates = [];
 }
 
 Game.prototype.getLayers = function() {
@@ -66,8 +68,20 @@ Game.prototype.getObjectLayer = function() {
     }
   }.bind(this));
 
+  this.addObjectState();
+
   return this._objectLayer;
 };
+
+Game.prototype.addObjectState = function() {
+  var state = {};
+  for (var key in this.objects) {
+    var object = this.objects[key];
+
+    state[key] = {gridX: object.gridX, gridY: object.gridY};
+  }
+  this.objectStates.push(state);
+}
 
 Game.prototype.loadEvents = function(events) {
   this.events = events;
@@ -88,6 +102,7 @@ Game.prototype.executeNextEvent = function(callback) {
     for (var objId in nextEvent.update) {
       this.objects[objId].updateModel(nextEvent.update[objId]);
     }
+    this.addObjectState();
     if (callback) {
       callback(false);
     }
@@ -122,8 +137,7 @@ Game.prototype.executeNextEvent = function(callback) {
 
     charater.animatePickCoin(coin, function() {
       // Remove coin from game
-      console.log(this.objects[nextEvent.target]);
-      delete this.objects[nextEvent.target];
+      this.objects[nextEvent.target].setGrid(-1, -1);
       updateModelAndCallback();
     }.bind(this));
 
@@ -137,24 +151,22 @@ Game.prototype.executeNextEvent = function(callback) {
     }
 
     charater.animatePickSpinach(spinach, function() {
-      delete this.objects[nextEvent.target];
+      this.objects[nextEvent.target].setGrid(-1, -1);
       updateModelAndCallback()
     }.bind(this));
   }
 };
 
-Game.prototype.executeNEvents = function(n, callback) {
-  var helper = function(counter) {
-    this.executeNextEvent(function(done) {
-      callback(done);
-      if (!done && counter+1 < n) {
-        helper(counter+1);
-      }
-    });
-  }.bind(this);
+Game.prototype.gotoFrame = function(frame) {
+  var state = this.objectStates[frame];
+  for (var key in state) {
+    var s = state[key];
+    var object = this.objects[key];
 
-  helper(0);
-};
+    object.setGrid(s.gridX, s.gridY);
+    object.repr.opacity(1.0);
+  }
+}
 
 Game.prototype.executeEvents = function(callback) {
   this.executeNextEvent(function(done) {
@@ -162,5 +174,5 @@ Game.prototype.executeEvents = function(callback) {
     if (!done) {
       this.executeEvents(callback);
     }
-  }.bind(this));;
+  }.bind(this));
 };
