@@ -14,14 +14,18 @@ angular.module('frontendApp')
     $scope.leftGrid = [];
 
     $scope.rightGrid = [];
-
+    var index = 0;
     for (var xCoord = 0; xCoord < mapSize; xCoord++){
         for (var yCoord = 0; yCoord < mapSize; yCoord++){
-            $scope.leftGrid.push({x: xCoord, y: yCoord});
+            $scope.leftGrid.push({index: index, x: xCoord, y: yCoord});
             $scope.rightGrid.push({x: xCoord, y: yCoord});
+            index++;
         }
     }
 
+    $scope.dropped = function(){
+        console.log(JSON.stringify($scope.leftGrid));
+    }
     $scope.left0 = {};
     $scope.left1 = {};
     $scope.left2 = {};
@@ -310,78 +314,11 @@ angular.module('frontendApp')
     ];
 
     $scope.saveMap = function(){
-        $scope.leftMap.push($scope.left0);
-        $scope.leftMap.push($scope.left1);
-        $scope.leftMap.push($scope.left2);
-        $scope.leftMap.push($scope.left3);
-        $scope.leftMap.push($scope.left4);
-        $scope.leftMap.push($scope.left5);
-        $scope.leftMap.push($scope.left6);
-        $scope.leftMap.push($scope.left7);
-        $scope.leftMap.push($scope.left8);
-        $scope.leftMap.push($scope.left9);
-        $scope.leftMap.push($scope.left10);
-        $scope.leftMap.push($scope.left11);
-        $scope.leftMap.push($scope.left12);
-        $scope.leftMap.push($scope.left13);
-        $scope.leftMap.push($scope.left14);
-        $scope.leftMap.push($scope.left15);
-        console.log(JSON.stringify($scope.leftMap));
 
-        $scope.rightMap.push($scope.right0);
-        $scope.rightMap.push($scope.right1);
-        $scope.rightMap.push($scope.right2);
-        $scope.rightMap.push($scope.right3);
-        $scope.rightMap.push($scope.right4);
-        $scope.rightMap.push($scope.right5);
-        $scope.rightMap.push($scope.right6);
-        $scope.rightMap.push($scope.right7);
-        $scope.rightMap.push($scope.right8);
-        $scope.rightMap.push($scope.right9);
-        $scope.rightMap.push($scope.right10);
-        $scope.rightMap.push($scope.right11);
-        $scope.rightMap.push($scope.right12);
-        $scope.rightMap.push($scope.right13);
-        $scope.rightMap.push($scope.right14);
-        $scope.rightMap.push($scope.right15);
-        console.log(JSON.stringify($scope.rightMap));
     }
 
     $scope.clearMap = function(){
-        $scope.right0 = {};
-        $scope.right1 = {};
-        $scope.right2 = {};
-        $scope.right3 = {};
-        $scope.right4 = {};
-        $scope.right5 = {};
-        $scope.right6 = {};
-        $scope.right7 = {};
-        $scope.right8 = {};
-        $scope.right9 = {};
-        $scope.right10 = {};
-        $scope.right11 = {};
-        $scope.right12 = {};
-        $scope.right13 = {};
-        $scope.right14 = {};
-        $scope.right15 = {};
-        $scope.left0 = {};
-        $scope.left1 = {};
-        $scope.left2 = {};
-        $scope.left3 = {};
-        $scope.left4 = {};
-        $scope.left5 = {};
-        $scope.left6 = {};
-        $scope.left7 = {};
-        $scope.left8 = {};
-        $scope.left9 = {};
-        $scope.left10 = {};
-        $scope.left11 = {};
-        $scope.left12 = {};
-        $scope.left13 = {};
-        $scope.left14 = {};
-        $scope.left15 = {};
-        $scope.leftMap = [];
-        $scope.rightMap = [];
+
     }
 
     $scope.sendData = function(){
