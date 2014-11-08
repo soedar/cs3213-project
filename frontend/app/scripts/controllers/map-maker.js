@@ -347,6 +347,43 @@ angular.module('frontendApp')
         console.log(JSON.stringify($scope.rightMap));
     }
 
+    $scope.clearMap = function(){
+        $scope.right0 = {};
+        $scope.right1 = {};
+        $scope.right2 = {};
+        $scope.right3 = {};
+        $scope.right4 = {};
+        $scope.right5 = {};
+        $scope.right6 = {};
+        $scope.right7 = {};
+        $scope.right8 = {};
+        $scope.right9 = {};
+        $scope.right10 = {};
+        $scope.right11 = {};
+        $scope.right12 = {};
+        $scope.right13 = {};
+        $scope.right14 = {};
+        $scope.right15 = {};
+        $scope.left0 = {};
+        $scope.left1 = {};
+        $scope.left2 = {};
+        $scope.left3 = {};
+        $scope.left4 = {};
+        $scope.left5 = {};
+        $scope.left6 = {};
+        $scope.left7 = {};
+        $scope.left8 = {};
+        $scope.left9 = {};
+        $scope.left10 = {};
+        $scope.left11 = {};
+        $scope.left12 = {};
+        $scope.left13 = {};
+        $scope.left14 = {};
+        $scope.left15 = {};
+        $scope.leftMap = [];
+        $scope.rightMap = [];
+    }
+
     $scope.sendData = function(){
         // For now, assume that the map is default
         var commands = getCommands();
