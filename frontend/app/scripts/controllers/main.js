@@ -71,7 +71,7 @@ angular.module('frontendApp')
           {
             filter: {
               where: {facebookId: $scope.user.id},
-              include: 'programs'
+              include: ['programs', 'customMaps']
             }
           }, function success (val, res) {
             $scope.gamer = gamer;

@@ -8,7 +8,7 @@
 * Controller of the frontendApp
 */
 angular.module('frontendApp')
-.controller('MapMakerCtrl', function ($scope, $state, $http, visualStore, gameEngine, levelViewer) {
+.controller('MapMakerCtrl', function ($scope, $state, $http, visualStore, gameEngine, levelViewer, CustomMap, Gamer) {
     var mapSize = 4;
 
     $scope.leftGrid = [];
@@ -345,6 +345,21 @@ angular.module('frontendApp')
         $scope.rightMap.push($scope.right14);
         $scope.rightMap.push($scope.right15);
         console.log(JSON.stringify($scope.rightMap));
+
+        var map = {
+            leftMap: $scope.leftMap,
+            rightMap: $scope.rightMap
+        };
+
+        var gamerId = $scope.$parent.gamer.id;
+
+        var data = {
+            map: map,
+            gamerId: gamerId
+        };
+
+        var customMap = CustomMap.create(data);
+        console.log(customMap);
     }
 
     $scope.clearMap = function(){
