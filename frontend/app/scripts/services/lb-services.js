@@ -1823,9 +1823,89 @@ module.factory(
       { 'id': '@id' },
       {
 
-        // INTERNAL. Use Gamer.stats() instead.
-        "prototype$__get__stats": {
-          url: urlBase + "/Gamers/:id/stats",
+        // INTERNAL. Use Gamer.programs.findById() instead.
+        "prototype$__findById__programs": {
+          url: urlBase + "/Gamers/:id/programs/:fk",
+          method: "GET",
+        },
+
+        // INTERNAL. Use Gamer.programs.destroyById() instead.
+        "prototype$__destroyById__programs": {
+          url: urlBase + "/Gamers/:id/programs/:fk",
+          method: "DELETE",
+        },
+
+        // INTERNAL. Use Gamer.programs.updateById() instead.
+        "prototype$__updateById__programs": {
+          url: urlBase + "/Gamers/:id/programs/:fk",
+          method: "PUT",
+        },
+
+        // INTERNAL. Use Gamer.customMaps.findById() instead.
+        "prototype$__findById__customMaps": {
+          url: urlBase + "/Gamers/:id/customMaps/:fk",
+          method: "GET",
+        },
+
+        // INTERNAL. Use Gamer.customMaps.destroyById() instead.
+        "prototype$__destroyById__customMaps": {
+          url: urlBase + "/Gamers/:id/customMaps/:fk",
+          method: "DELETE",
+        },
+
+        // INTERNAL. Use Gamer.customMaps.updateById() instead.
+        "prototype$__updateById__customMaps": {
+          url: urlBase + "/Gamers/:id/customMaps/:fk",
+          method: "PUT",
+        },
+
+        // INTERNAL. Use Gamer.programs() instead.
+        "prototype$__get__programs": {
+          url: urlBase + "/Gamers/:id/programs",
+          method: "GET",
+          isArray: true,
+        },
+
+        // INTERNAL. Use Gamer.programs.create() instead.
+        "prototype$__create__programs": {
+          url: urlBase + "/Gamers/:id/programs",
+          method: "POST",
+        },
+
+        // INTERNAL. Use Gamer.programs.destroyAll() instead.
+        "prototype$__delete__programs": {
+          url: urlBase + "/Gamers/:id/programs",
+          method: "DELETE",
+        },
+
+        // INTERNAL. Use Gamer.programs.count() instead.
+        "prototype$__count__programs": {
+          url: urlBase + "/Gamers/:id/programs/count",
+          method: "GET",
+        },
+
+        // INTERNAL. Use Gamer.customMaps() instead.
+        "prototype$__get__customMaps": {
+          url: urlBase + "/Gamers/:id/customMaps",
+          method: "GET",
+          isArray: true,
+        },
+
+        // INTERNAL. Use Gamer.customMaps.create() instead.
+        "prototype$__create__customMaps": {
+          url: urlBase + "/Gamers/:id/customMaps",
+          method: "POST",
+        },
+
+        // INTERNAL. Use Gamer.customMaps.destroyAll() instead.
+        "prototype$__delete__customMaps": {
+          url: urlBase + "/Gamers/:id/customMaps",
+          method: "DELETE",
+        },
+
+        // INTERNAL. Use Gamer.customMaps.count() instead.
+        "prototype$__count__customMaps": {
+          url: urlBase + "/Gamers/:id/customMaps/count",
           method: "GET",
         },
 
@@ -2305,21 +2385,108 @@ module.factory(
     */
     R.modelName = "Gamer";
 
+    /**
+     * @ngdoc object
+     * @name lbServices.Gamer.programs
+     * @header lbServices.Gamer.programs
+     * @object
+     * @description
+     *
+     * The object `Gamer.programs` groups methods
+     * manipulating `Program` instances related to `Gamer`.
+     *
+     * Call {@link lbServices.Gamer#programs Gamer.programs()}
+     * to query all related instances.
+     */
+
 
         /**
          * @ngdoc method
-         * @name lbServices.Gamer#stats
+         * @name lbServices.Gamer#programs
          * @methodOf lbServices.Gamer
          *
          * @description
          *
-         * Fetches hasOne relation stats
+         * Queries programs of Gamer.
          *
          * @param {Object=} parameters Request parameters.
          *
          *  - `id` – `{*}` - PersistedModel id
          *
-         *  - `refresh` – `{boolean=}` - 
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Program` object.)
+         * </em>
+         */
+        R.programs = function() {
+          var TargetResource = $injector.get("Program");
+          var action = TargetResource["::get::Gamer::programs"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Gamer.programs#count
+         * @methodOf lbServices.Gamer.programs
+         *
+         * @description
+         *
+         * Counts programs of Gamer.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.programs.count = function() {
+          var TargetResource = $injector.get("Program");
+          var action = TargetResource["::count::Gamer::programs"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Gamer.programs#create
+         * @methodOf lbServices.Gamer.programs
+         *
+         * @description
+         *
+         * Creates a new instance in programs of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -2333,12 +2500,419 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Stat` object.)
+         * This usually means the response is a `Program` object.)
          * </em>
          */
-        R.stats = function() {
-          var TargetResource = $injector.get("Stat");
-          var action = TargetResource["::get::Gamer::stats"];
+        R.programs.create = function() {
+          var TargetResource = $injector.get("Program");
+          var action = TargetResource["::create::Gamer::programs"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Gamer.programs#destroyAll
+         * @methodOf lbServices.Gamer.programs
+         *
+         * @description
+         *
+         * Deletes all programs of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.programs.destroyAll = function() {
+          var TargetResource = $injector.get("Program");
+          var action = TargetResource["::delete::Gamer::programs"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Gamer.programs#destroyById
+         * @methodOf lbServices.Gamer.programs
+         *
+         * @description
+         *
+         * Delete a related item by id for programs
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for programs
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `` – `{undefined=}` - 
+         */
+        R.programs.destroyById = function() {
+          var TargetResource = $injector.get("Program");
+          var action = TargetResource["::destroyById::Gamer::programs"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Gamer.programs#findById
+         * @methodOf lbServices.Gamer.programs
+         *
+         * @description
+         *
+         * Find a related item by id for programs
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for programs
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Program` object.)
+         * </em>
+         */
+        R.programs.findById = function() {
+          var TargetResource = $injector.get("Program");
+          var action = TargetResource["::findById::Gamer::programs"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Gamer.programs#updateById
+         * @methodOf lbServices.Gamer.programs
+         *
+         * @description
+         *
+         * Update a related item by id for programs
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for programs
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Program` object.)
+         * </em>
+         */
+        R.programs.updateById = function() {
+          var TargetResource = $injector.get("Program");
+          var action = TargetResource["::updateById::Gamer::programs"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.Gamer.customMaps
+     * @header lbServices.Gamer.customMaps
+     * @object
+     * @description
+     *
+     * The object `Gamer.customMaps` groups methods
+     * manipulating `CustomMap` instances related to `Gamer`.
+     *
+     * Call {@link lbServices.Gamer#customMaps Gamer.customMaps()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Gamer#customMaps
+         * @methodOf lbServices.Gamer
+         *
+         * @description
+         *
+         * Queries customMaps of Gamer.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `CustomMap` object.)
+         * </em>
+         */
+        R.customMaps = function() {
+          var TargetResource = $injector.get("CustomMap");
+          var action = TargetResource["::get::Gamer::customMaps"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Gamer.customMaps#count
+         * @methodOf lbServices.Gamer.customMaps
+         *
+         * @description
+         *
+         * Counts customMaps of Gamer.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.customMaps.count = function() {
+          var TargetResource = $injector.get("CustomMap");
+          var action = TargetResource["::count::Gamer::customMaps"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Gamer.customMaps#create
+         * @methodOf lbServices.Gamer.customMaps
+         *
+         * @description
+         *
+         * Creates a new instance in customMaps of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `CustomMap` object.)
+         * </em>
+         */
+        R.customMaps.create = function() {
+          var TargetResource = $injector.get("CustomMap");
+          var action = TargetResource["::create::Gamer::customMaps"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Gamer.customMaps#destroyAll
+         * @methodOf lbServices.Gamer.customMaps
+         *
+         * @description
+         *
+         * Deletes all customMaps of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.customMaps.destroyAll = function() {
+          var TargetResource = $injector.get("CustomMap");
+          var action = TargetResource["::delete::Gamer::customMaps"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Gamer.customMaps#destroyById
+         * @methodOf lbServices.Gamer.customMaps
+         *
+         * @description
+         *
+         * Delete a related item by id for customMaps
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for customMaps
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `` – `{undefined=}` - 
+         */
+        R.customMaps.destroyById = function() {
+          var TargetResource = $injector.get("CustomMap");
+          var action = TargetResource["::destroyById::Gamer::customMaps"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Gamer.customMaps#findById
+         * @methodOf lbServices.Gamer.customMaps
+         *
+         * @description
+         *
+         * Find a related item by id for customMaps
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for customMaps
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `CustomMap` object.)
+         * </em>
+         */
+        R.customMaps.findById = function() {
+          var TargetResource = $injector.get("CustomMap");
+          var action = TargetResource["::findById::Gamer::customMaps"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Gamer.customMaps#updateById
+         * @methodOf lbServices.Gamer.customMaps
+         *
+         * @description
+         *
+         * Update a related item by id for customMaps
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for customMaps
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `CustomMap` object.)
+         * </em>
+         */
+        R.customMaps.updateById = function() {
+          var TargetResource = $injector.get("CustomMap");
+          var action = TargetResource["::updateById::Gamer::customMaps"];
           return action.apply(R, arguments);
         };
 
@@ -2366,7 +2940,7 @@ module.factory(
   "Program",
   ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
     var R = Resource(
-      urlBase + "/programs/:id",
+      urlBase + "/Programs/:id",
       { 'id': '@id' },
       {
 
@@ -2404,7 +2978,7 @@ module.factory(
          * </em>
          */
         "create": {
-          url: urlBase + "/programs",
+          url: urlBase + "/Programs",
           method: "POST",
         },
 
@@ -2442,7 +3016,7 @@ module.factory(
          * </em>
          */
         "upsert": {
-          url: urlBase + "/programs",
+          url: urlBase + "/Programs",
           method: "PUT",
         },
 
@@ -2474,7 +3048,7 @@ module.factory(
          *  - `exists` – `{boolean=}` - 
          */
         "exists": {
-          url: urlBase + "/programs/:id/exists",
+          url: urlBase + "/Programs/:id/exists",
           method: "GET",
         },
 
@@ -2507,7 +3081,7 @@ module.factory(
          * </em>
          */
         "findById": {
-          url: urlBase + "/programs/:id",
+          url: urlBase + "/Programs/:id",
           method: "GET",
         },
 
@@ -2540,7 +3114,7 @@ module.factory(
          * </em>
          */
         "find": {
-          url: urlBase + "/programs",
+          url: urlBase + "/Programs",
           method: "GET",
           isArray: true,
         },
@@ -2574,7 +3148,7 @@ module.factory(
          * </em>
          */
         "findOne": {
-          url: urlBase + "/programs/findOne",
+          url: urlBase + "/Programs/findOne",
           method: "GET",
         },
 
@@ -2608,7 +3182,7 @@ module.factory(
          * This method returns no data.
          */
         "updateAll": {
-          url: urlBase + "/programs/update",
+          url: urlBase + "/Programs/update",
           method: "POST",
         },
 
@@ -2638,7 +3212,7 @@ module.factory(
          * This method returns no data.
          */
         "deleteById": {
-          url: urlBase + "/programs/:id",
+          url: urlBase + "/Programs/:id",
           method: "DELETE",
         },
 
@@ -2670,7 +3244,7 @@ module.factory(
          *  - `count` – `{number=}` - 
          */
         "count": {
-          url: urlBase + "/programs/count",
+          url: urlBase + "/Programs/count",
           method: "GET",
         },
 
@@ -2707,8 +3281,51 @@ module.factory(
          * </em>
          */
         "prototype$updateAttributes": {
-          url: urlBase + "/programs/:id",
+          url: urlBase + "/Programs/:id",
           method: "PUT",
+        },
+
+        // INTERNAL. Use Gamer.programs.findById() instead.
+        "::findById::Gamer::programs": {
+          url: urlBase + "/Gamers/:id/programs/:fk",
+          method: "GET",
+        },
+
+        // INTERNAL. Use Gamer.programs.destroyById() instead.
+        "::destroyById::Gamer::programs": {
+          url: urlBase + "/Gamers/:id/programs/:fk",
+          method: "DELETE",
+        },
+
+        // INTERNAL. Use Gamer.programs.updateById() instead.
+        "::updateById::Gamer::programs": {
+          url: urlBase + "/Gamers/:id/programs/:fk",
+          method: "PUT",
+        },
+
+        // INTERNAL. Use Gamer.programs() instead.
+        "::get::Gamer::programs": {
+          url: urlBase + "/Gamers/:id/programs",
+          method: "GET",
+          isArray: true,
+        },
+
+        // INTERNAL. Use Gamer.programs.create() instead.
+        "::create::Gamer::programs": {
+          url: urlBase + "/Gamers/:id/programs",
+          method: "POST",
+        },
+
+        // INTERNAL. Use Gamer.programs.destroyAll() instead.
+        "::delete::Gamer::programs": {
+          url: urlBase + "/Gamers/:id/programs",
+          method: "DELETE",
+        },
+
+        // INTERNAL. Use Gamer.programs.count() instead.
+        "::count::Gamer::programs": {
+          url: urlBase + "/Gamers/:id/programs/count",
+          method: "GET",
         },
       }
     );
@@ -4213,13 +4830,13 @@ module.factory(
 
 /**
  * @ngdoc object
- * @name lbServices.Stat
- * @header lbServices.Stat
+ * @name lbServices.CustomMap
+ * @header lbServices.CustomMap
  * @object
  *
  * @description
  *
- * A $resource object for interacting with the `Stat` model.
+ * A $resource object for interacting with the `CustomMap` model.
  *
  * ## Example
  *
@@ -4229,17 +4846,17 @@ module.factory(
  *
  */
 module.factory(
-  "Stat",
+  "CustomMap",
   ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
     var R = Resource(
-      urlBase + "/Stats/:id",
+      urlBase + "/CustomMaps/:id",
       { 'id': '@id' },
       {
 
         /**
          * @ngdoc method
-         * @name lbServices.Stat#create
-         * @methodOf lbServices.Stat
+         * @name lbServices.CustomMap#create
+         * @methodOf lbServices.CustomMap
          *
          * @description
          *
@@ -4266,18 +4883,18 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Stat` object.)
+         * This usually means the response is a `CustomMap` object.)
          * </em>
          */
         "create": {
-          url: urlBase + "/Stats",
+          url: urlBase + "/CustomMaps",
           method: "POST",
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.Stat#upsert
-         * @methodOf lbServices.Stat
+         * @name lbServices.CustomMap#upsert
+         * @methodOf lbServices.CustomMap
          *
          * @description
          *
@@ -4304,18 +4921,18 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Stat` object.)
+         * This usually means the response is a `CustomMap` object.)
          * </em>
          */
         "upsert": {
-          url: urlBase + "/Stats",
+          url: urlBase + "/CustomMaps",
           method: "PUT",
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.Stat#exists
-         * @methodOf lbServices.Stat
+         * @name lbServices.CustomMap#exists
+         * @methodOf lbServices.CustomMap
          *
          * @description
          *
@@ -4340,14 +4957,14 @@ module.factory(
          *  - `exists` – `{boolean=}` - 
          */
         "exists": {
-          url: urlBase + "/Stats/:id/exists",
+          url: urlBase + "/CustomMaps/:id/exists",
           method: "GET",
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.Stat#findById
-         * @methodOf lbServices.Stat
+         * @name lbServices.CustomMap#findById
+         * @methodOf lbServices.CustomMap
          *
          * @description
          *
@@ -4369,18 +4986,18 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Stat` object.)
+         * This usually means the response is a `CustomMap` object.)
          * </em>
          */
         "findById": {
-          url: urlBase + "/Stats/:id",
+          url: urlBase + "/CustomMaps/:id",
           method: "GET",
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.Stat#find
-         * @methodOf lbServices.Stat
+         * @name lbServices.CustomMap#find
+         * @methodOf lbServices.CustomMap
          *
          * @description
          *
@@ -4402,19 +5019,19 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Stat` object.)
+         * This usually means the response is a `CustomMap` object.)
          * </em>
          */
         "find": {
-          url: urlBase + "/Stats",
+          url: urlBase + "/CustomMaps",
           method: "GET",
           isArray: true,
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.Stat#findOne
-         * @methodOf lbServices.Stat
+         * @name lbServices.CustomMap#findOne
+         * @methodOf lbServices.CustomMap
          *
          * @description
          *
@@ -4436,18 +5053,18 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Stat` object.)
+         * This usually means the response is a `CustomMap` object.)
          * </em>
          */
         "findOne": {
-          url: urlBase + "/Stats/findOne",
+          url: urlBase + "/CustomMaps/findOne",
           method: "GET",
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.Stat#updateAll
-         * @methodOf lbServices.Stat
+         * @name lbServices.CustomMap#updateAll
+         * @methodOf lbServices.CustomMap
          *
          * @description
          *
@@ -4474,14 +5091,14 @@ module.factory(
          * This method returns no data.
          */
         "updateAll": {
-          url: urlBase + "/Stats/update",
+          url: urlBase + "/CustomMaps/update",
           method: "POST",
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.Stat#deleteById
-         * @methodOf lbServices.Stat
+         * @name lbServices.CustomMap#deleteById
+         * @methodOf lbServices.CustomMap
          *
          * @description
          *
@@ -4504,14 +5121,14 @@ module.factory(
          * This method returns no data.
          */
         "deleteById": {
-          url: urlBase + "/Stats/:id",
+          url: urlBase + "/CustomMaps/:id",
           method: "DELETE",
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.Stat#count
-         * @methodOf lbServices.Stat
+         * @name lbServices.CustomMap#count
+         * @methodOf lbServices.CustomMap
          *
          * @description
          *
@@ -4536,14 +5153,14 @@ module.factory(
          *  - `count` – `{number=}` - 
          */
         "count": {
-          url: urlBase + "/Stats/count",
+          url: urlBase + "/CustomMaps/count",
           method: "GET",
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.Stat#prototype$updateAttributes
-         * @methodOf lbServices.Stat
+         * @name lbServices.CustomMap#prototype$updateAttributes
+         * @methodOf lbServices.CustomMap
          *
          * @description
          *
@@ -4569,17 +5186,54 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Stat` object.)
+         * This usually means the response is a `CustomMap` object.)
          * </em>
          */
         "prototype$updateAttributes": {
-          url: urlBase + "/Stats/:id",
+          url: urlBase + "/CustomMaps/:id",
           method: "PUT",
         },
 
-        // INTERNAL. Use Gamer.stats() instead.
-        "::get::Gamer::stats": {
-          url: urlBase + "/Gamers/:id/stats",
+        // INTERNAL. Use Gamer.customMaps.findById() instead.
+        "::findById::Gamer::customMaps": {
+          url: urlBase + "/Gamers/:id/customMaps/:fk",
+          method: "GET",
+        },
+
+        // INTERNAL. Use Gamer.customMaps.destroyById() instead.
+        "::destroyById::Gamer::customMaps": {
+          url: urlBase + "/Gamers/:id/customMaps/:fk",
+          method: "DELETE",
+        },
+
+        // INTERNAL. Use Gamer.customMaps.updateById() instead.
+        "::updateById::Gamer::customMaps": {
+          url: urlBase + "/Gamers/:id/customMaps/:fk",
+          method: "PUT",
+        },
+
+        // INTERNAL. Use Gamer.customMaps() instead.
+        "::get::Gamer::customMaps": {
+          url: urlBase + "/Gamers/:id/customMaps",
+          method: "GET",
+          isArray: true,
+        },
+
+        // INTERNAL. Use Gamer.customMaps.create() instead.
+        "::create::Gamer::customMaps": {
+          url: urlBase + "/Gamers/:id/customMaps",
+          method: "POST",
+        },
+
+        // INTERNAL. Use Gamer.customMaps.destroyAll() instead.
+        "::delete::Gamer::customMaps": {
+          url: urlBase + "/Gamers/:id/customMaps",
+          method: "DELETE",
+        },
+
+        // INTERNAL. Use Gamer.customMaps.count() instead.
+        "::count::Gamer::customMaps": {
+          url: urlBase + "/Gamers/:id/customMaps/count",
           method: "GET",
         },
       }
@@ -4589,8 +5243,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.Stat#updateOrCreate
-         * @methodOf lbServices.Stat
+         * @name lbServices.CustomMap#updateOrCreate
+         * @methodOf lbServices.CustomMap
          *
          * @description
          *
@@ -4617,15 +5271,15 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Stat` object.)
+         * This usually means the response is a `CustomMap` object.)
          * </em>
          */
         R["updateOrCreate"] = R["upsert"];
 
         /**
          * @ngdoc method
-         * @name lbServices.Stat#update
-         * @methodOf lbServices.Stat
+         * @name lbServices.CustomMap#update
+         * @methodOf lbServices.CustomMap
          *
          * @description
          *
@@ -4655,8 +5309,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.Stat#destroyById
-         * @methodOf lbServices.Stat
+         * @name lbServices.CustomMap#destroyById
+         * @methodOf lbServices.CustomMap
          *
          * @description
          *
@@ -4682,8 +5336,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.Stat#removeById
-         * @methodOf lbServices.Stat
+         * @name lbServices.CustomMap#removeById
+         * @methodOf lbServices.CustomMap
          *
          * @description
          *
@@ -4710,13 +5364,13 @@ module.factory(
 
     /**
     * @ngdoc property
-    * @name lbServices.Stat#modelName
-    * @propertyOf lbServices.Stat
+    * @name lbServices.CustomMap#modelName
+    * @propertyOf lbServices.CustomMap
     * @description
     * The name of the model represented by this $resource,
-    * i.e. `Stat`.
+    * i.e. `CustomMap`.
     */
-    R.modelName = "Stat";
+    R.modelName = "CustomMap";
 
 
     return R;
