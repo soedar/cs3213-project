@@ -1,5 +1,26 @@
 <div class="container" >
-  <div id="command-bar">
+ 
+</div>
+
+<div class="container">
+
+  <div class="row" ng-controller="VisualizationCtrl">
+    <div class="col-xs-6">
+      <div id="stage-left"></div>
+
+      <div ng-show="events">
+        <input type="range" min="0" max="{{events[0].length}}" step="1" ng-model="sliders[0]" ng-change="changeFrame(0)">
+      </div>
+    </div>
+
+    <div class="col-xs-6">
+      <div id="stage-right"></div>
+      <div ng-show="events">
+        <input type="range" min="0" max="{{events[1].length}}" step="1"  ng-model="sliders[1]" ng-change="changeFrame(1)">
+      </div>
+    </div>
+  </div>
+ <div id="command-bar">
     <div class="navbar navbar-inverse">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
@@ -35,27 +56,6 @@
 </div>
 </div>
 </div>
-</div>
-
-<div class="container">
-
-  <div class="row" ng-controller="VisualizationCtrl">
-    <div class="col-xs-6">
-      <div id="stage-left"></div>
-
-      <div ng-show="events">
-        <input type="range" min="0" max="{{events[0].length}}" step="1" ng-model="sliders[0]" ng-change="changeFrame(0)">
-      </div>
-    </div>
-
-    <div class="col-xs-6">
-      <div id="stage-right"></div>
-      <div ng-show="events">
-        <input type="range" min="0" max="{{events[1].length}}" step="1"  ng-model="sliders[1]" ng-change="changeFrame(1)">
-      </div>
-    </div>
-  </div>
-
   <div class="row" >
     <div class="col-xs-4" id="command-palette">
       <div class="panel panel-primary">
