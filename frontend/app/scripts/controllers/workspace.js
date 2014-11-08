@@ -8,7 +8,7 @@
  * Controller of the frontendApp
  */
 angular.module('frontendApp')
-  .controller('WorkspaceCtrl', function ($scope, $state, $http, visualStore, gameEngine) {
+  .controller('WorkspaceCtrl', function ($scope, $state, $http, visualStore, gameEngine, levelViewer) {
         $scope.navCommands = [
             {'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Up'},
             {'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Down'},
@@ -51,11 +51,7 @@ angular.module('frontendApp')
 
 
         $scope.playerColors = ['blue', 'red', 'yellow', 'green'];
-
         $scope.ninjaColor = 'blue';
-        $scope.$watch('ninjaColor', function(value) {
-
-        });
 
 
         $scope.commandsWorkspace = [];
@@ -118,11 +114,13 @@ angular.module('frontendApp')
 
         $scope.run = function() {
             var commands = getCommands();
-            var map = gameEngine.defaultMap($scope.ninjaColor);
-            var gameEvents = gameEngine.run(commands, map);
 
-            var key = visualStore.addLocal(gameEvents);
-            $state.go('visualizer', {id: key});
+            levelViewer.run(commands);
+            //var map = gameEngine.defaultMap($scope.ninjaColor);
+            //var gameEvents = gameEngine.run(commands, map);
+
+            //var key = visualStore.addLocal(gameEvents);
+            //$state.go('visualizer', {id: key});
         };
 
         $scope.removeCommands = function(index) {

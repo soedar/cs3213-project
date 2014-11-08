@@ -8,7 +8,7 @@
  * Controller of the frontendApp
  */
 angular.module('frontendApp')
-  .controller('VisualizationCtrl', function ($scope, $stateParams, $timeout, visualStore, gameEngine) {
+  .controller('VisualizationCtrl', function ($scope, $stateParams, $timeout, visualStore, gameEngine, levelViewer) {
      var map1 = new Map(4);
      map1.addPlayer('localPlayer', 'blue', 100, {x: 0, y: 2});
      map1.addCoin({x: 1, y: 2});
@@ -21,6 +21,8 @@ angular.module('frontendApp')
      map2.addCoin({x: 2, y: 2});
      map2.addSpinach({x: 1, y: 0});
 
+    var maps = [map1, map2];
+    levelViewer.setMaps(maps);
 
     var stageLeft = new Kinetic.Stage({
       container: 'stage-left',
@@ -34,15 +36,11 @@ angular.module('frontendApp')
         height: 350
     });
 
-    Assets.load(function() {
-      var gameLeft = new Game(map1, 350);
-      gameLeft.getLayers().forEach(function(layer) {
-        stageLeft.add(layer);
-      });
+    var stages = [stageLeft, stageRight];
 
-      var gameRight = new Game(map2, 350);
-      gameRight.getLayers().forEach(function(layer) {
-        stageRight.add(layer);
+    Assets.load(function() {
+      stages.forEach(function(stage, i) {
+        levelViewer.loadStage(i, stage);
       });
     });
   });

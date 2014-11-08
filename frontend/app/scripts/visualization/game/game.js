@@ -69,6 +69,11 @@ Game.prototype.getObjectLayer = function() {
   return this._objectLayer;
 };
 
+Game.prototype.loadEvents = function(events) {
+  this.events = events;
+  this.eventCounter = 0;
+}
+
 Game.prototype.executeNextEvent = function(callback) {
   // We have run out of events to execute
   if (this.eventCounter >= this.events.length) {
