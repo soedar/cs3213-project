@@ -18,7 +18,6 @@ Engine.prototype.run = function() {
   if(this.playerActions) {
 	  gameOutput.events = this.makeEvents(this.playerActions);
   }
-  console.log(gameOutput.events);
   return gameOutput;
 };
 
@@ -36,8 +35,8 @@ Engine.prototype.makeEvents = function(actions) {
 				Array.prototype.push.apply(events, this.makeEvents(whileActionsFull));
 				i += whileActions.length + 1;
 		} else if (actions[i].command === 'If') {
-			if (this.isConditionSatisfied(actions[i].object, actions[i].operation, actions[i].parameter)) {
-				var ifActions = this.getIfActionList(actions, i);
+			var ifActions = this.getIfActionList(actions, i);
+			if (this.isConditionSatisfied(actions[i].gameObject.name, actions[i].operator.name, actions[i].parameters)) {
 				Array.prototype.push.apply(events, this.makeEvents(ifActions));
 			}
 			i += ifActions.length + 1;
@@ -59,10 +58,8 @@ Engine.prototype.makeEvent = function(action) {
 		direction = action.commandType;
 	}
 	
-	console.log(player.xy.x + " " + player.xy.y + " " + direction);
 	if (!this.isValidMove(direction))
 		return null;
-	console.log("VALID");
 	
 	this.updatePlayerPosition(direction);
 	var obj = this.popObjectAtPosition(player.xy); //get and delete an object at a specific location
@@ -99,10 +96,10 @@ Engine.prototype.makeEvent = function(action) {
 
 //helping methods
 
-Engine.prototype.isConditionSatisfied = function(object, operation, parameter) {
+Engine.prototype.isConditionSatisfied = function(object, operator, parameter) {
 	if (object === "coin") {
 		var player = this.getPlayer();
-		switch (operation) {
+		switch (operator) {
 			case '==':
 				return player.model.coin == parameter;
 				break;
