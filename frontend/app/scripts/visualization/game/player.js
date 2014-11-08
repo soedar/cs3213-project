@@ -83,7 +83,6 @@ Player.prototype.animatePickCoin = function(coin, callback) {
       x: this.gridToReprCoord(gridX),
       y: this.gridToReprCoord(gridY),
       onFinish: function() {
-        coin.repr.remove();
         if (callback) {
           callback();
         }
@@ -98,7 +97,6 @@ Player.prototype.animatePickSpinach = function(spinach, callback) {
   var gridY = spinach.gridY;
   this.setGrid(gridX, gridY, true);
 
-
   new Kinetic.Tween({
     node: spinach.repr,
       duration: Config.stepDuration * 0.9,
@@ -112,7 +110,6 @@ Player.prototype.animatePickSpinach = function(spinach, callback) {
       x: this.gridToReprCoord(gridX),
       y: this.gridToReprCoord(gridY),
       onFinish: function() {
-        spinach.repr.remove();
         if (callback) {
           callback();
         }
