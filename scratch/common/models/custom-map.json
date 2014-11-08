@@ -4,6 +4,9 @@
   "properties": {
     "map": {
       "type": "object"
+    },
+    "name": {
+      "type": "string"
     }
   },
   "validations": [],

@@ -61,7 +61,7 @@
           <div class="row">
             <div class="map-item col-xs-3" ng-repeat="color in playerColors" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" jqyoui-draggable="{index: {{$index}}, animate: false, placeholder: 'keep'}" ng-model="playerColors">
             <img ng-src="game_images/{{color.type}}.png"/>
-            
+
             </div>
           </div>
 
@@ -87,6 +87,19 @@
 
 
       </div>
+
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Your custom maps</h3>
+        </div>
+        <div class="panel-body">
+         <ul>
+         <li ng-repeat = "map in customMaps">
+           {{ map.name }}
+         </li>
+         </ul>
+      </div>
+
     </div>
 
     <div class="col-xs-4 panel panel-primary">
@@ -101,7 +114,7 @@
           <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="left1" data-jqyoui-droppable="{multiple:true}" >
             <img class="map-item" ng-src="game_images/{{left1.type}}.png" ng-show="left1.type"/>
           </div>
-   
+
           <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="left2" data-jqyoui-droppable="{multiple:true}" >
             <img class="map-item" ng-src="game_images/{{left2.type}}.png" ng-show="left2.type"/>
           </div>
@@ -110,12 +123,12 @@
             <img class="map-item" ng-src="game_images/{{left3.type}}.png" ng-show="left3.type"/>
           </div>
         </div>
-        
+
         <div class="row">
           <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="left4" data-jqyoui-droppable="{multiple:true}" >
             <img class="map-item" ng-src="game_images/{{left4.type}}.png" ng-show="left4.type"/>
           </div>
-   
+
           <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="left5" data-jqyoui-droppable="{multiple:true}" >
             <img class="map-item" ng-src="game_images/{{left5.type}}.png" ng-show="left5.type"/>
           </div>
@@ -128,7 +141,7 @@
             <img class="map-item" ng-src="game_images/{{left7.type}}.png" ng-show="left7.type"/>
           </div>
         </div>
-        
+
         <div class="row">
           <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="left8" data-jqyoui-droppable="{multiple:true}" >
             <img class="map-item" ng-src="game_images/{{left8.type}}.png" ng-show="left8.type"/>
@@ -146,7 +159,7 @@
             <img class="map-item" ng-src="game_images/{{left11.type}}.png" ng-show="left11.type"/>
           </div>
         </div>
-        
+
         <div class="row">
           <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="left12" data-jqyoui-droppable="{multiple:true}" >
             <img class="map-item" ng-src="game_images/{{left12.type}}.png" ng-show="left12.type"/>
@@ -185,7 +198,7 @@
           <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="right1" data-jqyoui-droppable="{multiple:true}" >
             <img class="map-item" ng-src="game_images/{{right1.type}}.png" ng-show="right1.type"/>
           </div>
-   
+
           <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="right2" data-jqyoui-droppable="{multiple:true}" >
             <img class="map-item" ng-src="game_images/{{right2.type}}.png" ng-show="right2.type"/>
           </div>
@@ -194,12 +207,12 @@
             <img class="map-item" ng-src="game_images/{{right3.type}}.png" ng-show="right3.type"/>
           </div>
         </div>
-        
+
         <div class="row">
           <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="right4" data-jqyoui-droppable="{multiple:true}" >
             <img class="map-item" ng-src="game_images/{{right4.type}}.png" ng-show="right4.type"/>
           </div>
-   
+
           <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="right5" data-jqyoui-droppable="{multiple:true}" >
             <img class="map-item" ng-src="game_images/{{right5.type}}.png" ng-show="right5.type"/>
           </div>
@@ -212,7 +225,7 @@
             <img class="map-item" ng-src="game_images/{{right7.type}}.png" ng-show="right7.type"/>
           </div>
         </div>
-        
+
         <div class="row">
           <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="right8" data-jqyoui-droppable="{multiple:true}" >
             <img class="map-item" ng-src="game_images/{{right8.type}}.png" ng-show="right8.type"/>
@@ -230,7 +243,7 @@
             <img class="map-item" ng-src="game_images/{{right11.type}}.png" ng-show="right11.type"/>
           </div>
         </div>
-        
+
         <div class="row">
           <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="right12" data-jqyoui-droppable="{multiple:true}" >
             <img class="map-item" ng-src="game_images/{{right12.type}}.png" ng-show="right12.type"/>
