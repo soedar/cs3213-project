@@ -5,6 +5,8 @@
   },
   "database": {
     "name": "database",
-    "connector": "mongodb"
+    "connector": "mongodb",
+    "database": "scratchninja",
+    "host": "127.0.0.1"
   }
 }
