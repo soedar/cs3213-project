@@ -29,10 +29,19 @@ Engine.prototype.makeEvents = function(actions) {
 				var whileActions = this.getWhileActionList(actions, i);
 				var j;
 				var whileActionsFull = [];
-				for (j = 0; j < actions[i].parameters; j++) {
-					Array.prototype.push.apply(whileActionsFull, whileActions);
+				//Old while version which has manual parameter
+				if (!actions[i].operator) {
+					for (j = 0; j < actions[i].parameters; j++) {
+						Array.prototype.push.apply(whileActionsFull, whileActions);
+						Array.prototype.push.apply(events, this.makeEvents(whileActionsFull));
+					}
+				} else { //New WHILE version which has conditions
+					var count = 0;
+					while (this.isConditionSatisfied(actions[i].gameObject.name, actions[i].operator.name, actions[i].parameters) && count < 100) {
+						Array.prototype.push.apply(events, this.makeEvents(whileActions));
+						count++;
+					}
 				}
-				Array.prototype.push.apply(events, this.makeEvents(whileActionsFull));
 				i += whileActions.length + 1;
 		} else if (actions[i].command === 'If') {
 			var ifActions = this.getIfActionList(actions, i);
