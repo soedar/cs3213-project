@@ -18,7 +18,8 @@ angular.module('frontendApp')
         ];
         $scope.loopCommands = [
             {'type' : 'loop','command':'While', 'template':'views/loop-command-template.html', 'commandType':'Loop', 'parameters':1},
-            {'type' : 'loop','command':'End While', 'template':'views/loop-command-template.html', 'commandType':'Loop'}
+            {'type' : 'loop','command':'End While', 'template':'views/loop-command-template.html', 'commandType':'Loop'},
+            {'type' : 'loop','command':'While', 'template':'views/loop-command-template.html', 'gameObject': 'type', 'operator' : 'logical', 'parameters':1},
             // {'command':'For', 'commandType':'Loop', 'parameters':1},
             // {'command':'Do While','commandType':'Loop', 'parameters':1}
         ];
