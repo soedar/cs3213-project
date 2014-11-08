@@ -124,6 +124,14 @@ angular.module('frontendApp')
 
             //var key = visualStore.addLocal(gameEvents);
             //$state.go('visualizer', {id: key});
+
+            $scope.events = levelViewer.getEvents();
+
+            $scope.sliders = $scope.events.map(function(e) { return e.length  });
+
+            $scope.changeFrame = function(eventid) {
+              levelViewer.gotoFrame(eventid, $scope.sliders[eventid]);
+            }
         };
 
         $scope.removeCommands = function(index) {
