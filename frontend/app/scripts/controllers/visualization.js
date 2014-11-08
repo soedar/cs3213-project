@@ -34,6 +34,8 @@ angular.module('frontendApp')
         height: 350
     });
 
+
+
     var stages = [stageLeft, stageRight];
 
     Assets.load(function() {

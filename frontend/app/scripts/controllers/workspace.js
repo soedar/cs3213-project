@@ -10,7 +10,7 @@
  var windowObject = null;
 
 angular.module('frontendApp')
-  .controller('WorkspaceCtrl', function ($scope, $state, $http, visualStore, gameEngine, levelViewer) {
+  .controller('WorkspaceCtrl', function ($scope, $state, $http, visualStore, gameEngine, levelViewer, $modal) {
         $scope.navCommands = [
             {'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Up'},
             {'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Down'},
@@ -183,52 +183,57 @@ angular.module('frontendApp')
             }
         };
 
-        $scope.tryLogic = function() {
-
-            windowObject = window.open(document.URL, "", "width=document.outerWidth, height=document.outerHeight");
+        $scope.tryLogic = function(size) {
+            $modal.open({
+                templateUrl: 'views/visualization-template.html',
+                size: size
+               // controller: 'WorkspaceCtrl'
+        
+            });
+            //windowObject = window.open(document.URL, "", "width=document.outerWidth, height=document.outerHeight");
             
         };
 
-        $scope.historyValue = true;
-        var forTryLogic = function() {
-            if(history.length === 1) {
-                $scope.historyValue = false;
-                document.onkeydown = function(e) {
-                e = e || window.event;
-                    switch(e.which || e.keyCode) {
-                         case 37: // left
-                        $scope.commandsWorkspace = [];
-                        $scope.commandsWorkspace.push({'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Left'});
-                        $scope.run();
-                        break;
+       //  $scope.historyValue = true;
+       //  var forTryLogic = function() {
+       //      if(history.length === 1) {
+       //          $scope.historyValue = false;
+       //          document.onkeydown = function(e) {
+       //          e = e || window.event;
+       //              switch(e.which || e.keyCode) {
+       //                   case 37: // left
+       //                  $scope.commandsWorkspace = [];
+       //                  $scope.commandsWorkspace.push({'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Left'});
+       //                  $scope.run();
+       //                  break;
 
-                        case 38: // up
-                        $scope.commandsWorkspace = [];
-                        $scope.commandsWorkspace.push({'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Up'});
-                        $scope.run();
-                        break;
+       //                  case 38: // up
+       //                  $scope.commandsWorkspace = [];
+       //                  $scope.commandsWorkspace.push({'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Up'});
+       //                  $scope.run();
+       //                  break;
 
-                        case 39: // right
+       //                  case 39: // right
                         
-                        $scope.commandsWorkspace = [];
-                        $scope.commandsWorkspace.push({'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Right'});
-                        $scope.run();
-                       // alert($scope.commandsWorkspace.length);
-                        break;
+       //                  $scope.commandsWorkspace = [];
+       //                  $scope.commandsWorkspace.push({'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Right'});
+       //                  $scope.run();
+       //                 // alert($scope.commandsWorkspace.length);
+       //                  break;
 
-                        case 40: // down
-                        $scope.commandsWorkspace = [];
-                        $scope.commandsWorkspace.push({'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Down'});
-                        $scope.run();
-                        break;
+       //                  case 40: // down
+       //                  $scope.commandsWorkspace = [];
+       //                  $scope.commandsWorkspace.push({'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Down'});
+       //                  $scope.run();
+       //                  break;
 
-                        default: return; 
-                    }
-                    e.preventDefault();
-                }
-            }
-       }
-       forTryLogic();
+       //                  default: return; 
+       //              }
+       //              e.preventDefault();
+       //          }
+       //      }
+       // }
+       // forTryLogic();
 
   });
 

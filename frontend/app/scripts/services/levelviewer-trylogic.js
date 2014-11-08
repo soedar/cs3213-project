@@ -8,7 +8,7 @@
  * Factory in the frontendApp.
  */
 angular.module('frontendApp')
-  .factory('levelViewer', function(gameEngine) {
+  .factory('levelViewerTryLogic', function(gameEngine) {
 
     var games = [];
     function setMaps(maps) {
@@ -28,6 +28,7 @@ angular.module('frontendApp')
       if (!callback) {
         callback = function() {};
       }
+      
       games.forEach(function(game) {
         var events = gameEngine.run(commands, game.map);
         game.loadEvents(events.events);
