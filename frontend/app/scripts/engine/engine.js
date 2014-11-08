@@ -139,23 +139,40 @@ Engine.prototype.popObjectAtPosition = function(xy) {
 	return null;
 };
 
+Engine.prototype.getObjectAtPosition = function(xy) {
+	var i;
+	for (i = 0; i < this.map.objects.length; i++) {
+		var object = this.map.objects[i];
+		if (xy.x === object.xy.x && xy.y === object.xy.y) {
+			return object;
+		}
+	}
+	return null;
+};
+
 Engine.prototype.isValidMove = function(direction) {
 	var player = this.getPlayer();
+	var newXY = _.clone(player.xy);
 	switch(direction) {
       case 'Left':
-        if (player.xy.x > 0) { return true; }
+        newXY.x --;
 		break;
       case 'Right':
-        if (player.xy.x < this.map.mapSize - 1) { return true; }
+		newXY.x ++;
 		break;
       case 'Up':
-        if (player.xy.y > 0) { return true; }
+        newXY.y --;
 		break;
       case 'Down':
-        if (player.xy.y < this.map.mapSize - 1) { return true; }
+		newXY.y ++;
 		break;
     }
-	return false;
+	var object = this.getObjectAtPosition(newXY);
+	if (newXY.x < 0 || newXY.x >= this.map.mapSize || newXY.y < 0 || newXY.y >= this.map.mapSize || (object !== null && object.type === 'wall')) {
+		console.log('Return false');
+		return false;
+	}
+	return true;
 };
 
 Engine.prototype.updatePlayerPosition = function(direction) {

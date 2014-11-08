@@ -4,8 +4,8 @@
 function Tile() {
   Grid.call(this, {}, new Kinetic.Rect({
     stroke: '#000000',
-    strokeWidth: 1,
-    fill: '#009966',
+    strokeWidth: 0.3,
+    fill: '#d9d7d7',
     //fillPatternImage: Assets.grass
   }));
 }
@@ -59,7 +59,9 @@ Game.prototype.getObjectLayer = function() {
       object = new Coin();
     } else if (obj.type === 'spinach') {
       object = new Spinach();
-    }
+    } else if (obj.type === 'wall') {
+		object = new Wall();
+	}
 
     if (object) {
       object.setGrid(obj.xy.x, obj.xy.y);

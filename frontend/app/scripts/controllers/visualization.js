@@ -11,6 +11,9 @@ angular.module('frontendApp')
   .controller('VisualizationCtrl', function ($scope, $stateParams, $timeout, visualStore, gameEngine, levelViewer) {
      var map1 = new Map(4);
      map1.addPlayer('localPlayer', 'blue', 100, {x: 0, y: 2});
+     map1.addCoin({x: 1, y: 2});
+     map1.addCoin({x: 2, y: 2});
+     map1.addSpinach({x: 1, y: 0});
 
      var map2 = new Map(4);
      map2.addPlayer('localPlayer', 'blue', 100, {x: 0, y: 1});

@@ -1,4 +1,4 @@
-<div class="input-group">
+<div class="input-group loop-command">
   <span class="input-group-addon input-group-addon-green" ng-show="command.command">{{ command.command }}</span>
   <div class="input-group-btn"  ng-show="command.commandType">
     <button type="button" class="btn btn-success" data-toggle="dropdown">
@@ -7,12 +7,10 @@
 
   </div>
   <select  ng-show="command.gameObject" ng-model="command.gameObject" ng-options="go.name group by go.effect for go in gameObjects">
-    </select>
+  </select>
 
 	<select  ng-show="command.operator" ng-model="command.operator" ng-options="op.name for op in operators">
     </select>
-  <input type="text" class="form-control" ng-model="command.parameters" ng-model-options="{ updateOn: 'blur' }" ng-show="showField(command)" />
-
-  <br />
+  <input type="text" ng-model="command.parameters" ng-model-options="{ updateOn: 'blur' }" ng-show="showField(command)" />
 
 </div>
