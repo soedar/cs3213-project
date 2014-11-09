@@ -43,6 +43,12 @@ angular.module('frontendApp')
             {name: '<'}
         ];
 
+
+        $scope.controlCommands[0].gameObject = $scope.gameObjects[0];
+        $scope.controlCommands[0].operator = $scope.operators[0];
+
+        $scope.loopCommands[2].gameObject = $scope.gameObjects[0];
+        $scope.loopCommands[2].operator = $scope.operators[0];
         // $scope.selectedObject = $scope.operators[0];
         // $scope.$watch('selectedObject', function(value) {
         //     console.log(value);
@@ -182,6 +188,7 @@ angular.module('frontendApp')
                 return true;
             }
         };
+
 
         $scope.tryLogic = function(size) {
             $modal.open({
