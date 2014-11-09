@@ -11,7 +11,7 @@ angular.module('frontendApp')
   .controller('TabsCtrl', function ($scope, $rootScope, $state) {
     $scope.tabs = [
         { heading: "Workspace", route:"main", active:false },
-        { heading: "Visualizer", route:"visualizer", active:false },
+        //{ heading: "Visualizer", route:"visualizer", active:false },
         { heading: "Map Maker", route: "map-maker", active:false}
     ];
 
