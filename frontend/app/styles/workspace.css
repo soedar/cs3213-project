@@ -12,7 +12,7 @@
     font-size: 15px;
 }
 
-.loop-command select, .loop-command input, .loop-command option{
+.loop-command select, .loop-command input{
   background: transparent;
   border:none;
   white-space: nowrap;
@@ -28,7 +28,7 @@
     font-size: 15px;
 }
 
-.control-command select, .control-command input, .control-command option{
+.control-command select, .control-command input{
   background: transparent;
   border:none;
   white-space: nowrap;
