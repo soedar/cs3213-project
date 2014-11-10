@@ -37,7 +37,7 @@ Engine.prototype.makeEvents = function(actions) {
 					}
 				} else { //New WHILE version which has conditions
 					var count = 0;
-					while (this.isConditionSatisfied(actions[i].gameObject.name, actions[i].operator.name, actions[i].parameters) && count < 100) {
+					while (this.isConditionSatisfied(actions[i].gameObject, actions[i].operator, actions[i].parameters) && count < 100) {
 						Array.prototype.push.apply(events, this.makeEvents(whileActions));
 						count++;
 					}
@@ -45,7 +45,7 @@ Engine.prototype.makeEvents = function(actions) {
 				i += whileActions.length + 1;
 		} else if (actions[i].command === 'If') {
 			var ifActions = this.getIfActionList(actions, i);
-			if (this.isConditionSatisfied(actions[i].gameObject.name, actions[i].operator.name, actions[i].parameters)) {
+			if (this.isConditionSatisfied(actions[i].gameObject, actions[i].operator, actions[i].parameters)) {
 				Array.prototype.push.apply(events, this.makeEvents(ifActions));
 			}
 			i += ifActions.length + 1;
