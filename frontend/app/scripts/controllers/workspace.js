@@ -147,6 +147,9 @@ angular.module('frontendApp')
         };
 
         $scope.run = function() {
+            if ($scope.events) {
+              return;
+            }
             var commands = getCommands();
             //commands = formatGameOperatorToObjects(commands);
             //console.log(commands);
@@ -158,7 +161,6 @@ angular.module('frontendApp')
             //$state.go('visualizer', {id: key});
 
             $scope.events = levelViewer.getEvents();
-
             $scope.sliders = $scope.events.map(function(e) { return e.length  });
 
             $scope.changeFrame = function(eventid) {
@@ -184,6 +186,9 @@ angular.module('frontendApp')
 
         $scope.clearCommands = function() {
             $scope.commandsWorkspace = [];
+            levelViewer.reset();
+            $scope.events = null;
+            $scope.slider = null;
         };
 
         $scope.setNestLevel = function() {

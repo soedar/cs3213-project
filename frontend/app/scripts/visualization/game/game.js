@@ -92,6 +92,12 @@ Game.prototype.loadEvents = function(events) {
   this.eventCounter = 0;
 }
 
+Game.prototype.reset = function() {
+  this.events = [];
+  this.eventCounter = 0;
+  this.objectStates = [this.objectStates[0]];
+}
+
 Game.prototype.executeNextEvent = function(callback) {
   // We have run out of events to execute
   if (this.eventCounter >= this.events.length) {
@@ -118,7 +124,6 @@ Game.prototype.executeNextEvent = function(callback) {
       DEBUG('Invalid id for object in event');
       return;
     }
-
     object.animateTo(nextEvent.xy.x, nextEvent.xy.y, updateModelAndCallback);
   } else if (nextEvent.type === 'attack') {
     var object = this.objects[nextEvent.id];

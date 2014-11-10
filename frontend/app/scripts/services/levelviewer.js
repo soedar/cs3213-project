@@ -11,8 +11,10 @@ angular.module('frontendApp')
   .factory('levelViewer', function(gameEngine) {
 
     var games = [];
+    var g_maps = [];
     function setMaps(maps) {
       maps.forEach(function(map, index) {
+        g_maps[index] = _.cloneDeep(map);
         var game = gameEngine.run([], map);
         games[index] = new Game(map, 350);
       });
@@ -34,6 +36,7 @@ angular.module('frontendApp')
       if (!callback) {
         callback = function() {};
       }
+
       games.forEach(function(game) {
         var events = gameEngine.run(commands, game.map);
         game.loadEvents(events.events);
@@ -41,6 +44,14 @@ angular.module('frontendApp')
 
       games.forEach(function(game) {
         game.executeEvents(callback);
+      });
+    }
+
+    function reset() {
+      games.forEach(function(game, index) {
+        gotoFrame(index, 0);
+        game.reset();
+        game.map = _.cloneDeep(g_maps[index]);
       });
     }
 
@@ -62,6 +73,7 @@ angular.module('frontendApp')
       run: run,
       getEvents: getEvents,
       gotoFrame: gotoFrame,
-      changeNinja: changeNinja
+      changeNinja: changeNinja,
+      reset: reset
     };
   });
