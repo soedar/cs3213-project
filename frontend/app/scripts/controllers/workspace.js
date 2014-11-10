@@ -10,7 +10,7 @@
  var windowObject = null;
 
 angular.module('frontendApp')
-  .controller('WorkspaceCtrl', function ($scope, $state, $http, visualStore, gameEngine, levelViewer, $modal) {
+  .controller('WorkspaceCtrl', function ($scope, $state, $http, visualStore, gameEngine, levelViewer, levelViewerTryLogic,  $modal) {
         $scope.navCommands = [
             {'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Up'},
             {'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Down'},
@@ -68,6 +68,7 @@ angular.module('frontendApp')
 
         $scope.changeNinja = function(color) {
           levelViewer.changeNinja(color);
+          levelViewerTryLogic.changeNinja(color);
         };
 
         $scope.commandsWorkspace = [];
