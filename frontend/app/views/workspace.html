@@ -59,13 +59,14 @@
 </div>
   <div class="row" >
     <div class="col-xs-4" id="command-palette">
-      <div class="panel panel-primary">
+      <accordion >
+      <!-- <div class="panel panel-primary">
         <div class="panel-heading">
           <h3 class="panel-title">Choose your ninja!</h3>
         </div>
-        <div class="panel-body">
+        <div class="panel-body"> -->
 
-
+        <accordion-group class="panel-primary" heading="Choose your ninja!">
           <div class="row">
             <div class="col-xs-3" ng-repeat="color in playerColors">
               <label class="ninjas">
@@ -74,7 +75,7 @@
               </label>
             </div>
           </div>
-
+        </accordion-group>
           <!--
           <div class="row">
           <div class="col-xs-3" ng-repeat="color in playerColor">
@@ -82,54 +83,65 @@
         </div>
       </div>
       //-->
-    </div>
-  </div>
+   <!--  </div>
+  </div> -->
+  </accordion>
 
-
-
-  <div class="panel panel-primary">
+  <accordion>
+  <!-- <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title">Navigation</h3>
     </div>
-    <div class="panel-body" id="move-command-palette">
-
+    <div class="panel-body" id="move-command-palette"> -->
+    <accordion-group class="panel-primary" heading="Navigation" id="move-command-palette">
       <div  class="row" ng-repeat="command in navCommands" ng-show="command.command" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="navCommands" jqyoui-draggable="{index: {{$index}}, animate: false, placeholder: 'keep'}" data-type="move" data-direction="up" data-steps="0" >
         <div class="command-object move-command" ng-include="command.template">
 
         </div>
       </div>
+    </accordion-group>
+   <!--  </div>
+  </div> -->
+  </accordion>
 
-    </div>
-
-
-  </div>
-
-  <div class="panel panel-primary">
+  <accordion>
+  <!-- <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title">Iteration</h3>
     </div>
-    <div class="panel-body" id="loop-command-palette">
+    <div class="panel-body" id="loop-command-palette"> -->
+    <accordion-group class="panel-primary" heading="Iteration" id="loop-command-palette">
       <div class="row" ng-repeat="command in loopCommands | filter : {type:'loop'}" ng-show="command.command" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="loopCommands" jqyoui-draggable="{index: {{$index}}, animate: false, placeholder: 'keep'}">
         <div class="command-object" ng-include="command.template">
         </div>
         <!-- <button type="button" class="btn btn-default btn-block text-left">For ( ... )</button>
         <button type="button" class="btn btn-default btn-block text-left">Do While</button> -->
       </div>
-    </div>
-  </div>
-  <div class="panel panel-primary">
+    </accordion-group>
+    <!-- </div>
+  </div> -->
+  </accordion>
+
+  <accordion>
+  <!-- <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title">Control</h3>
     </div>
-    <div class="panel-body" id="control-command-palette">
+    <div class="panel-body" id="control-command-palette"> -->
+    <accordion-group class="panel-primary" heading="Control" id="control-command-palette">
       <div class="row" ng-repeat="command in controlCommands | filter : {type:'control'}" ng-show="command.command" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="controlCommands" jqyoui-draggable="{index: {{$index}}, animate: false, placeholder: 'keep'}">
         <div class="command-object" ng-include="command.template">
 
         </div>
       </div>
-    </div>
-  </div>
+    </accordion-group>
+    <!-- </div>
+  </div> -->
+
+  </accordion>
+
 </div>
+
 <div class="col-xs-8">
   <div class="panel panel-primary">
     <div class="panel-body" id="workspace-main" data-drop="true" ng-model="commandsWorkspace" jqyoui-droppable="{multiple:true, onDrop: 'setNestLevel'}" >
