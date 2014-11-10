@@ -29,7 +29,8 @@ angular.module('frontendApp')
             '>=',
             '<=',
             '>',
-            '<'
+            '<',
+            '!='
         ];
 
         $scope.loopCommands = [
