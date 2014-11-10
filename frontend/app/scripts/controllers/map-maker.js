@@ -96,6 +96,15 @@ angular.module('frontendApp')
         $scope.rightGrid = [];
         $scope.leftMap = [];
         $scope.rightGrid = [];
+
+        var index=0;
+        for (var xCoord = 0; xCoord < mapSize; xCoord++){
+            for (var yCoord = 0; yCoord < mapSize; yCoord++){
+                $scope.leftGrid.push({index: index, x: xCoord, y: yCoord});
+                $scope.rightGrid.push({index: index, x: xCoord, y: yCoord});
+                index++;
+            }
+        }
     };
 
     $scope.sendData = function(){
