@@ -11,7 +11,7 @@
       <div class="navbar-collapse collapse navbar-inverse-collapse">
         <ul class="nav navbar-nav navbar-right">
           <li><a ng-click="run()">Run</a></li>
-          <li><a id="save-workspace" ng-click="sendData()">Save</a></li>
+          <!--<li><a id="save-workspace" ng-click="sendData()">Save</a></li>//-->
           <li><a ng-click="clearCommands()">Clear all</a></li>
         </ul>
       </div>
@@ -20,18 +20,6 @@
 </div>
 
 <div class="container" >
-
-  <div class="row" ng-controller="VisualizationCtrl">
-    <div class="col-xs-6">
-      <div id="stage-left" class="text-center">
-      </div>
-    </div>
-
-    <div class="col-xs-6">
-      <div id="stage-right" class="text-center">
-      </div>
-    </div>
-  </div>
 
   <div class="row" ng-controller="MapMakerCtrl">
     <div class="col-xs-4" id="command-palette">
@@ -45,7 +33,7 @@
 
           <div class="row">
             <div class="map-item col-xs-3" ng-repeat="color in playerColors" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" jqyoui-draggable="{index: {{$index}}, animate: false, placeholder: 'keep'}" ng-model="playerColors">
-            
+
               <img ng-src="game_images/{{color.type}}.png"/>
 
             </div>
