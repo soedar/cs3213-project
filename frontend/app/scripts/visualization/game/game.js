@@ -28,6 +28,7 @@ function Game(map, canvasSize) {
   Grid.prototype.size = this.gridSize;
 
   this.objectStates = [];
+  this.player = null;
 }
 
 Game.prototype.getLayers = function() {
@@ -55,6 +56,7 @@ Game.prototype.getObjectLayer = function() {
     var object;
     if (obj.type === 'player') {
       object = new Player(obj.model);
+      this.player = object;
     } else if (obj.type === 'coin') {
       object = new Coin();
     } else if (obj.type === 'spinach') {

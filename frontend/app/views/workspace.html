@@ -18,7 +18,7 @@
       </div>
     </div>
   </div>
-  
+
   <br />
 
  <div id="command-bar">
@@ -70,7 +70,7 @@
           <div class="row">
             <div class="col-xs-3" ng-repeat="color in playerColors">
               <label class="ninjas">
-                <input type="radio" name="color" ng-model="$parent.ninjaColor" value="{{color}}">
+                <input type="radio" name="color" ng-model="$parent.ninjaColor" value="{{color}}" ng-click="changeNinja(color)">
                 <img ng-src="game_images/ninja-{{color}}.png">
               </label>
             </div>

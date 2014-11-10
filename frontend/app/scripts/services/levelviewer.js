@@ -24,6 +24,12 @@ angular.module('frontendApp')
       });
     }
 
+    function changeNinja(color) {
+      games.forEach(function(game) {
+        game.player.changeColor(color);
+      });
+    }
+
     function run(commands, callback) {
       if (!callback) {
         callback = function() {};
@@ -55,6 +61,7 @@ angular.module('frontendApp')
       loadStage: loadStage,
       run: run,
       getEvents: getEvents,
-      gotoFrame: gotoFrame
+      gotoFrame: gotoFrame,
+      changeNinja: changeNinja
     };
   });

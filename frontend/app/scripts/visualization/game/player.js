@@ -33,6 +33,29 @@ function Player(model) {
 }
 Player.prototype = Object.create(Grid.prototype);
 
+Player.prototype.changeColor = function(color) {
+  this.model.color = color;
+  var image;
+  switch(color) {
+    case 'yellow':
+      image = Assets.playerYellow;
+      break;
+    case 'red':
+      image = Assets.playerRed;
+      break;
+    case 'green':
+      image = Assets.playerGreen;
+      break;
+    case 'blue':
+      image = Assets.playerBlue;
+      break;
+  }
+  this.repr.fillPatternImage(image);
+  if (this.repr.parent) {
+    this.repr.parent.draw();
+  }
+};
+
 Player.prototype.animateAttack = function(target, callback) {
   this.repr.moveToTop();
 

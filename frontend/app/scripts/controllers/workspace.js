@@ -45,7 +45,7 @@ angular.module('frontendApp')
             {'type' : 'control','command':'End If', 'template':'views/control-command-template.html'}
         ];
 
-        
+
 
 
         // $scope.controlCommands[0].gameObject = $scope.gameObjects[0];
@@ -66,6 +66,9 @@ angular.module('frontendApp')
         $scope.playerColors = ['blue', 'red', 'yellow', 'green'];
         $scope.ninjaColor = 'blue';
 
+        $scope.changeNinja = function(color) {
+          levelViewer.changeNinja(color);
+        };
 
         $scope.commandsWorkspace = [];
 
@@ -87,7 +90,7 @@ angular.module('frontendApp')
                             alert('only numbers');
                            return null;
                         }
-                         
+
                         stackCommandIds.push($scope.commandsWorkspace[i].commandId);
 
                     }
@@ -125,7 +128,7 @@ angular.module('frontendApp')
             }
             return commands;
         }
-       
+
 		    $scope.sendData = function(){
             // For now, assume that the map is default
             var commands = getCommands();
@@ -218,10 +221,10 @@ angular.module('frontendApp')
                 templateUrl: 'views/visualization-template.html',
                 size: size
                // controller: 'WorkspaceCtrl'
-        
+
             });
             //windowObject = window.open(document.URL, "", "width=document.outerWidth, height=document.outerHeight");
-            
+
         };
 
         // $scope.showOperators = function(item) {
@@ -232,7 +235,7 @@ angular.module('frontendApp')
         //         }
         //     }
         //     return $scope.operators;
-           
+
         // }
        //  $scope.historyValue = true;
        //  var forTryLogic = function() {
@@ -254,7 +257,7 @@ angular.module('frontendApp')
        //                  break;
 
        //                  case 39: // right
-                        
+
        //                  $scope.commandsWorkspace = [];
        //                  $scope.commandsWorkspace.push({'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Right'});
        //                  $scope.run();
@@ -267,7 +270,7 @@ angular.module('frontendApp')
        //                  $scope.run();
        //                  break;
 
-       //                  default: return; 
+       //                  default: return;
        //              }
        //              e.preventDefault();
        //          }
