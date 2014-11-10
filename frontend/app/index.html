@@ -24,10 +24,10 @@
       {{ command.command }}, {{ command.commandType }}
     </script>
     <script type="text/ng-template" id="loop-command-template.html">
-      {{ command.command }}, {{ command.commandType }}
+      {{ command.command }}, {{command.gameObject}}, {{command.operator}}, {{command.parameters}}, {{ command.commandType }}
     </script>
     <script type="text/ng-template" id="control-command-template.html">
-      {{ command.command}},{{ command.filler}},{{ command.variable}}
+      {{ command.command}}, {{command.gameObject}}, {{command.operator}}, {{command.parameters}}
     </script>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>

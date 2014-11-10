@@ -3,7 +3,8 @@
 
 	<!-- select ng-show="command.gameObject" ng-model="$parent.selectedObject" ng-options="game.name group by game.effect for game in gameObjects">  </select-->
 
-	<!-- <div class="btn-group" ng-show="command.gameObject">
+	<!-- 
+	<div class="btn-group" ng-show="command.gameObject">
 		<a href="#" class="btn btn-warning">{{command.gameObject}}</a>
 		<a href="#" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
 		<ul class="dropdown-menu">
@@ -12,13 +13,13 @@
 		</ul>
 	</div>
  -->
-	<select  ng-show="command.gameObject" ng-model="command.gameObject" ng-options="go.name group by go.effect for go in gameObjects">
-    </select>
 
-	<select  ng-show="command.operator" ng-model="command.operator" ng-options="op.name for op in operators">
+	<select  ng-show="command.gameObject" ng-model="command.gameObject" ng-options="go for go in gameObjects">
+	</select>
+	<select  ng-show="command.operator" ng-model="command.operator" ng-options="op for op in operators">
     </select>
 
     <input type="text" ng-model="command.parameters" ng-model-options="{ updateOn: 'blur' }" ng-show="showField(command)" />
- 
+
 	<!-- <button type="button" class="btn btn-default btn-block text-left">End If </button> -->
 </div>

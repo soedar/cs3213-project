@@ -12,7 +12,7 @@
     font-size: 15px;
 }
 
-.loop-command select, .loop-command input, .loop-command option{
+.loop-command select, .loop-command input{
   background: transparent;
   border:none;
   white-space: nowrap;
@@ -28,7 +28,7 @@
     font-size: 15px;
 }
 
-.control-command select, .control-command input, .control-command option{
+.control-command select, .control-command input{
   background: transparent;
   border:none;
   white-space: nowrap;
@@ -90,6 +90,7 @@
     border-top: none;
     border-right: none;
     border-bottom: none;
+    border-left: none;
     color: #e0e0e0;
 }
 
@@ -128,4 +129,8 @@ label > input + img {
 label > input:checked + img {
   opacity: 1.0;
   filter: alpha(opacity=100);
+}
+
+option {
+  background: black;
 }

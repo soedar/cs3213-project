@@ -9,30 +9,14 @@
         </button>
       </div>
       <div class="navbar-collapse collapse navbar-inverse-collapse">
-        <!-- <ul class="nav navbar-nav">
-        <li><a href="#">Undo</a></li>
-        <li><a href="#">Redo</a></li>
-        <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-        <li><a href="#">Action</a></li>
-        <li><a href="#">Another action</a></li>
-        <li><a href="#">Something else here</a></li>
-        <li class="divider"></li>
-        <li class="dropdown-header">Dropdown header</li>
-        <li><a href="#">Separated link</a></li>
-        <li><a href="#">One more separated link</a></li>
-      </ul>
-    </li>
-  </ul> -->
-  <ul class="nav navbar-nav navbar-right">
-    <li><a ng-click="run()">Run</a></li>
-    <li><a id="save-workspace" ng-click="sendData()">Save</a></li>
-    <li><a ng-click="clearCommands()">Clear all</a></li>
-  </ul>
-</div>
-</div>
-</div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a ng-click="run()">Run</a></li>
+          <li><a id="save-workspace" ng-click="sendData()">Save</a></li>
+          <li><a ng-click="clearCommands()">Clear all</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="container" >
@@ -60,7 +44,8 @@
 
           <div class="row">
             <div class="map-item col-xs-3" ng-repeat="color in playerColors" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" jqyoui-draggable="{index: {{$index}}, animate: false, placeholder: 'keep'}" ng-model="playerColors">
-            <img ng-src="game_images/{{color.type}}.png"/>
+            
+              <img ng-src="game_images/{{color.type}}.png"/>
 
             </div>
           </div>
@@ -84,8 +69,6 @@
           <a ng-click="saveMap()">Save Map</a><br/>
           <a ng-click="clearMap()">Clear Map</a>
         </div>
-
-
       </div>
 
       <div class="panel panel-primary">
@@ -94,93 +77,21 @@
         </div>
         <div class="panel-body">
          <ul>
-         <li ng-repeat = "map in customMaps">
-           {{ map.name }}
-         </li>
+           <li ng-repeat = "map in customMaps">
+             {{ map.name }}
+           </li>
          </ul>
+        </div>
       </div>
-
     </div>
 
-    <div class="col-xs-4 panel panel-primary">
+     <div class="col-xs-4 panel panel-primary">
       <div class="panel-body" id="map-left">
-
-
         <div class="row">
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="left0" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{left0.type}}.png" ng-show="left0.type"/>
-          </div>
-
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="left1" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{left1.type}}.png" ng-show="left1.type"/>
-          </div>
-
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="left2" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{left2.type}}.png" ng-show="left2.type"/>
-          </div>
-
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="left3" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{left3.type}}.png" ng-show="left3.type"/>
+          <div class="map-box map-item col-xs-3"  data-drop="true" ng-repeat="box in leftGrid" ng-model="leftGrid[box.index]" data-jqyoui-droppable="{multiple:true, onDrop: 'dropped'}" >
+            <img class="map-item" ng-src="{{'game_images/' + box.type + '.png'}}" ng-show="{{box.type.length}}"/>
           </div>
         </div>
-
-        <div class="row">
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="left4" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{left4.type}}.png" ng-show="left4.type"/>
-          </div>
-
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="left5" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{left5.type}}.png" ng-show="left5.type"/>
-          </div>
-
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="left6" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{left6.type}}.png" ng-show="left6.type"/>
-          </div>
-
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="left7" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{left7.type}}.png" ng-show="left7.type"/>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="left8" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{left8.type}}.png" ng-show="left8.type"/>
-          </div>
-
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="left9" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{left9.type}}.png" ng-show="left9.type"/>
-          </div>
-
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="left10" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{left10.type}}.png" ng-show="left10.type"/>
-          </div>
-
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="left11" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{left11.type}}.png" ng-show="left11.type"/>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="left12" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{left12.type}}.png" ng-show="left12.type"/>
-          </div>
-
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="left13" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{left13.type}}.png" ng-show="left13.type"/>
-          </div>
-
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="left14" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{left14.type}}.png" ng-show="left14.type"/>
-          </div>
-
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="left15" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{left15.type}}.png" ng-show="left15.type"/>
-          </div>
-        </div>
-
-
-
-
       </div>
     </div>
 
@@ -189,84 +100,13 @@
     <div class="col-xs-4 panel panel-primary">
       <div class="panel-body" id="map-right">
 
-
         <div class="row">
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="right0" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{right0.type}}.png" ng-show="right0.type"/>
-          </div>
-
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="right1" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{right1.type}}.png" ng-show="right1.type"/>
-          </div>
-
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="right2" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{right2.type}}.png" ng-show="right2.type"/>
-          </div>
-
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="right3" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{right3.type}}.png" ng-show="right3.type"/>
+          <div class="map-box map-item col-xs-3"  data-drop="true" ng-repeat="box in rightGrid" ng-model="rightGrid[box.index]" data-jqyoui-droppable="{multiple:true, onDrop: 'dropped'}" >
+            <img class="map-item" ng-src="{{'game_images/' + box.type + '.png'}}" ng-show="{{box.type.length}}"/>
           </div>
         </div>
-
-        <div class="row">
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="right4" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{right4.type}}.png" ng-show="right4.type"/>
-          </div>
-
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="right5" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{right5.type}}.png" ng-show="right5.type"/>
-          </div>
-
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="right6" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{right6.type}}.png" ng-show="right6.type"/>
-          </div>
-
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="right7" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{right7.type}}.png" ng-show="right7.type"/>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="right8" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{right8.type}}.png" ng-show="right8.type"/>
-          </div>
-
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="right9" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{right9.type}}.png" ng-show="right9.type"/>
-          </div>
-
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="right10" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{right10.type}}.png" ng-show="right10.type"/>
-          </div>
-
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="right11" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{right11.type}}.png" ng-show="right11.type"/>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="right12" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{right12.type}}.png" ng-show="right12.type"/>
-          </div>
-
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="right13" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{right13.type}}.png" ng-show="right13.type"/>
-          </div>
-
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="right14" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{right14.type}}.png" ng-show="right14.type"/>
-          </div>
-
-          <div class="map-box map-item col-xs-3"  data-drop="true" ng-model="right15" data-jqyoui-droppable="{multiple:true}" >
-            <img class="map-item" ng-src="game_images/{{right15.type}}.png" ng-show="right15.type"/>
-          </div>
-        </div>
-
-
-
 
       </div>
     </div>
   </div>
-</div>
 </div>
