@@ -23,24 +23,25 @@
 
   <div class="row" ng-controller="VisualizationCtrl">
     <div class="col-xs-6">
-      <div id="stage-left">
+      <div id="stage-left" class="text-center">
       </div>
     </div>
 
     <div class="col-xs-6">
-      <div id="stage-right">
+      <div id="stage-right" class="text-center">
       </div>
     </div>
   </div>
 
   <div class="row" ng-controller="MapMakerCtrl">
     <div class="col-xs-4" id="command-palette">
-      <div class="panel panel-primary">
+      <accordion>
+      <!-- <div class="panel panel-primary">
         <div class="panel-heading">
           <h3 class="panel-title">Add players</h3>
         </div>
-        <div class="panel-body">
-
+        <div class="panel-body"> -->
+        <accordion-group class="panel-primary" heading="Add players">
 
           <div class="row">
             <div class="map-item col-xs-3" ng-repeat="color in playerColors" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" jqyoui-draggable="{index: {{$index}}, animate: false, placeholder: 'keep'}" ng-model="playerColors">
@@ -49,18 +50,18 @@
 
             </div>
           </div>
+        </accordion-group>
+       <!--  </div>
+      </div> -->
+      </accordion>
 
-        </div>
-      </div>
-
-
-
-      <div class="panel panel-primary">
+      <accordion>
+     <!--  <div class="panel panel-primary">
         <div class="panel-heading">
           <h3 class="panel-title">Add items</h3>
         </div>
-        <div class="panel-body" id="items-palette">
-
+        <div class="panel-body" id="items-palette"> -->
+        <accordion-group class="panel-primary" heading="Add items" id="items-palette">
           <div class="row">
             <div class="map-item col-xs-3" ng-repeat="item in objectList" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" jqyoui-draggable="{index: {{$index}}, animate: false, placeholder: 'keep'}" ng-model="objectList">
               <img ng-src="game_images/{{item.type}}.png"/>
@@ -68,21 +69,28 @@
           </div>
           <a ng-click="saveMap()">Save Map</a><br/>
           <a ng-click="clearMap()">Clear Map</a>
-        </div>
-      </div>
+        </accordion-group>
+      <!--   </div>
+      </div> -->
+      </accordion>
 
-      <div class="panel panel-primary">
+      <accordion>
+      <!-- <div class="panel panel-primary">
         <div class="panel-heading">
           <h3 class="panel-title">Your custom maps</h3>
         </div>
-        <div class="panel-body">
+        <div class="panel-body"> -->
+        <accordion-group class="panel-primary" heading="Your custom maps">
          <ul>
            <li ng-repeat = "map in customMaps">
              {{ map.name }}
            </li>
          </ul>
-        </div>
-      </div>
+        </accordion-group>
+      <!--   </div>
+      </div> -->
+      </accordion>
+
     </div>
 
      <div class="col-xs-4 panel panel-primary">
