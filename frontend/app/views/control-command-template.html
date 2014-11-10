@@ -12,14 +12,14 @@
 			<li><a href="#" ng-click="command.gameObject = 'spinach'">Spinach</a></li>
 		</ul>
 	</div>
- 	-->
-	<select  ng-show="command.gameObject" ng-model="command.gameObject" ng-options="go.name group by go.effect for go in gameObjects">
-    </select>
+ -->
 
-	<select  ng-show="command.operator" ng-model="command.operator" ng-options="op.name for op in operators">
+	<select  ng-show="command.gameObject" ng-model="command.gameObject" ng-options="go for go in gameObjects">
+	</select>
+	<select  ng-show="command.operator" ng-model="command.operator" ng-options="op for op in operators">
     </select>
 
     <input type="text" ng-model="command.parameters" ng-model-options="{ updateOn: 'blur' }" ng-show="showField(command)" />
- 
+
 	<!-- <button type="button" class="btn btn-default btn-block text-left">End If </button> -->
 </div>
