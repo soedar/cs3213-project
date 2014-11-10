@@ -106,9 +106,9 @@ Engine.prototype.isConditionSatisfied = function(object, operator, parameter) {
 		var player = this.getPlayer();
 		switch (operator) {
 			case '==':
-				return player.model.coin === parameter;
+				return player.model.coin == parameter;
 			case '!=':
-				return player.model.coin !== parameter;
+				return player.model.coin != parameter;
 			case '>':
 				return player.model.coin > parameter;
 			case '>=':
