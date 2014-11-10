@@ -18,17 +18,6 @@ angular.module('frontendApp')
             {'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Right'}
            // {'type' : 'navigation','command':'Move', 'template':'views/move-command-template.html', 'commandType':'Direction'}
         ];
-        $scope.loopCommands = [
-            {'type' : 'loop','command':'While', 'template':'views/loop-command-template.html', 'commandType':'Loop', 'parameters':1},
-            {'type' : 'loop','command':'End While', 'template':'views/loop-command-template.html', 'commandType':'Loop'},
-            {'type' : 'loop','command':'While', 'template':'views/loop-command-template.html', 'gameObject': 'type', 'operator' : 'logical', 'parameters':1},
-            // {'command':'For', 'commandType':'Loop', 'parameters':1},
-            // {'command':'Do While','commandType':'Loop', 'parameters':1}
-        ];
-        $scope.controlCommands = [
-            {'type' : 'control', 'command':'If', 'template':'views/control-command-template.html', 'gameObject': 'type', 'operator' : 'logical', 'parameters':1},
-            {'type' : 'control','command':'End If', 'template':'views/control-command-template.html'}
-        ];
 
         $scope.gameObjects = [
             {name:'coin', effect:'positive'},
@@ -43,12 +32,26 @@ angular.module('frontendApp')
             {name: '<'}
         ];
 
+        $scope.loopCommands = [
+            {'type' : 'loop','command':'While', 'template':'views/loop-command-template.html', 'commandType':'Loop', 'parameters':1},
+            {'type' : 'loop','command':'End While', 'template':'views/loop-command-template.html', 'commandType':'Loop'},
+            {'type' : 'loop','command':'While', 'template':'views/loop-command-template.html', 'gameObject': $scope.gameObjects[0], 'operator' : $scope.operators[0], 'parameters':1},
+            // {'command':'For', 'commandType':'Loop', 'parameters':1},
+            // {'command':'Do While','commandType':'Loop', 'parameters':1}
+        ];
+        $scope.controlCommands = [
+            {'type' : 'control', 'command':'If', 'template':'views/control-command-template.html', 'gameObject': $scope.gameObjects[0], 'operator' : $scope.operators[0], 'parameters':1},
+            {'type' : 'control','command':'End If', 'template':'views/control-command-template.html'}
+        ];
 
-        $scope.controlCommands[0].gameObject = $scope.gameObjects[0];
-        $scope.controlCommands[0].operator = $scope.operators[0];
+        
 
-        $scope.loopCommands[2].gameObject = $scope.gameObjects[0];
-        $scope.loopCommands[2].operator = $scope.operators[0];
+
+        // $scope.controlCommands[0].gameObject = $scope.gameObjects[0];
+        // $scope.controlCommands[0].operator = $scope.operators[0];
+
+        // $scope.loopCommands[2].gameObject = $scope.gameObjects[0];
+        // $scope.loopCommands[2].operator = $scope.operators[0];
         // $scope.selectedObject = $scope.operators[0];
         // $scope.$watch('selectedObject', function(value) {
         //     console.log(value);
@@ -201,6 +204,16 @@ angular.module('frontendApp')
             
         };
 
+        // $scope.showOperators = function(item) {
+        //     for(var i=0; i<$scope.operators; i++) {
+        //         alert(item.operator.name);
+        //         if(item.operator.name === $scope.operators[i].name) {
+        //             return $scope.operators[i];
+        //         }
+        //     }
+        //     return $scope.operators;
+           
+        // }
        //  $scope.historyValue = true;
        //  var forTryLogic = function() {
        //      if(history.length === 1) {

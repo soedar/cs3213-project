@@ -130,3 +130,7 @@ label > input:checked + img {
   opacity: 1.0;
   filter: alpha(opacity=100);
 }
+
+option {
+  background: black;
+}
