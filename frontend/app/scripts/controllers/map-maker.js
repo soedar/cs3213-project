@@ -8,13 +8,13 @@
 * Controller of the frontendApp
 */
 angular.module('frontendApp')
-.controller('MapMakerCtrl', function ($scope, $state, $http, visualStore, gameEngine, levelViewer, CustomMap) {
+.controller('MapMakerCtrl', function ($scope, $state, $http, visualStore, gameEngine, levelViewer, Level) {
 
-    // $scope.customMaps = CustomMap.find({
-    //     filter: {
-    //         where: {gamerId: $scope.$parent.gamer.id}
-    //     }
-    // });
+    $scope.levels = Level.find({
+        filter: {
+            where: {gamerId: $scope.$parent.gamer.id}
+        }
+    });
 
     var mapSize = 4;
 
@@ -69,26 +69,26 @@ angular.module('frontendApp')
         $scope.rightMap = $scope.rightGrid;
         console.log(JSON.stringify($scope.rightMap));
 
-        var map = {
+        var maps = {
             leftMap: $scope.leftMap,
             rightMap: $scope.rightMap
         };
 
-        // var gamerId = $scope.$parent.gamer.id;
+        var gamerId = $scope.$parent.gamer.id;
 
-        // var data = {
-        //     map: map,
-        //     gamerId: gamerId,
-        //     name: 'custommap123'
-        // };
+        var data = {
+            maps: maps,
+            gamerId: gamerId,
+            name: 'custommap123'
+        };
 
-        // var customMap = CustomMap.create(data);
+        var level = Level.create(data);
 
-        // $scope.customMaps = CustomMap.find({
-        //     filter: {
-        //         where: {gamerId: $scope.$parent.gamer.id}
-        //     }
-        // });
+        $scope.levels = Level.find({
+            filter: {
+                where: {gamerId: $scope.$parent.gamer.id}
+            }
+        });
     };
 
     $scope.clearMap = function(){

@@ -21,9 +21,9 @@
       "model": "Program",
       "foreignKey": "gamerId"
     },
-    "customMaps": {
+    "levels": {
       "type": "hasMany",
-      "model": "CustomMap",
+      "model": "Level",
       "foreignKey": "gamerId"
     }
   },

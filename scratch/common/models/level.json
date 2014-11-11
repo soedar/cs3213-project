@@ -2,19 +2,16 @@
   "name": "Level",
   "base": "PersistedModel",
   "properties": {
-    "number": {
-      "type": "number",
+    "maps": {
+      "type": "object",
       "required": true
+    },
+    "name": {
+      "type": "string"
     }
   },
   "validations": [],
-  "relations": {
-    "maps": {
-      "type": "hasMany",
-      "model": "Map",
-      "foreignKey": "levelId"
-    }
-  },
+  "relations": {},
   "acls": [],
   "methods": []
 }

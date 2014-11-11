@@ -39,6 +39,7 @@ angular
       })
       .state('level', {
         url: '/level/:id',
-        templateUrl: 'views/level.html'
+        templateUrl: 'views/level.html',
+        controller: 'LevelCtrl'
       });
   });

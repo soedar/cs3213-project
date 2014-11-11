@@ -43,13 +43,5 @@
   "Level": {
     "dataSource": "database",
     "public": true
-  },
-  "Map": {
-    "dataSource": "database",
-    "public": true
-  },
-  "CustomMap": {
-    "dataSource": "database",
-    "public": true
   }
 }
