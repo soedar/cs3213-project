@@ -13,12 +13,12 @@ angular.module('frontendApp')
     map1.addPlayer('localPlayer', 'blue', 100, {x: 0, y: 2});
     map1.addCoin({x: 1, y: 2});
     map1.addCoin({x: 2, y: 2});
-    map1.addSpinach({x: 1, y: 0});
+    map1.addSpinach({x: 2, y: 0});
+	  map1.addWall({x: 1, y: 0});
+	  map1.addWall({x: 1, y: 1});
 	  map1.addWall({x: 0, y: 0});
 	  map1.addWall({x: 0, y: 1});
-	  map1.addWall({x: 2, y: 0});
 	  map1.addWall({x: 3, y: 0});
-	  map1.addWall({x: 2, y: 1});
 	  map1.addWall({x: 3, y: 1});
 	  map1.addWall({x: 0, y: 3});
 	  map1.addWall({x: 1, y: 3});
