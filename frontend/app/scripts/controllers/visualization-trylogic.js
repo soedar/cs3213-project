@@ -30,7 +30,6 @@ angular.module('frontendApp')
     map2.addCoin({x: 1, y: 1});
 	  map2.addWall({x: 0, y: 0});
 	  map2.addWall({x: 1, y: 0});
-	  map2.addWall({x: 2, y: 0});
 	  map2.addWall({x: 3, y: 0});
 	  map2.addWall({x: 1, y: 2});
 	  map2.addWall({x: 2, y: 2});
